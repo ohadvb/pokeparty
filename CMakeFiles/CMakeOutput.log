@@ -1,0 +1,30 @@
+The target system is: Linux -  - LLVM-IR
+The host system is: Darwin - 15.5.0 - x86_64
+Determining if the include file pthread.h exists passed with the following output:
+Change Dir: /Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/CMakeFiles/CMakeTmp
+
+Run Build Command:"/opt/local/bin/gmake" "cmTC_efd68/fast"
+/opt/local/bin/gmake -f CMakeFiles/cmTC_efd68.dir/build.make CMakeFiles/cmTC_efd68.dir/build
+gmake[1]: Entering directory `/Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_efd68.dir/CheckIncludeFile.c.o
+/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49//toolchain/mac_pnacl/bin/pnacl-clang   -isystem /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/include -isystem /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/usr/include/glibc-compat  -Wno-non-literal-null-conversion -Wno-deprecated-writable-strings -U__STRICT_ANSI__    -o CMakeFiles/cmTC_efd68.dir/CheckIncludeFile.c.o   -c /Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_efd68
+/opt/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_efd68.dir/link.txt --verbose=1
+/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49//toolchain/mac_pnacl/bin/pnacl-clang  -Wno-non-literal-null-conversion -Wno-deprecated-writable-strings -U__STRICT_ANSI__     CMakeFiles/cmTC_efd68.dir/CheckIncludeFile.c.o  -o cmTC_efd68  -L/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/lib/pnacl/Release -rdynamic 
+gmake[1]: Leaving directory `/Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/CMakeFiles/CMakeTmp'
+
+
+Determining if the function pthread_create exists in the pthread passed with the following output:
+Change Dir: /Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/CMakeFiles/CMakeTmp
+
+Run Build Command:"/opt/local/bin/gmake" "cmTC_9c989/fast"
+/opt/local/bin/gmake -f CMakeFiles/cmTC_9c989.dir/build.make CMakeFiles/cmTC_9c989.dir/build
+gmake[1]: Entering directory `/Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_9c989.dir/CheckFunctionExists.c.o
+/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49//toolchain/mac_pnacl/bin/pnacl-clang   -isystem /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/include -isystem /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/usr/include/glibc-compat  -Wno-non-literal-null-conversion -Wno-deprecated-writable-strings -U__STRICT_ANSI__ -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_9c989.dir/CheckFunctionExists.c.o   -c /opt/local/share/cmake-3.5/Modules/CheckFunctionExists.c
+Linking C executable cmTC_9c989
+/opt/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_9c989.dir/link.txt --verbose=1
+/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49//toolchain/mac_pnacl/bin/pnacl-clang  -Wno-non-literal-null-conversion -Wno-deprecated-writable-strings -U__STRICT_ANSI__ -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_9c989.dir/CheckFunctionExists.c.o  -o cmTC_9c989  -L/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/lib/pnacl/Release -rdynamic -lpthread -Wl,-rpath,/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/lib/pnacl/Release 
+gmake[1]: Leaving directory `/Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/CMakeFiles/CMakeTmp'
+
+

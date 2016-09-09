@@ -1,0 +1,5 @@
+/Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/CMakeFiles/edit_cache.dir
+/Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/CMakeFiles/rebuild_cache.dir
+/Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/CMakeFiles/vbam.dir
+/Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/CMakeFiles/vbamcore.dir
+/Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/CMakeFiles/fex.dir

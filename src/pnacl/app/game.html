@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div id="listener">
+      <embed name="nacl_module"
+             id="naclModule"
+             width=480 height=320
+             src="game.nmf"
+             type="application/x-pnacl" />
+    </div>
+    <div id="loadingMessage" class="centered">
+      <div>Translating PNaCl to Native Architecture</div>
+      <div id="loadingBar">
+        <div id="progress"></div>
+      </div>
+    </div>
+    <div id="openMessage" class="centered" style="display: none;">
+      Press Ctrl+O to open a file
+    </div>
+    <script src="index.js"></script>
+  </body>
+</html>
+

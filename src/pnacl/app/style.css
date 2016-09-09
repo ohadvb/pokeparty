@@ -1,0 +1,49 @@
+/* Structure */
+
+html {
+  height: 100%;
+}
+
+body {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  margin: 0;
+}
+
+.lightsOn {
+  background-color: rgb(251, 251, 251);
+}
+
+.lightsOff {
+  background-color: black;
+}
+
+.centered {
+  left: 0;
+  position:absolute;
+  text-align: center;
+  top: 40%;
+  width: 100%;
+  z-index: -1;
+}
+
+#loadingBar {
+  background-color: black;
+  border-radius: 13px;
+  margin: 0 auto;
+  padding: 3px;
+  width: 200px;
+}
+
+#loadingBar > div {
+  background-color: blue;
+  border-radius: 10px;
+  height: 10px;
+  width: 0;
+}
+
+#naclModule {
+  -webkit-transform-origin: 50% 50%;
+}
