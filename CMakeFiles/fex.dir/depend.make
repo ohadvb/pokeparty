@@ -64,7 +64,7 @@ CMakeFiles/fex.dir/fex/7z_C/LzmaDec.c.o: fex/7z_C/LzmaDec.c
 CMakeFiles/fex.dir/fex/7z_C/LzmaDec.c.o: fex/7z_C/LzmaDec.h
 CMakeFiles/fex.dir/fex/7z_C/LzmaDec.c.o: fex/7z_C/Types.h
 
-CMakeFiles/fex.dir/fex/7z_C/Ppmd7.c.o: /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/x86_64-nacl/usr/include/memory.h
+CMakeFiles/fex.dir/fex/7z_C/Ppmd7.c.o: /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/include/memory.h
 CMakeFiles/fex.dir/fex/7z_C/Ppmd7.c.o: fex/7z_C/CpuArch.h
 CMakeFiles/fex.dir/fex/7z_C/Ppmd7.c.o: fex/7z_C/Ppmd.h
 CMakeFiles/fex.dir/fex/7z_C/Ppmd7.c.o: fex/7z_C/Ppmd7.c
@@ -87,8 +87,8 @@ CMakeFiles/fex.dir/fex/fex/Binary_Extractor.cpp.o: fex/fex/blargg_errors.h
 CMakeFiles/fex.dir/fex/fex/Binary_Extractor.cpp.o: fex/fex/blargg_source.h
 CMakeFiles/fex.dir/fex/fex/Binary_Extractor.cpp.o: fex/fex/fex.h
 
-CMakeFiles/fex.dir/fex/fex/Data_Reader.cpp.o: /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/x86_64-nacl/usr/include/zconf.h
-CMakeFiles/fex.dir/fex/fex/Data_Reader.cpp.o: /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/x86_64-nacl/usr/include/zlib.h
+CMakeFiles/fex.dir/fex/fex/Data_Reader.cpp.o: /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/include/zconf.h
+CMakeFiles/fex.dir/fex/fex/Data_Reader.cpp.o: /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/include/zlib.h
 CMakeFiles/fex.dir/fex/fex/Data_Reader.cpp.o: fex/fex/Data_Reader.cpp
 CMakeFiles/fex.dir/fex/fex/Data_Reader.cpp.o: fex/fex/Data_Reader.h
 CMakeFiles/fex.dir/fex/fex/Data_Reader.cpp.o: fex/fex/blargg_common.h
@@ -106,8 +106,8 @@ CMakeFiles/fex.dir/fex/fex/File_Extractor.cpp.o: fex/fex/blargg_errors.h
 CMakeFiles/fex.dir/fex/fex/File_Extractor.cpp.o: fex/fex/blargg_source.h
 CMakeFiles/fex.dir/fex/fex/File_Extractor.cpp.o: fex/fex/fex.h
 
-CMakeFiles/fex.dir/fex/fex/Gzip_Extractor.cpp.o: /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/x86_64-nacl/usr/include/zconf.h
-CMakeFiles/fex.dir/fex/fex/Gzip_Extractor.cpp.o: /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/x86_64-nacl/usr/include/zlib.h
+CMakeFiles/fex.dir/fex/fex/Gzip_Extractor.cpp.o: /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/include/zconf.h
+CMakeFiles/fex.dir/fex/fex/Gzip_Extractor.cpp.o: /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/include/zlib.h
 CMakeFiles/fex.dir/fex/fex/Gzip_Extractor.cpp.o: fex/fex/Data_Reader.h
 CMakeFiles/fex.dir/fex/fex/Gzip_Extractor.cpp.o: fex/fex/File_Extractor.h
 CMakeFiles/fex.dir/fex/fex/Gzip_Extractor.cpp.o: fex/fex/Gzip_Extractor.cpp
@@ -120,8 +120,8 @@ CMakeFiles/fex.dir/fex/fex/Gzip_Extractor.cpp.o: fex/fex/blargg_errors.h
 CMakeFiles/fex.dir/fex/fex/Gzip_Extractor.cpp.o: fex/fex/blargg_source.h
 CMakeFiles/fex.dir/fex/fex/Gzip_Extractor.cpp.o: fex/fex/fex.h
 
-CMakeFiles/fex.dir/fex/fex/Gzip_Reader.cpp.o: /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/x86_64-nacl/usr/include/zconf.h
-CMakeFiles/fex.dir/fex/fex/Gzip_Reader.cpp.o: /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/x86_64-nacl/usr/include/zlib.h
+CMakeFiles/fex.dir/fex/fex/Gzip_Reader.cpp.o: /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/include/zconf.h
+CMakeFiles/fex.dir/fex/fex/Gzip_Reader.cpp.o: /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/include/zlib.h
 CMakeFiles/fex.dir/fex/fex/Gzip_Reader.cpp.o: fex/fex/Data_Reader.h
 CMakeFiles/fex.dir/fex/fex/Gzip_Reader.cpp.o: fex/fex/Gzip_Reader.cpp
 CMakeFiles/fex.dir/fex/fex/Gzip_Reader.cpp.o: fex/fex/Gzip_Reader.h
@@ -157,8 +157,8 @@ CMakeFiles/fex.dir/fex/fex/Zip7_Extractor.cpp.o: fex/7z_C/7zBuf.h
 CMakeFiles/fex.dir/fex/fex/Zip7_Extractor.cpp.o: fex/7z_C/7zCrc.h
 CMakeFiles/fex.dir/fex/fex/Zip7_Extractor.cpp.o: fex/7z_C/Types.h
 
-CMakeFiles/fex.dir/fex/fex/Zip_Extractor.cpp.o: /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/x86_64-nacl/usr/include/zconf.h
-CMakeFiles/fex.dir/fex/fex/Zip_Extractor.cpp.o: /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/x86_64-nacl/usr/include/zlib.h
+CMakeFiles/fex.dir/fex/fex/Zip_Extractor.cpp.o: /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/include/zconf.h
+CMakeFiles/fex.dir/fex/fex/Zip_Extractor.cpp.o: /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/include/zlib.h
 CMakeFiles/fex.dir/fex/fex/Zip_Extractor.cpp.o: fex/fex/Data_Reader.h
 CMakeFiles/fex.dir/fex/fex/Zip_Extractor.cpp.o: fex/fex/File_Extractor.h
 CMakeFiles/fex.dir/fex/fex/Zip_Extractor.cpp.o: fex/fex/Zip_Extractor.cpp
@@ -171,8 +171,8 @@ CMakeFiles/fex.dir/fex/fex/Zip_Extractor.cpp.o: fex/fex/blargg_errors.h
 CMakeFiles/fex.dir/fex/fex/Zip_Extractor.cpp.o: fex/fex/blargg_source.h
 CMakeFiles/fex.dir/fex/fex/Zip_Extractor.cpp.o: fex/fex/fex.h
 
-CMakeFiles/fex.dir/fex/fex/Zlib_Inflater.cpp.o: /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/x86_64-nacl/usr/include/zconf.h
-CMakeFiles/fex.dir/fex/fex/Zlib_Inflater.cpp.o: /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/x86_64-nacl/usr/include/zlib.h
+CMakeFiles/fex.dir/fex/fex/Zlib_Inflater.cpp.o: /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/include/zconf.h
+CMakeFiles/fex.dir/fex/fex/Zlib_Inflater.cpp.o: /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/include/zlib.h
 CMakeFiles/fex.dir/fex/fex/Zlib_Inflater.cpp.o: fex/fex/Data_Reader.h
 CMakeFiles/fex.dir/fex/fex/Zlib_Inflater.cpp.o: fex/fex/Zlib_Inflater.cpp
 CMakeFiles/fex.dir/fex/fex/Zlib_Inflater.cpp.o: fex/fex/Zlib_Inflater.h

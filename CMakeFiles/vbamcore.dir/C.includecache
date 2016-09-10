@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/x86_64-nacl/usr/include/zconf.h
+/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/include/zconf.h
 windows.h
 -
 limits.h
@@ -22,9 +22,9 @@ unistd.h
 unixio.h
 -
 
-/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/x86_64-nacl/usr/include/zlib.h
+/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/include/zlib.h
 zconf.h
-/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/x86_64-nacl/usr/include/zconf.h
+/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/include/zconf.h
 
 /Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/src/common/memgzio.c
 stdio.h

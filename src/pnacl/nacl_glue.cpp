@@ -5,6 +5,7 @@
 #include <ppapi/c/pp_instance.h>
 #include <ppapi/c/ppb_instance.h>
 #include <ppapi/cpp/completion_callback.h>
+#include <ppapi/cpp/var_dictionary.h>
 #include <ppapi/cpp/file_system.h>
 #include <ppapi/cpp/input_event.h>
 #include <ppapi/cpp/instance.h>
@@ -43,6 +44,7 @@ class GameInstance : public pp::Instance {
   // This function is called with the HTML attributes of the embed tag,
   // which can be used in lieu of command line arguments.
   virtual bool Init(uint32_t argc, const char* argn[], const char* argv[]) {
+    fprintf(stderr, "hello from Init\n");
     for (uint32_t i = 0; i < argc; ++i) {
       if (argn[i] == std::string("width")) {
         width_ = strtol(argv[i], 0, 0);
@@ -57,7 +59,7 @@ class GameInstance : public pp::Instance {
 
   // This crucial function forwards PPAPI events to SDL.
   virtual bool HandleInputEvent(const pp::InputEvent& event) {
-    SDL_NACL_PushEvent(event.pp_resource());
+    SDL_PushEvent((SDL_Event*)event.pp_resource());
     return true;
   }
 
@@ -92,20 +94,24 @@ class GameInstance : public pp::Instance {
   // size changes. We ignore these calls except for the first
   // invocation, which we use to start the game.
   virtual void DidChangeView(const pp::Rect& position, const pp::Rect& clip) {
+    fprintf(stderr, "hello\n");
     ++num_changed_view_;
     if (num_changed_view_ > 1) return;
     // NOTE: It is crucial that the two calls below are run here
     // and not in a thread.
-    SDL_NACL_SetInstance(pp_instance(),
-                         pp::Module::Get()->get_browser_interface(),
-                         width_,
-                         height_);
+    // SDL_NACL_SetInstance(pp_instance(),
+    //                      pp::Module::Get()->get_browser_interface(),
+    //                      width_,
+    //                      height_);
     // This is SDL_Init call which used to be in game_main()
     int flags = SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER |
         SDL_INIT_NOPARACHUTE;
     if(SDL_Init(flags))
+    {
+      fprintf(stderr, "bye bye\n");
       exit(-1);
-
+    }
+  //
     StartGameInNewThread(0);
   }
  private:
@@ -169,8 +175,10 @@ class GameModule : public pp::Module {
   }
 };
 
+
 namespace pp {
 Module* CreateModule() {
+    fprintf(stderr, "in CreateModule\n");
   return new GameModule();
 }
 

@@ -249,30 +249,6 @@ CMakeFiles/vbam.dir/src/sdl/expr-lex.cpp.o.provides: CMakeFiles/vbam.dir/src/sdl
 CMakeFiles/vbam.dir/src/sdl/expr-lex.cpp.o.provides.build: CMakeFiles/vbam.dir/src/sdl/expr-lex.cpp.o
 
 
-CMakeFiles/vbam.dir/src/pnacl/nacl_glue.cpp.o: CMakeFiles/vbam.dir/flags.make
-CMakeFiles/vbam.dir/src/pnacl/nacl_glue.cpp.o: src/pnacl/nacl_glue.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/vbam.dir/src/pnacl/nacl_glue.cpp.o"
-	/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49//toolchain/mac_pnacl/bin/pnacl-clang++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/vbam.dir/src/pnacl/nacl_glue.cpp.o -c /Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/src/pnacl/nacl_glue.cpp
-
-CMakeFiles/vbam.dir/src/pnacl/nacl_glue.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/vbam.dir/src/pnacl/nacl_glue.cpp.i"
-	/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49//toolchain/mac_pnacl/bin/pnacl-clang++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/src/pnacl/nacl_glue.cpp > CMakeFiles/vbam.dir/src/pnacl/nacl_glue.cpp.i
-
-CMakeFiles/vbam.dir/src/pnacl/nacl_glue.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/vbam.dir/src/pnacl/nacl_glue.cpp.s"
-	/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49//toolchain/mac_pnacl/bin/pnacl-clang++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/src/pnacl/nacl_glue.cpp -o CMakeFiles/vbam.dir/src/pnacl/nacl_glue.cpp.s
-
-CMakeFiles/vbam.dir/src/pnacl/nacl_glue.cpp.o.requires:
-
-.PHONY : CMakeFiles/vbam.dir/src/pnacl/nacl_glue.cpp.o.requires
-
-CMakeFiles/vbam.dir/src/pnacl/nacl_glue.cpp.o.provides: CMakeFiles/vbam.dir/src/pnacl/nacl_glue.cpp.o.requires
-	$(MAKE) -f CMakeFiles/vbam.dir/build.make CMakeFiles/vbam.dir/src/pnacl/nacl_glue.cpp.o.provides.build
-.PHONY : CMakeFiles/vbam.dir/src/pnacl/nacl_glue.cpp.o.provides
-
-CMakeFiles/vbam.dir/src/pnacl/nacl_glue.cpp.o.provides.build: CMakeFiles/vbam.dir/src/pnacl/nacl_glue.cpp.o
-
-
 # Object files for target vbam
 vbam_OBJECTS = \
 "CMakeFiles/vbam.dir/src/sdl/debugger.cpp.o" \
@@ -282,8 +258,7 @@ vbam_OBJECTS = \
 "CMakeFiles/vbam.dir/src/sdl/inputSDL.cpp.o" \
 "CMakeFiles/vbam.dir/src/sdl/expr.cpp.o" \
 "CMakeFiles/vbam.dir/src/sdl/exprNode.cpp.o" \
-"CMakeFiles/vbam.dir/src/sdl/expr-lex.cpp.o" \
-"CMakeFiles/vbam.dir/src/pnacl/nacl_glue.cpp.o"
+"CMakeFiles/vbam.dir/src/sdl/expr-lex.cpp.o"
 
 # External object files for target vbam
 vbam_EXTERNAL_OBJECTS =
@@ -296,16 +271,15 @@ vbam: CMakeFiles/vbam.dir/src/sdl/inputSDL.cpp.o
 vbam: CMakeFiles/vbam.dir/src/sdl/expr.cpp.o
 vbam: CMakeFiles/vbam.dir/src/sdl/exprNode.cpp.o
 vbam: CMakeFiles/vbam.dir/src/sdl/expr-lex.cpp.o
-vbam: CMakeFiles/vbam.dir/src/pnacl/nacl_glue.cpp.o
 vbam: CMakeFiles/vbam.dir/build.make
 vbam: libvbamcore.a
 vbam: libfex.a
-vbam: /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/x86_64-nacl/usr/lib/libSDLmain.a
-vbam: /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/x86_64-nacl/usr/lib/libSDL.a
-vbam: /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/x86_64-nacl/usr/lib/libz.a
-vbam: /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/x86_64-nacl/usr/lib/libpng.a
+vbam: /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/lib/libSDLmain.a
+vbam: /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/lib/libSDL.a
+vbam: /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/lib/libz.a
+vbam: /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/lib/libpng.a
 vbam: CMakeFiles/vbam.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable vbam"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable vbam"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/vbam.dir/link.txt --verbose=$(VERBOSE)
 	/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49//toolchain/mac_pnacl/bin/pnacl-finalize -o src/pnacl/app/vbam.pexe /Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/vbam
 
@@ -322,7 +296,6 @@ CMakeFiles/vbam.dir/requires: CMakeFiles/vbam.dir/src/sdl/inputSDL.cpp.o.require
 CMakeFiles/vbam.dir/requires: CMakeFiles/vbam.dir/src/sdl/expr.cpp.o.requires
 CMakeFiles/vbam.dir/requires: CMakeFiles/vbam.dir/src/sdl/exprNode.cpp.o.requires
 CMakeFiles/vbam.dir/requires: CMakeFiles/vbam.dir/src/sdl/expr-lex.cpp.o.requires
-CMakeFiles/vbam.dir/requires: CMakeFiles/vbam.dir/src/pnacl/nacl_glue.cpp.o.requires
 
 .PHONY : CMakeFiles/vbam.dir/requires
 

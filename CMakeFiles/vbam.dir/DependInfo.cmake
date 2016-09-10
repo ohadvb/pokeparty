@@ -4,7 +4,6 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/src/pnacl/nacl_glue.cpp" "/Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/CMakeFiles/vbam.dir/src/pnacl/nacl_glue.cpp.o"
   "/Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/src/sdl/SDL.cpp" "/Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/CMakeFiles/vbam.dir/src/sdl/SDL.cpp.o"
   "/Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/src/sdl/debugger.cpp" "/Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/CMakeFiles/vbam.dir/src/sdl/debugger.cpp.o"
   "/Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/src/sdl/expr-lex.cpp" "/Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/CMakeFiles/vbam.dir/src/sdl/expr-lex.cpp.o"
@@ -36,9 +35,9 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/include"
   "/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/usr/include/glibc-compat"
-  "/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/x86_64-nacl/usr/include"
+  "/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/include"
   "fex"
-  "/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/x86_64-nacl/usr/include/SDL"
+  "/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/include/SDL"
   )
 
 # Targets to which this target links.

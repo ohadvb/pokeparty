@@ -22,6 +22,8 @@
 #include <string.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <nacl_io/nacl_io.h>
+#include <sys/mount.h>
 #include <cmath>
 #ifdef USE_OPENGL
 #ifdef __APPLE__
@@ -1888,9 +1890,36 @@ void handleRewinds()
 	}
 }
 
+void from_glue()
+{
+    umount("/");
+    mount("", "/", "memfs", 0, "");
+
+    mkdir("/config", 0777);
+    fprintf(stderr, "mount httpfs = %d\n", mount("/", "/config", "httpfs", 0, ""));
+
+    mkdir("/games", 0777);
+    fprintf(stderr, "mount rom = %d\n", mount("/", "/games", "httpfs", 0, ""));
+
+    mkdir("/store", 0777);
+    fprintf(stderr, "mount html5fs = %d\n", mount("/", "/store", "html5fs", 0, ""));
+    mkdir("/store/states", 0777);
+    mkdir("/store/captures", 0777);
+}
+
+int real_main(int argc, char **argv);
+
 int main(int argc, char **argv)
 {
+    from_glue();
+    char* rargv[] = { "vbam", "--config=/config/vbam.cfg", "/games/Gold.zip", NULL};
+    return real_main(3, rargv );
+}
+
+int real_main(int argc, char **argv)
+{
   fprintf(stdout, "VBA-M version %s [SDL]\n", VERSION);
+  fprintf(stderr, "VBA-M version %s [SDL]\n", VERSION);
 
   arg0 = argv[0];
 

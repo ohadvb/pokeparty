@@ -3,9 +3,9 @@
   "version": "1.1",
   "manifest_version": 2,
   "minimum_chrome_version": "34",
-  "icons": {
-    "128": "icon.png"
-  },
+  // "icons": {
+  //   "128": "icon.png"
+  // },
   "app": {
     "background": {
       "scripts": ["background.js"]

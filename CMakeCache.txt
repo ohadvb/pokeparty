@@ -155,8 +155,8 @@ CMAKE_SYSTEM_NAME:STRING=Linux
 //Target processor.
 CMAKE_SYSTEM_PROCESSOR:STRING=LLVM-IR
 
-//The CMake toolchain file
-CMAKE_TOOLCHAIN_FILE:FILEPATH=/Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/CMakeScripts/PNaCl.Toolchain.cmake
+//No help, variable specified on the command line.
+CMAKE_TOOLCHAIN_FILE:UNINITIALIZED=CMakeScripts/PNaCl.Toolchain.cmake
 
 //If this value is on, makefiles will be generated without the
 // .SILENT directive, and all commands will be echoed to the console
@@ -213,19 +213,19 @@ OPENGL_xmesa_INCLUDE_DIR:PATH=OPENGL_xmesa_INCLUDE_DIR-NOTFOUND
 PNG_LIBRARY_DEBUG:FILEPATH=PNG_LIBRARY_DEBUG-NOTFOUND
 
 //Path to a library.
-PNG_LIBRARY_RELEASE:FILEPATH=/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/x86_64-nacl/usr/lib/libpng.a
+PNG_LIBRARY_RELEASE:FILEPATH=/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/lib/libpng.a
 
 //Path to a file.
-PNG_PNG_INCLUDE_DIR:PATH=/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/x86_64-nacl/usr/include
+PNG_PNG_INCLUDE_DIR:PATH=/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/include
 
 //Path to a library.
-SDLMAIN_LIBRARY:FILEPATH=/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/x86_64-nacl/usr/lib/libSDLmain.a
+SDLMAIN_LIBRARY:FILEPATH=/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/lib/libSDLmain.a
 
 //Path to a file.
-SDL_INCLUDE_DIR:PATH=/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/x86_64-nacl/usr/include/SDL
+SDL_INCLUDE_DIR:PATH=/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/include/SDL
 
 //Where the SDL Library can be found
-SDL_LIBRARY:STRING=/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/x86_64-nacl/usr/lib/libSDLmain.a;/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/x86_64-nacl/usr/lib/libSDL.a;-lpthread
+SDL_LIBRARY:STRING=/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/lib/libSDLmain.a;/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/lib/libSDL.a;-lpthread
 
 //Value Computed by CMake
 VBA-M_BINARY_DIR:STATIC=/Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk
@@ -234,13 +234,13 @@ VBA-M_BINARY_DIR:STATIC=/Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk
 VBA-M_SOURCE_DIR:STATIC=/Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk
 
 //Path to a file.
-ZLIB_INCLUDE_DIR:PATH=/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/x86_64-nacl/usr/include
+ZLIB_INCLUDE_DIR:PATH=/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/include
 
 //Path to a library.
 ZLIB_LIBRARY_DEBUG:FILEPATH=ZLIB_LIBRARY_DEBUG-NOTFOUND
 
 //Path to a library.
-ZLIB_LIBRARY_RELEASE:FILEPATH=/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/x86_64-nacl/usr/lib/libz.a
+ZLIB_LIBRARY_RELEASE:FILEPATH=/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/lib/libz.a
 
 //Dependencies for target
 fex_LIB_DEPENDS:STATIC=
@@ -383,13 +383,13 @@ CMAKE_UNAME:INTERNAL=/usr/bin/uname
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
 //Details about finding PNG
-FIND_PACKAGE_MESSAGE_DETAILS_PNG:INTERNAL=[/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/x86_64-nacl/usr/lib/libpng.a][/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/x86_64-nacl/usr/include][v1.6.20()]
+FIND_PACKAGE_MESSAGE_DETAILS_PNG:INTERNAL=[/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/lib/libpng.a][/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/include][v1.6.20()]
 //Details about finding SDL
-FIND_PACKAGE_MESSAGE_DETAILS_SDL:INTERNAL=[/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/x86_64-nacl/usr/lib/libSDLmain.a;/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/x86_64-nacl/usr/lib/libSDL.a;-lpthread][/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/x86_64-nacl/usr/include/SDL][v1.2.15()]
+FIND_PACKAGE_MESSAGE_DETAILS_SDL:INTERNAL=[/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/lib/libSDLmain.a;/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/lib/libSDL.a;-lpthread][/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/include/SDL][v1.2.15()]
 //Details about finding Threads
 FIND_PACKAGE_MESSAGE_DETAILS_Threads:INTERNAL=[TRUE][v()]
 //Details about finding ZLIB
-FIND_PACKAGE_MESSAGE_DETAILS_ZLIB:INTERNAL=[/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/x86_64-nacl/usr/lib/libz.a][/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/x86_64-nacl/usr/include][v1.2.8()]
+FIND_PACKAGE_MESSAGE_DETAILS_ZLIB:INTERNAL=[/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/lib/libz.a][/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/include][v1.2.8()]
 //ADVANCED property for variable: OPENGL_INCLUDE_DIR
 OPENGL_INCLUDE_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: OPENGL_gl_LIBRARY
@@ -404,7 +404,7 @@ PNG_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
 PNG_LIBRARY_RELEASE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: PNG_PNG_INCLUDE_DIR
 PNG_PNG_INCLUDE_DIR-ADVANCED:INTERNAL=1
-SDL_LIBRARY_TEMP:INTERNAL=/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/x86_64-nacl/usr/lib/libSDLmain.a;/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/x86_64-nacl/usr/lib/libSDL.a;-lpthread
+SDL_LIBRARY_TEMP:INTERNAL=/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/lib/libSDLmain.a;/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/lib/libSDL.a;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread
 //ADVANCED property for variable: ZLIB_INCLUDE_DIR
 ZLIB_INCLUDE_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: ZLIB_LIBRARY_DEBUG

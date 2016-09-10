@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/x86_64-nacl/usr/include/memory.h
+/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/include/memory.h
 string.h
 -
 

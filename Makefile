@@ -2336,33 +2336,6 @@ src/gba/remote.cpp.s:
 	$(MAKE) -f CMakeFiles/vbamcore.dir/build.make CMakeFiles/vbamcore.dir/src/gba/remote.cpp.s
 .PHONY : src/gba/remote.cpp.s
 
-src/pnacl/nacl_glue.o: src/pnacl/nacl_glue.cpp.o
-
-.PHONY : src/pnacl/nacl_glue.o
-
-# target to build an object file
-src/pnacl/nacl_glue.cpp.o:
-	$(MAKE) -f CMakeFiles/vbam.dir/build.make CMakeFiles/vbam.dir/src/pnacl/nacl_glue.cpp.o
-.PHONY : src/pnacl/nacl_glue.cpp.o
-
-src/pnacl/nacl_glue.i: src/pnacl/nacl_glue.cpp.i
-
-.PHONY : src/pnacl/nacl_glue.i
-
-# target to preprocess a source file
-src/pnacl/nacl_glue.cpp.i:
-	$(MAKE) -f CMakeFiles/vbam.dir/build.make CMakeFiles/vbam.dir/src/pnacl/nacl_glue.cpp.i
-.PHONY : src/pnacl/nacl_glue.cpp.i
-
-src/pnacl/nacl_glue.s: src/pnacl/nacl_glue.cpp.s
-
-.PHONY : src/pnacl/nacl_glue.s
-
-# target to generate assembly for a file
-src/pnacl/nacl_glue.cpp.s:
-	$(MAKE) -f CMakeFiles/vbam.dir/build.make CMakeFiles/vbam.dir/src/pnacl/nacl_glue.cpp.s
-.PHONY : src/pnacl/nacl_glue.cpp.s
-
 src/sdl/SDL.o: src/sdl/SDL.cpp.o
 
 .PHONY : src/sdl/SDL.o
@@ -2833,9 +2806,6 @@ help:
 	@echo "... src/gba/remote.o"
 	@echo "... src/gba/remote.i"
 	@echo "... src/gba/remote.s"
-	@echo "... src/pnacl/nacl_glue.o"
-	@echo "... src/pnacl/nacl_glue.i"
-	@echo "... src/pnacl/nacl_glue.s"
 	@echo "... src/sdl/SDL.o"
 	@echo "... src/sdl/SDL.i"
 	@echo "... src/sdl/SDL.s"

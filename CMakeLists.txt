@@ -58,6 +58,7 @@ ENDIF( NOT VERSION )
 # Fill in SDLMAIN_LIBRARY on OS X manually to avoid using SDLMain.m
 # OS X users will have to compile and install SDL from source.
 if( APPLE )
+    message( "APPLE" )
     SET(SDLMAIN_LIBRARY "-lSDLmain")
 endif( APPLE )
 
@@ -70,6 +71,7 @@ endif( ENABLE_ASM_SCALERS )
 FIND_PACKAGE ( ZLIB REQUIRED )
 FIND_PACKAGE ( PNG REQUIRED )
 FIND_PACKAGE ( OpenGL )
+set ( SDL_BUILDING_LIBRARY 1)
 FIND_PACKAGE ( SDL REQUIRED )
 
 if( ENABLE_LINK )
@@ -80,6 +82,8 @@ SET(VBAMCORE_LIBS
     vbamcore
     fex
     ${SDL_LIBRARY}
+    # /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/lib/libSDL.a
+    # # sdl
     ${SFML_LIBRARY}
     ${OPENGL_LIBRARIES}
     ${ZLIB_LIBRARY}
@@ -87,7 +91,7 @@ SET(VBAMCORE_LIBS
 
 if ( PNACL )
    # Add core NaCl libraries.
-   SET(VBAMCORE_LIBS ${VBAMCORE_LIBS} ppapi ppapi_cpp nacl_io)
+   SET(VBAMCORE_LIBS ${VBAMCORE_LIBS} Regal glslopt ppapi_gles2 ppapi_gles2 cli_main nacl_spawn tar ppapi_simple nacl_io  ppapi m c++ m pthread )
 endif ( PNACL )
 
 # Disable looking for GTK if not going to build the GTK frontend
@@ -431,7 +435,7 @@ IF( ENABLE_SDL )
         vbam
         WIN32
         ${SRC_SDL}
-        ${SRC_PNACL}
+        # ${SRC_PNACL}
     )
     IF( WIN32 )
         SET( WIN32_LIBRARIES wsock32 )

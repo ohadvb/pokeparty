@@ -7,7 +7,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/vbam.dir/src/sdl/expr.cpp.o"
   "CMakeFiles/vbam.dir/src/sdl/exprNode.cpp.o"
   "CMakeFiles/vbam.dir/src/sdl/expr-lex.cpp.o"
-  "CMakeFiles/vbam.dir/src/pnacl/nacl_glue.cpp.o"
   "vbam.pdb"
   "vbam"
 )

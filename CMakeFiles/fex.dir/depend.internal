@@ -65,7 +65,7 @@ CMakeFiles/fex.dir/fex/7z_C/LzmaDec.c.o
  /Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/fex/7z_C/LzmaDec.h
  /Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/fex/7z_C/Types.h
 CMakeFiles/fex.dir/fex/7z_C/Ppmd7.c.o
- /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/x86_64-nacl/usr/include/memory.h
+ /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/include/memory.h
  /Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/fex/7z_C/CpuArch.h
  /Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/fex/7z_C/Ppmd.h
  /Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/fex/7z_C/Ppmd7.c
@@ -88,8 +88,8 @@ CMakeFiles/fex.dir/fex/fex/Binary_Extractor.cpp.o
  /Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/fex/fex/blargg_source.h
  /Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/fex/fex/fex.h
 CMakeFiles/fex.dir/fex/fex/Data_Reader.cpp.o
- /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/x86_64-nacl/usr/include/zconf.h
- /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/x86_64-nacl/usr/include/zlib.h
+ /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/include/zconf.h
+ /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/include/zlib.h
  /Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/fex/fex/Data_Reader.cpp
  /Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/fex/fex/Data_Reader.h
  /Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/fex/fex/blargg_common.h
@@ -107,8 +107,8 @@ CMakeFiles/fex.dir/fex/fex/File_Extractor.cpp.o
  /Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/fex/fex/blargg_source.h
  /Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/fex/fex/fex.h
 CMakeFiles/fex.dir/fex/fex/Gzip_Extractor.cpp.o
- /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/x86_64-nacl/usr/include/zconf.h
- /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/x86_64-nacl/usr/include/zlib.h
+ /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/include/zconf.h
+ /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/include/zlib.h
  /Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/fex/fex/Data_Reader.h
  /Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/fex/fex/File_Extractor.h
  /Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/fex/fex/Gzip_Extractor.cpp
@@ -121,8 +121,8 @@ CMakeFiles/fex.dir/fex/fex/Gzip_Extractor.cpp.o
  /Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/fex/fex/blargg_source.h
  /Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/fex/fex/fex.h
 CMakeFiles/fex.dir/fex/fex/Gzip_Reader.cpp.o
- /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/x86_64-nacl/usr/include/zconf.h
- /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/x86_64-nacl/usr/include/zlib.h
+ /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/include/zconf.h
+ /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/include/zlib.h
  /Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/fex/fex/Data_Reader.h
  /Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/fex/fex/Gzip_Reader.cpp
  /Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/fex/fex/Gzip_Reader.h
@@ -158,8 +158,8 @@ CMakeFiles/fex.dir/fex/fex/Zip7_Extractor.cpp.o
  fex/7z_C/7zCrc.h
  fex/7z_C/Types.h
 CMakeFiles/fex.dir/fex/fex/Zip_Extractor.cpp.o
- /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/x86_64-nacl/usr/include/zconf.h
- /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/x86_64-nacl/usr/include/zlib.h
+ /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/include/zconf.h
+ /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/include/zlib.h
  /Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/fex/fex/Data_Reader.h
  /Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/fex/fex/File_Extractor.h
  /Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/fex/fex/Zip_Extractor.cpp
@@ -172,8 +172,8 @@ CMakeFiles/fex.dir/fex/fex/Zip_Extractor.cpp.o
  /Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/fex/fex/blargg_source.h
  /Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/fex/fex/fex.h
 CMakeFiles/fex.dir/fex/fex/Zlib_Inflater.cpp.o
- /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/x86_64-nacl/usr/include/zconf.h
- /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/x86_64-nacl/usr/include/zlib.h
+ /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/include/zconf.h
+ /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/include/zlib.h
  /Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/fex/fex/Data_Reader.h
  /Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/fex/fex/Zlib_Inflater.cpp
  /Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/fex/fex/Zlib_Inflater.h

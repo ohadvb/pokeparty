@@ -26,7 +26,7 @@ set( FINALIZED_TARGET        "src/pnacl/app/vbam.pexe" )
 
 set( CMAKE_SYSTEM_NAME       "Linux" CACHE STRING "Target system." )
 set( CMAKE_SYSTEM_PROCESSOR  "LLVM-IR" CACHE STRING "Target processor." )
-set( CMAKE_FIND_ROOT_PATH    "${PLATFORM_PREFIX}/x86_64-nacl/usr" )
+set( CMAKE_FIND_ROOT_PATH    "${PLATFORM_PREFIX}/le32-nacl/usr" )
 set( CMAKE_AR                "${PLATFORM_PREFIX}/bin/pnacl-ar" CACHE STRING "")
 set( CMAKE_RANLIB            "${PLATFORM_PREFIX}/bin/pnacl-ranlib" CACHE STRING "")
 set( CMAKE_C_COMPILER        "${PLATFORM_PREFIX}/bin/pnacl-clang" )

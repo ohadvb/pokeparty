@@ -7,11 +7,11 @@ C_FLAGS = -Wno-non-literal-null-conversion -Wno-deprecated-writable-strings -U__
 
 C_DEFINES = -DBKPT_SUPPORT -DC_CORE -DENABLE_NLS -DFINAL_VERSION -DGBA_LOGGING -DHAVE_ARPA_INET_H -DHAVE_NETINET_IN_H -DHAVE_ZLIB_H -DNO_ASM -DNO_FFMPEG -DNO_LINK -DSDL
 
-C_INCLUDES = -isystem /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/include -isystem /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/usr/include/glibc-compat -I/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/x86_64-nacl/usr/include -I/Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/fex -I/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/x86_64-nacl/usr/include/SDL 
+C_INCLUDES = -isystem /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/include -isystem /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/usr/include/glibc-compat -I/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/include -I/Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/fex -I/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/include/SDL 
 
 CXX_FLAGS = -Wno-non-literal-null-conversion -Wno-deprecated-writable-strings -U__STRICT_ANSI__   -DSYSCONFDIR='"/etc"' -DWITH_LIRC='0' -DVERSION='"1.8.0-SVN"' -DPKGDATADIR='"/usr/local/share/vbam"' -DPACKAGE='' -DLOCALEDIR=\"/usr/local/share/locale\"
 
 CXX_DEFINES = -DBKPT_SUPPORT -DC_CORE -DENABLE_NLS -DFINAL_VERSION -DGBA_LOGGING -DHAVE_ARPA_INET_H -DHAVE_NETINET_IN_H -DHAVE_ZLIB_H -DNO_ASM -DNO_FFMPEG -DNO_LINK -DSDL
 
-CXX_INCLUDES = -isystem /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/include -isystem /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/usr/include/glibc-compat -I/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/x86_64-nacl/usr/include -I/Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/fex -I/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/x86_64-nacl/usr/include/SDL 
+CXX_INCLUDES = -isystem /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/include -isystem /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/usr/include/glibc-compat -I/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/include -I/Users/ohad/Projects/pokemon/pnacl/vbam-code-1231-trunk/fex -I/Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/include/SDL 
 
