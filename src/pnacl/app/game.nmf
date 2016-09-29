@@ -4,11 +4,6 @@
       "pnacl-translate" : {
         "url" : "vbam.pexe",
         "optlevel": 2
-      },
-      "pnacl-debug": {
-              "url": "vbam",
-                      "optlevel": 0
-                            }
       }
     }
   }
