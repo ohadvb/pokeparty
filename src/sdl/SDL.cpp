@@ -1902,7 +1902,7 @@ void from_glue()
     fprintf(stderr, "mount rom = %d\n", mount("/", "/games", "httpfs", 0, ""));
 
     mkdir("/store", 0777);
-    fprintf(stderr, "mount html5fs = %d\n", mount("/", "/store", "html5fs", 0, ""));
+    fprintf(stderr, "mount html5fs = %d\n", mount("/", "/store", "html5fs", 0, "type=PERSISTENT,expected_size=1048576"));
     mkdir("/store/states", 0777);
     mkdir("/store/captures", 0777);
 }

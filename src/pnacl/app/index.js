@@ -47,6 +47,12 @@ chrome.app.window.current().onBoundsChanged.addListener(scaleNacl);
 
 var listener = document.getElementById('listener');
 
+// window.webkitStorageInfo.requestQuota(PERSISTENT, 10*1024*1024, function(grantedBytes) {
+//       window.requestFileSystem(PERSISTENT, grantedBytes, onInitFs, errorHandler);
+// }, function(e) {
+//       console.log('Error', e);
+// });
+
 listener.addEventListener(
   'message',
   function(e) {
