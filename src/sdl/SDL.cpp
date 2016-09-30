@@ -24,6 +24,7 @@
 #include <sys/stat.h>
 #include <nacl_io/nacl_io.h>
 #include <sys/mount.h>
+#include <fcntl.h>
 #include <cmath>
 #ifdef USE_OPENGL
 #ifdef __APPLE__
@@ -1904,10 +1905,11 @@ void from_glue()
 
     mkdir("/store", 0777);
     fprintf(stderr, "mount html5fs = %d\n", mount("", "/store", "html5fs", 0, "type=PERSISTENT,expected_size=1048576"));
-    auto f = fopen("/store/try", "wb");
-    fprintf(stderr, "fopen returned: %p %p\n", f, errno);
     mkdir("/store/states", 0777);
     mkdir("/store/captures", 0777);
+
+    int fd0 = open(getenv("PS_STDIN"), O_RDONLY);
+      dup2(fd0, 0);
 }
 
 int real_main(int argc, char **argv);
@@ -2398,6 +2400,7 @@ int real_main(int argc, char **argv)
 
 
   while(emulating) {
+      handle_incoming_js_messages();
     if(!paused && active) {
       if(debugger && emulator.emuHasDebugger)
         dbgMain();

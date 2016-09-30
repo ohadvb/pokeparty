@@ -43,6 +43,12 @@ function showOpenFileDialog() {
     });
 }
 
+function send_to_nacl(msg) {
+    message = {};
+    message["tty: "] = msg;
+    plugin.postMessage(message);
+} 
+
 // chrome.app.window.current().onBoundsChanged.addListener(scaleNacl);
 
 var listener = document.getElementById('listener');
@@ -56,8 +62,9 @@ window.webkitStorageInfo.requestQuota(PERSISTENT, 10*1024*1024, function(granted
 listener.addEventListener(
   'message',
   function(e) {
-    if (e.data.split(" ")[0] != "POKEMSG")
+    if (e.data.split(" ")[1] != "POKEMSG")
       {
+          // console.log("discard " + e.data);
           return;
       }
     console.log(e.data);
