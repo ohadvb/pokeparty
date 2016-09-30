@@ -22,7 +22,7 @@ include( CMakeForceCompiler )
 
 set( PNACL                   ON )
 set( PLATFORM_PREFIX         "$ENV{NACL_SDK_ROOT}/toolchain/mac_pnacl" )
-set( FINALIZED_TARGET        "src/pnacl/app/vbam.pexe" )
+set( FINALIZED_TARGET        "${CMAKE_SOURCE_DIR}/src/pnacl/app/vbam.pexe" )
 
 set( CMAKE_SYSTEM_NAME       "Linux" CACHE STRING "Target system." )
 set( CMAKE_SYSTEM_PROCESSOR  "LLVM-IR" CACHE STRING "Target processor." )

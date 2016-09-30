@@ -81,7 +81,9 @@ endif( ENABLE_LINK )
 SET(VBAMCORE_LIBS
     vbamcore
     fex
+    # ${SDLMAIN_LIBRARY}
     ${SDL_LIBRARY}
+    sdlmain
     # /Users/ohad/Projects/pokemon/nacl_sdk/pepper_49/toolchain/mac_pnacl/le32-nacl/usr/lib/libSDL.a
     # # sdl
     ${SFML_LIBRARY}
