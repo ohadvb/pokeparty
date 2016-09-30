@@ -1898,13 +1898,18 @@ void from_glue()
     mount("", "/", "memfs", 0, "");
 
     mkdir("/config", 0777);
-    fprintf(stderr, "mount httpfs = %d\n", mount("/", "/config", "httpfs", 0, ""));
+    fprintf(stderr, "mount httpfs = %d\n", mount("/app", "/config", "httpfs", 0, ""));
 
     mkdir("/games", 0777);
-    fprintf(stderr, "mount rom = %d\n", mount("/", "/games", "httpfs", 0, ""));
+    fprintf(stderr, "mount rom = %d\n", mount("/app", "/games", "httpfs", 0, ""));
 
     mkdir("/store", 0777);
     fprintf(stderr, "mount html5fs = %d\n", mount("", "/store", "html5fs", 0, "type=PERSISTENT,expected_size=1048576"));
+
+    mkdir("/dev", 0777);
+    fprintf(stderr, "mount rom = %d\n", mount("/", "/dev", "dev", 0, ""));
+
+
     mkdir("/store/states", 0777);
     mkdir("/store/captures", 0777);
 
