@@ -104,3 +104,10 @@ document.addEventListener('keydown', function(e) {
     e.preventDefault();
   }
 }, true);
+
+
+var socket = io.connect('http://' + document.domain + ':' + location.port);
+socket.on('connect', function() {
+        socket.emit('POKEMSG', "connected");
+    });
+
