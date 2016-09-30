@@ -316,12 +316,9 @@ SET(SRC_SDL
 )
 
 SET(SRC_PNACL
-    src/pnacl/nacl_glue.cpp
+    src/sdl/pokemon.cpp
 )
 
-SET(SRC_PNACL
-    src/pnacl/nacl_glue.cpp
-)
 
 SET(SRC_FILTERS
     src/filters/2xSaI.cpp
@@ -437,7 +434,7 @@ IF( ENABLE_SDL )
         vbam
         WIN32
         ${SRC_SDL}
-        # ${SRC_PNACL}
+        ${SRC_PNACL}
     )
     IF( WIN32 )
         SET( WIN32_LIBRARIES wsock32 )

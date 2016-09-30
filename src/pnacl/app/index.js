@@ -56,7 +56,11 @@ window.webkitStorageInfo.requestQuota(PERSISTENT, 10*1024*1024, function(granted
 listener.addEventListener(
   'message',
   function(e) {
-    console.log(e);
+    if (e.data.split(" ")[0] != "POKEMSG")
+      {
+          return;
+      }
+    console.log(e.data);
   }, true);
 
 listener.addEventListener(

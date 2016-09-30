@@ -53,6 +53,7 @@
 #include "../gb/gbCheats.h"
 #include "../gb/gbSound.h"
 #include "../Util.h"
+#include "pokemon.h"
 
 #include "debugger.h"
 #include "filters.h"
@@ -1922,6 +1923,7 @@ int real_main(int argc, char **argv)
 {
   fprintf(stdout, "VBA-M version %s [SDL]\n", VERSION);
   fprintf(stderr, "VBA-M version %s [SDL]\n", VERSION);
+  message_js("POKEMSG hello");
 
   arg0 = argv[0];
 
