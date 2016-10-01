@@ -63,14 +63,16 @@ function send_to_nacl(msg) {
 
 function handle_saved_to(msg) {
     saves_fs.root.getFile( msg, {}, function(entry) {
-        console.log("uploading");
         entry.file( function(file) {
             var form = new FormData();
-            // form.append("filename", "uploaded.sgm");
             var fname = "";
             while( fname == "" )
             {
                 fname = prompt("Enter filename:", "");
+                if (fname == null) //on cancel
+                {
+                    return;
+                }
             }
             form.append("file", file, fname + ".sgm" );
 
