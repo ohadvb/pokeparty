@@ -1,6 +1,7 @@
 var plugin = document.getElementById('naclModule');
 var resizeTimer;
 var firstLoad = false;
+var saves_fs = null;
 
 var postFileCallback = function() {};
 
@@ -49,12 +50,24 @@ function send_to_nacl(msg) {
     plugin.postMessage(message);
 } 
 
+function send_file() {
+    saves_fs.root.getDirectory("states",{}, find_file); 
+}
 // chrome.app.window.current().onBoundsChanged.addListener(scaleNacl);
+function errorHandler(e) {
+    console.log(e)
+}
+
+function onInitFs(fs) {
+    console.log('Opened fs: ' + fs);
+    saves_fs = fs
+}
 
 var listener = document.getElementById('listener');
 
-window.webkitStorageInfo.requestQuota(PERSISTENT, 10*1024*1024, function(grantedBytes) {
-      window.requestFileSystem(PERSISTENT, grantedBytes, onInitFs, errorHandler);
+navigator.webkitPersistentStorage.requestQuota( 10*1024*1024, function(grantedBytes) {
+    console.log('granted :' + grantedBytes);
+    window.webkitRequestFileSystem(PERSISTENT, grantedBytes, onInitFs, errorHandler);
 }, function(e) {
       console.log('Error', e);
 });

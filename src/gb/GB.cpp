@@ -13,6 +13,7 @@
 #include "gbMemory.h"
 #include "gbSGB.h"
 #include "gbSound.h"
+#include "../sdl/pokemon.h"
 #include "../Util.h"
 
 #ifdef __GNUC__
@@ -700,7 +701,15 @@ void gbCompareLYToLYC()
   }
 }
 
-void  gbWriteMemory(register u16 address, register u8 value)
+void realWriteMemory(register u16 address, register u8 value);
+
+void gbWriteMemory(register u16 address, register u8 value)
+{
+    realWriteMemory(address, value);
+    run_memory_hooks(address);
+}
+
+void  realWriteMemory(register u16 address, register u8 value)
 {
 
   if(address < 0x8000) {

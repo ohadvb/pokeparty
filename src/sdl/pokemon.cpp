@@ -1,5 +1,9 @@
 #include <stdio.h>
 #include <sys/poll.h>
+#include "pokemon.h"
+#include "../System.h"
+
+extern struct EmulatedSystem emulator;
 
 static const char * MESSAGE_FORMAT = "POKEMSG %s\n";
 
@@ -18,10 +22,23 @@ void handle_incoming_js_messages()
 
     if ( ret != 1 )
     {
-        // fprintf(stderr, "no messages\n");
         return;
     }
     char msg[1024];
     scanf("%s", msg);
     fprintf(stderr, "%s\n",  msg);
+}
+
+void run_memory_hooks(u16 address)
+{
+    pokedex_hook(address);
+}
+
+void pokedex_hook(u16 address)
+{
+    if (address >= 0xdbe4 && address <= 0xdc13)
+    {
+        // TODO: send pokedex data
+        // fprintf(stderr, "%p\n",  address);
+    }
 }

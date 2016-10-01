@@ -6,5 +6,8 @@
         "optlevel": 2
       }
     }
-  }
+  },
+  "permissions": [
+    "filesystem"
+  ]
 }
