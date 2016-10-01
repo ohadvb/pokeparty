@@ -164,6 +164,7 @@ function update_saves(list)
 {
    saves_list = saves_list.concat(list).unique();
     console.log(saves_list);
+    saves_select.options.length = 0;
     saves_list.forEach( function(elem){
         var opt = document.createElement('option');
         opt.value = elem;
