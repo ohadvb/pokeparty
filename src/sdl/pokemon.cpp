@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include <sys/poll.h>
 #include "pokemon.h"
 #include "../System.h"
@@ -11,6 +12,15 @@ void message_js(char * msg)
 {
     printf(MESSAGE_FORMAT, msg);
 }
+
+void do_save()
+{
+    int ret = emulator.emuWriteState("/store/states/to_upload.sgm");
+    fprintf(stderr, "emuWriteState returned: %d\n", ret);
+    message_js("saved states/to_upload.sgm");
+    return;
+}
+
 
 void handle_incoming_js_messages()
 {
@@ -25,8 +35,14 @@ void handle_incoming_js_messages()
         return;
     }
     char msg[1024];
-    scanf("%s", msg);
+    char arg[1024];
+    scanf("%s %s", msg, arg);
     fprintf(stderr, "%s\n",  msg);
+
+    if (0 == strcmp(msg, "save"))
+    {
+        do_save();
+    }
 }
 
 void run_memory_hooks(u16 address)

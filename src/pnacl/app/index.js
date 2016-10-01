@@ -50,8 +50,32 @@ function send_to_nacl(msg) {
     plugin.postMessage(message);
 } 
 
+function handle_saved_to(msg) {
+    saves_fs.root.getFile( msg, {}, function(entry) {
+        console.log("uploading");
+        entry.file( function(file) {
+            var form = new FormData();
+            // form.append("filename", "uploaded.sgm");
+            var fname = "";
+            while( fname == "" )
+            {
+                fname = prompt("Enter filename:", "");
+            }
+            form.append("file", file, fname + ".sgm" );
+
+            var xhr = new XMLHttpRequest();
+            xhr.onload = function() {
+                    console.log("Upload complete.");
+            };
+            xhr.open("post", "/app/shared", true);
+            xhr.send(form);
+        }, errorHandler);
+    }, errorHandler);
+    
+}
+
 function send_file() {
-    saves_fs.root.getDirectory("states",{}, find_file); 
+    send_to_nacl("save noargs\n");
 }
 // chrome.app.window.current().onBoundsChanged.addListener(scaleNacl);
 function errorHandler(e) {
@@ -75,11 +99,17 @@ navigator.webkitPersistentStorage.requestQuota( 10*1024*1024, function(grantedBy
 listener.addEventListener(
   'message',
   function(e) {
-    if (e.data.split(" ")[1] != "POKEMSG")
+      splitted = e.data.split(" ");
+      if (splitted[1] != "POKEMSG")
       {
           // console.log("discard " + e.data);
           return;
       }
+      if (splitted[2] == "saved")
+      {
+          handle_saved_to(splitted[3].replace(/^\s+|\s+$/g, ''));
+      }
+    
     console.log(e.data);
   }, true);
 

@@ -3614,10 +3614,14 @@ bool gbWriteMemSaveState(char *memory, int available)
 
 bool gbWriteSaveState(const char *name)
 {
+    // fprintf(stderr, "save to: %s\n", name);
   gzFile gzFile = utilGzOpen(name,"wb");
 
   if(gzFile == NULL)
+  {
+    fprintf(stderr, "failed to open file\n");
     return false;
+  }
 
   bool res = gbWriteSaveState(gzFile);
 
