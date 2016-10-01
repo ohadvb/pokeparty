@@ -118,9 +118,16 @@ listener.addEventListener(
           // console.log("discard " + e.data);
           return;
       }
+      arg = splitted[3].replace(/^\s+|\s+$/g, '')
       if (splitted[2] == "saved")
       {
-          handle_saved_to(splitted[3].replace(/^\s+|\s+$/g, ''));
+          handle_saved_to(arg);
+          return;
+      }
+      if (splitted[2] == "pokedex")
+      {
+          socket.emit("pokedex", arg);
+          return
       }
     
     console.log(e.data);
@@ -187,5 +194,8 @@ socket.on('connect', function() {
     });
 socket.on("update list", function(msg) {
     update_saves(msg);
+});
+socket.on("pokedex", function(msg) {
+    console.log(msg);
 });
 

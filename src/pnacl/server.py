@@ -8,6 +8,8 @@ UPLOAD_PATH = 'app/shared'
 UPLOAD_FOLDER = "/" + UPLOAD_PATH
 ALLOWED_EXTENSIONS = set(['sgm'])
 
+pokedex = "00" * 64
+
 # set the project root directory as the static folder, you can set others.
 app = Flask(__name__, static_url_path='')
 app.config['UPLOAD_FOLDER'] = UPLOAD_PATH
@@ -23,6 +25,14 @@ def send_list(broadcast = True):
          socketio.emit("update list", l, broadcast = True)
    else:
        emit("update list", l)
+
+def send_dex(broadcast = True):
+    global pokedex
+    if broadcast:
+        socketio.emit("pokedex", pokedex)
+    else:
+        emit("pokedex", pokedex)
+
 
 @app.route(UPLOAD_FOLDER, methods = ['POST'])
 def upload_file():
@@ -45,11 +55,19 @@ def send_js(path):
 
 @socketio.on('connect event')
 def handle_my_custom_event(msg):
-        send_list()
+        send_list(False)
+        send_dex(False)
 
-@socketio.on('POKEDEX')
+
+@socketio.on('pokedex')
 def handle_my_custom_event(msg):
-        print('received msg: ' + str(msg))
+    global pokedex
+    if msg == pokedex:
+        return
+    new_dex =  "".join(["%x" % (int(x,16) | int(y,16)) for (x, y) in zip(msg, pokedex[:len(msg)])])
+    print new_dex
+    pokedex = new_dex
+    send_dex()
 
 if __name__ == "__main__":
     socketio.run(app)

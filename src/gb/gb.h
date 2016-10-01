@@ -43,6 +43,8 @@ bool gbWritePNGFile(const char *);
 bool gbWriteBMPFile(const char *);
 bool gbReadGSASnapshot(const char *);
 
+u8 gbReadMemory(register u16);
+
 extern int gbHardware;
 
 extern struct EmulatedSystem GBSystem;

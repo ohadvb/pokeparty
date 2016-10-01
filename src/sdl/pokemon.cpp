@@ -3,6 +3,7 @@
 #include <sys/poll.h>
 #include "pokemon.h"
 #include "../System.h"
+#include "../gb/gb.h"
 
 extern struct EmulatedSystem emulator;
 
@@ -58,11 +59,25 @@ void run_memory_hooks(u16 address)
     pokedex_hook(address);
 }
 
+static const u16 POKEDEX_START  = 0xdbe4; 
+static const u16 POKEDEX_END  = 0xdc23; 
+
 void pokedex_hook(u16 address)
 {
-    if (address >= 0xdbe4 && address <= 0xdc13)
+    static bool last_write_was_pokedex = false;
+    if (address >= POKEDEX_START && address <= POKEDEX_END)
     {
-        // TODO: send pokedex data
-        // fprintf(stderr, "%p\n",  address);
+        last_write_was_pokedex = true;
+        return;
     }
+    if(last_write_was_pokedex)
+    {
+        printf("POKEMSG pokedex ");
+        for( int i = POKEDEX_START; i <= POKEDEX_END; i++ )
+        {
+            printf("%02x", gbReadMemory(i));
+        }
+        printf("\n");
+    }
+    last_write_was_pokedex = false;
 }
