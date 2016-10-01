@@ -14,8 +14,6 @@
              src="game.nmf"
              type="application/x-pnacl" />
     </div>
-    <br>
-    <button onclick="send_file()">Upload Save</button>
     <div id="loadingMessage" class="centered">
       <div>Translating PNaCl to Native Architecture</div>
       <div id="loadingBar">
@@ -25,6 +23,11 @@
     <div id="openMessage" class="centered" style="display: none;">
       Press Ctrl+O to open a file
     </div>
+    <br>
+    <button onclick="send_file()">Upload Save</button>
+    <br>
+    <select id="saves_select"></select>
+    <button onclick="load_save()">Load Save</button>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
     <script src="index.js"></script>
   </body>

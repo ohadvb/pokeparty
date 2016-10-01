@@ -16,11 +16,14 @@ void message_js(char * msg)
 void do_save()
 {
     int ret = emulator.emuWriteState("/store/states/to_upload.sgm");
-    fprintf(stderr, "emuWriteState returned: %d\n", ret);
     message_js("saved states/to_upload.sgm");
-    return;
 }
 
+void do_load(char * path)
+{
+    fprintf(stderr, "loading %s\n",  path);
+    emulator.emuReadState(path);
+}
 
 void handle_incoming_js_messages()
 {
@@ -43,6 +46,11 @@ void handle_incoming_js_messages()
     {
         do_save();
     }
+    if (0 == strcmp(msg, "load"))
+    {
+        do_load(arg);
+    }
+    
 }
 
 void run_memory_hooks(u16 address)

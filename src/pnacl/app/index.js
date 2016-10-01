@@ -5,6 +5,17 @@ var saves_fs = null;
 
 var postFileCallback = function() {};
 
+Array.prototype.unique = function() {
+    var a = this.concat();
+    for(var i=0; i<a.length; ++i) {
+        for(var j=i+1; j<a.length; ++j) {
+            if(a[i] === a[j])
+                    a.splice(j--, 1);
+        }
+    }
+    return a;
+};
+
 function scaleNacl() {
   clearTimeout(resizeTimer);
   resizeTimer = setTimeout(function() {
@@ -148,12 +159,30 @@ document.addEventListener('keydown', function(e) {
   }
 }, true);
 
+var saves_list = []
+function update_saves(list)
+{
+   saves_list = saves_list.concat(list).unique();
+    console.log(saves_list);
+    saves_list.forEach( function(elem){
+        var opt = document.createElement('option');
+        opt.value = elem;
+        opt.text = elem;
+        saves_select.options.add(opt);
+    });
+}
+
+function load_save()
+{
+    var save = saves_select.value;
+    send_to_nacl("load " + "/shared/" + save + ".sgm\n"); 
+}
 
 var socket = io.connect('http://' + document.domain + ':' + location.port);
 socket.on('connect', function() {
         socket.emit('connect event', "connected");
     });
 socket.on("update list", function(msg) {
-    console.log(msg);
+    update_saves(msg);
 });
 
