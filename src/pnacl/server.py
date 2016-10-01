@@ -14,12 +14,15 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_PATH
 socketio = SocketIO(app)
 
 
-def send_list():
+def send_list(broadcast = True):
    l = []
    for f in os.listdir(UPLOAD_PATH):
        if fnmatch.fnmatch(f, "*.sgm"):
             l.append(f.replace(".sgm", ""))
-   socketio.emit("update list", l, broadcast = True)
+   if broadcast:
+         socketio.emit("update list", l, broadcast = True)
+   else:
+       emit("update list", l)
 
 @app.route(UPLOAD_FOLDER, methods = ['POST'])
 def upload_file():
@@ -40,9 +43,9 @@ def upload_file():
 def send_js(path):
     return send_from_directory('app', path)
 
-@socketio.on('POKEMSG')
+@socketio.on('connect event')
 def handle_my_custom_event(msg):
-        print('received msg: ' + str(msg))
+        send_list()
 
 @socketio.on('POKEDEX')
 def handle_my_custom_event(msg):

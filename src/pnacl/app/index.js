@@ -151,7 +151,7 @@ document.addEventListener('keydown', function(e) {
 
 var socket = io.connect('http://' + document.domain + ':' + location.port);
 socket.on('connect', function() {
-        socket.emit('POKEMSG', "connected");
+        socket.emit('connect event', "connected");
     });
 socket.on("update list", function(msg) {
     console.log(msg);
