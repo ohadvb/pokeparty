@@ -196,6 +196,6 @@ socket.on("update list", function(msg) {
     update_saves(msg);
 });
 socket.on("pokedex", function(msg) {
-    console.log(msg);
+    send_to_nacl("pokedex " + msg + "\n"); 
 });
 

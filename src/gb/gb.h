@@ -43,6 +43,7 @@ bool gbWritePNGFile(const char *);
 bool gbWriteBMPFile(const char *);
 bool gbReadGSASnapshot(const char *);
 
+void realWriteMemory(register u16 address, register u8 value);
 u8 gbReadMemory(register u16);
 
 extern int gbHardware;

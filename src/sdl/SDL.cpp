@@ -1933,7 +1933,7 @@ int real_main(int argc, char **argv)
 {
   fprintf(stdout, "VBA-M version %s [SDL]\n", VERSION);
   fprintf(stderr, "VBA-M version %s [SDL]\n", VERSION);
-  message_js("POKEMSG hello");
+  message_js("hello");
 
   arg0 = argv[0];
 

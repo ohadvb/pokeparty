@@ -8,6 +8,10 @@
 extern struct EmulatedSystem emulator;
 
 static const char * MESSAGE_FORMAT = "POKEMSG %s\n";
+static const u16 POKEDEX_START  = 0xdbe4; 
+static const u16 POKEDEX_END  = 0xdc23; 
+static const u16 POKEDEX_LEN = POKEDEX_END - POKEDEX_START + 1;
+
 
 void message_js(char * msg)
 {
@@ -24,6 +28,18 @@ void do_load(char * path)
 {
     fprintf(stderr, "loading %s\n",  path);
     emulator.emuReadState(path);
+}
+
+void do_dex(char * message)
+{
+    for (int i = 0; i < POKEDEX_LEN; i++)
+    {
+        u8 b = 0;
+        sscanf(message, "%2hhx", &b);
+        message += 2;
+        realWriteMemory(POKEDEX_START + i, b);
+    }
+
 }
 
 void handle_incoming_js_messages()
@@ -51,6 +67,10 @@ void handle_incoming_js_messages()
     {
         do_load(arg);
     }
+    if (0 == strcmp(msg, "pokedex"))
+    {
+        do_dex(arg);
+    }
     
 }
 
@@ -58,9 +78,6 @@ void run_memory_hooks(u16 address)
 {
     pokedex_hook(address);
 }
-
-static const u16 POKEDEX_START  = 0xdbe4; 
-static const u16 POKEDEX_END  = 0xdc23; 
 
 void pokedex_hook(u16 address)
 {

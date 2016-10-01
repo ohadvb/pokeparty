@@ -701,7 +701,6 @@ void gbCompareLYToLYC()
   }
 }
 
-void realWriteMemory(register u16 address, register u8 value);
 
 void gbWriteMemory(register u16 address, register u8 value)
 {
