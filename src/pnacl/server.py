@@ -69,10 +69,11 @@ def handle_my_custom_event(msg):
 @socketio.on('pokedex')
 def handle_my_custom_event(msg):
     global pokedex
-    if msg == pokedex:
-        return
     new_dex =  "".join(["%x" % (int(x,16) | int(y,16)) for (x, y) in zip(msg, pokedex[:len(msg)])])
     print new_dex
+    if new_dex  == pokedex:
+        send_dex(False)
+        return
     pokedex = new_dex
     send_dex()
 

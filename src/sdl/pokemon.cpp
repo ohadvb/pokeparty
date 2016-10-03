@@ -24,11 +24,23 @@ void do_save()
     message_js("saved states/to_upload.sgm");
 }
 
+void send_dex()
+{
+    printf("POKEMSG pokedex ");
+    for( int i = POKEDEX_START; i <= POKEDEX_END; i++ )
+    {
+        printf("%02x", gbReadMemory(i));
+    }
+    printf("\n");
+}
+
 void do_load(char * path)
 {
     fprintf(stderr, "loading %s\n",  path);
     emulator.emuReadState(path);
+    send_dex();
 }
+
 
 void do_dex(char * message)
 {
@@ -89,12 +101,8 @@ void pokedex_hook(u16 address)
     }
     if(last_write_was_pokedex)
     {
-        printf("POKEMSG pokedex ");
-        for( int i = POKEDEX_START; i <= POKEDEX_END; i++ )
-        {
-            printf("%02x", gbReadMemory(i));
-        }
-        printf("\n");
+        send_dex();
     }
+
     last_write_was_pokedex = false;
 }
