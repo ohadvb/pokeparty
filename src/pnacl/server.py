@@ -16,15 +16,21 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_PATH
 socketio = SocketIO(app)
 
 
-def send_list(broadcast = True):
+def saves_list(broadcast = True):
+    send_list(UPLOAD_PATH, "*.sgm", ".sgm", "update list", broadcast)
+
+def games_list(broadcast = False):
+    send_list("app/games", "*.zip", "", "games list", broadcast) 
+
+def send_list(path, match, trim_str, msg, broadcast):
    l = []
-   for f in os.listdir(UPLOAD_PATH):
-       if fnmatch.fnmatch(f, "*.sgm"):
-            l.append(f.replace(".sgm", ""))
+   for f in os.listdir(path):
+       if fnmatch.fnmatch(f, match):
+            l.append(f.replace(trim_str, ""))
    if broadcast:
-         socketio.emit("update list", l, broadcast = True)
+         socketio.emit(msg, l, broadcast = True)
    else:
-       emit("update list", l)
+       emit(msg, l)
 
 def send_dex(broadcast = True):
     global pokedex
@@ -45,7 +51,7 @@ def upload_file():
     # if file.filename == '':
     #     flash('No selected file')
     file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
-    send_list()
+    saves_list()
     return "Uploaded succesfully"
                                     
 
@@ -55,7 +61,8 @@ def send_js(path):
 
 @socketio.on('connect event')
 def handle_my_custom_event(msg):
-        send_list(False)
+        saves_list(False)
+        games_list(False)
         send_dex(False)
 
 

@@ -35,27 +35,12 @@ function makeNewPlugin() {
   document.getElementsByTagName('body')[0].className = 'lightsOn';
 }
 
-function showOpenFileDialog() {
-  chrome.fileSystem.chooseEntry({
-    'type': 'openFile'
-    },
-    function(entry) {
-      if (!entry)
-        return;
-
-      postFileCallback = function() {
-        plugin.postMessage({
-          'path': entry.fullPath,
-          'filesystem': entry.filesystem
-        });
-        document.getElementsByTagName('body')[0].className = 'lightsOff';
-        postFileCallback = function() {};
-      };
-      makeNewPlugin();
-    });
-}
 
 function send_to_nacl(msg) {
+    if (!firstLoad)
+    {
+        return
+    }
     message = {};
     message["tty: "] = msg;
     plugin.postMessage(message);
@@ -142,10 +127,13 @@ listener.addEventListener(
 listener.addEventListener(
   'load',
   function(e) {
-    document.getElementById('openMessage').style.display = 'block';
     document.getElementById('loadingMessage').style.display = 'none';
-    postFileCallback();
-    firstLoad = true;
+    var e = document.getElementById("games_select");
+    var strUser = e.options[e.selectedIndex].value;
+    message = {};
+    message["tty: "] = "/games/" + strUser + '\n';
+    plugin.postMessage(message);
+    firstLoad = true; //allow sending messages
     scaleNacl();
   }, true);
 
@@ -168,18 +156,28 @@ document.addEventListener('keydown', function(e) {
   }
 }, true);
 
-var saves_list = []
-function update_saves(list)
+function update_ddl(list, new_list, ddl)
 {
-   saves_list = saves_list.concat(list).unique();
-    console.log(saves_list);
-    saves_select.options.length = 0;
-    saves_list.forEach( function(elem){
+   list = list.concat(new_list).unique();
+    ddl.options.length = 0;
+    list.forEach( function(elem){
         var opt = document.createElement('option');
         opt.value = elem;
         opt.text = elem;
-        saves_select.options.add(opt);
+        ddl.options.add(opt);
     });
+}
+
+var games_list = []
+function update_games(list)
+{
+    update_ddl(list, games_list, games_select);
+}
+
+var saves_list = []
+function update_saves(list)
+{
+    update_ddl(list, saves_list, saves_select);
 }
 
 function load_save()
@@ -194,6 +192,9 @@ socket.on('connect', function() {
     });
 socket.on("update list", function(msg) {
     update_saves(msg);
+});
+socket.on("games list", function(msg) {
+    update_games(msg);
 });
 socket.on("pokedex", function(msg) {
     send_to_nacl("pokedex " + msg + "\n"); 

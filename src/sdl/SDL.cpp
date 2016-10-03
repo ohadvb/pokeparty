@@ -1904,7 +1904,7 @@ void from_glue()
     fprintf(stderr, "mount httpfs = %d\n", mount("/app/shared", "/shared", "httpfs", 0, ""));
 
     mkdir("/games", 0777);
-    fprintf(stderr, "mount rom = %d\n", mount("/app", "/games", "httpfs", 0, ""));
+    fprintf(stderr, "mount rom = %d\n", mount("/app/games", "/games", "httpfs", 0, ""));
 
     mkdir("/store", 0777);
     fprintf(stderr, "mount html5fs = %d\n", mount("", "/store", "html5fs", 0, "type=PERSISTENT,expected_size=1048576"));
@@ -1925,7 +1925,9 @@ int real_main(int argc, char **argv);
 int main(int argc, char **argv)
 {
     from_glue();
-    char* rargv[] = { "vbam", "--config=/config/vbam.cfg", "/games/Gold.zip", NULL};
+    char to_load[1024];
+    scanf("%s", to_load);
+    char* rargv[] = { "vbam", "--config=/config/vbam.cfg", to_load, NULL};
     return real_main(3, rargv );
 }
 
