@@ -15,22 +15,34 @@ app = Flask(__name__, static_url_path='')
 app.config['UPLOAD_FOLDER'] = UPLOAD_PATH
 socketio = SocketIO(app)
 
+saves_path = {}
 
-def saves_list(broadcast = True):
-    send_list(UPLOAD_PATH, "*.sgm", ".sgm", "update list", broadcast)
-
-def games_list(broadcast = False):
-    send_list("app/games", "*.zip", "", "games list", broadcast) 
-
-def send_list(path, match, trim_str, msg, broadcast):
-   l = []
-   for f in os.listdir(path):
-       if fnmatch.fnmatch(f, match):
-            l.append(f.replace(trim_str, ""))
+def my_send(msg, l, broadcast):
    if broadcast:
          socketio.emit(msg, l, broadcast = True)
    else:
        emit(msg, l)
+
+def saves_list(broadcast = True):
+    suffix = ".sgm"
+    d = {}
+    for game in saves_path.keys():
+        d[game] = get_list(saves_path[game], "*" + suffix, suffix)
+    print d
+    my_send("update list", d, broadcast)
+
+    # send_list(UPLOAD_PATH, "*" + suffix, suffix, "update list", broadcast)
+
+def games_list(broadcast = False):
+    my_send("games list", get_list("app/games", "*.zip", ".zip"), broadcast) 
+    
+
+def get_list(path, match, trim_str):
+    l = []
+    for f in os.listdir(path):
+       if fnmatch.fnmatch(f, match):
+            l.append(f.replace(trim_str, ""))
+    return l
 
 def send_dex(broadcast = True):
     global pokedex
@@ -61,10 +73,22 @@ def send_js(path):
 
 @socketio.on('connect event')
 def handle_my_custom_event(msg):
-        saves_list(False)
+        print "connected"
         games_list(False)
-        send_dex(False)
 
+def create_save_path(game):
+    path = os.path.join(UPLOAD_PATH, game)
+    if not os.path.exists(path):
+        print "created %s" %(path)
+        os.mkdir(path)
+    saves_path[game] = path
+
+
+@socketio.on('startgame event')
+def handle_my_custom_event(msg):
+    create_save_path(msg)
+    saves_list(False)
+    send_dex(False)
 
 @socketio.on('pokedex')
 def handle_my_custom_event(msg):

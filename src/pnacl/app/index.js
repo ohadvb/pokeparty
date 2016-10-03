@@ -2,6 +2,7 @@ var plugin = document.getElementById('naclModule');
 var resizeTimer;
 var firstLoad = false;
 var saves_fs = null;
+var game = null;
 
 var postFileCallback = function() {};
 
@@ -59,7 +60,7 @@ function handle_saved_to(msg) {
                     return;
                 }
             }
-            form.append("file", file, fname + ".sgm" );
+            form.append("file", file, game + "/" + fname +  ".sgm" );
 
             var xhr = new XMLHttpRequest();
             xhr.onload = function() {
@@ -129,10 +130,11 @@ listener.addEventListener(
   function(e) {
     document.getElementById('loadingMessage').style.display = 'none';
     var e = document.getElementById("games_select");
-    var strUser = e.options[e.selectedIndex].value;
+    game = e.options[e.selectedIndex].value;
     message = {};
-    message["tty: "] = "/games/" + strUser + '\n';
+    message["tty: "] = "/games/" + game + '.zip\n';
     plugin.postMessage(message);
+    socket.emit('startgame event', game);
     firstLoad = true; //allow sending messages
     scaleNacl();
   }, true);
@@ -177,18 +179,20 @@ function update_games(list)
 var saves_list = []
 function update_saves(list)
 {
-    update_ddl(list, saves_list, saves_select);
+    console.log(list);
+    // saves_list = list;
+    update_ddl(eval("list."+game), saves_list, saves_select);
 }
 
 function load_save()
 {
     var save = saves_select.value;
-    send_to_nacl("load " + "/shared/" + save + ".sgm\n"); 
+    send_to_nacl("load " + "/shared/" + game + "/" + save + ".sgm\n"); 
 }
 
 var socket = io.connect('http://' + document.domain + ':' + location.port);
 socket.on('connect', function() {
-        socket.emit('connect event', "connected");
+    socket.emit('connect event', "connect");
     });
 socket.on("update list", function(msg) {
     update_saves(msg);
