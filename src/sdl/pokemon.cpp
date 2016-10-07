@@ -86,9 +86,26 @@ void handle_incoming_js_messages()
     
 }
 
-void run_memory_hooks(u16 address)
+void run_memory_hooks(u16 address, u8 value)
 {
     pokedex_hook(address);
+    sram_hook(address, value);
+}
+
+
+//ox4000 selects bank, 0xa to 0 enables, 0 to 0 disables
+void sram_hook(u16 address, u8 value)
+{
+    static u8 last_bank = 0;
+    if (address == 0x4000)
+    {
+        u8 bank = value;
+        if ((last_bank == 1 || last_bank == 2) && bank != 1 && bank != 2)
+        {
+            fprintf(stderr, "wrote boxes\n");
+        }
+        last_bank = bank;
+    }
 }
 
 void pokedex_hook(u16 address)
