@@ -70,7 +70,6 @@ function handle_saved_to(msg) {
             xhr.send(form);
         }, errorHandler);
     }, errorHandler);
-    
 }
 
 function send_file() {
@@ -101,7 +100,6 @@ listener.addEventListener(
       splitted = e.data.split(" ");
       if (splitted[1] != "POKEMSG")
       {
-          // console.log("discard " + e.data);
           return;
       }
       arg = splitted[3].replace(/^\s+|\s+$/g, '')
@@ -179,8 +177,6 @@ function update_games(list)
 var saves_list = []
 function update_saves(list)
 {
-    console.log(list);
-    // saves_list = list;
     update_ddl(eval("list."+game), saves_list, saves_select);
 }
 
@@ -189,18 +185,4 @@ function load_save()
     var save = saves_select.value;
     send_to_nacl("load " + "/shared/" + game + "/" + save + ".sgm\n"); 
 }
-
-var socket = io.connect('http://' + document.domain + ':' + location.port);
-socket.on('connect', function() {
-    socket.emit('connect event', "connect");
-    });
-socket.on("update list", function(msg) {
-    update_saves(msg);
-});
-socket.on("games list", function(msg) {
-    update_games(msg);
-});
-socket.on("pokedex", function(msg) {
-    send_to_nacl("pokedex " + msg + "\n"); 
-});
 

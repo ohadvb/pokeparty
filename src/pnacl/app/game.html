@@ -22,17 +22,19 @@
       </div>
     </div>
     </p>
+    <br>
     <p>
     <select id="games_select"></select>
     <button onclick="makeNewPlugin()">Restart Gameboy</button>
     <br>
-    <button onclick="send_file()">Upload Save</button>
+    <button onclick="send_file()">Upload State</button>
     <br>
     <select id="saves_select"></select>
-    <button onclick="load_save()">Load Save</button>
+    <button onclick="load_save()">Load State</button>
     </p>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
     <script src="index.js"></script>
+    <script src="sock.js"></script>
   </body>
 </html>
 
