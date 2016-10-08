@@ -4,5 +4,6 @@ out/*
 *.nexe
 *.sgm
 src/pnacl/app/shared/*
+*.pyc
 tags
 venv
