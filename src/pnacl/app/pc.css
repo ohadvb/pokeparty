@@ -1,0 +1,54 @@
+/*
+blue 4F7FC1
+brown 877A73
+light green 42A17C
+dark green 25654E
+white F3F4EE
+*/
+.pc {
+    width: 800px;
+    display: flex;
+}
+.pc-my {
+    background: #F3F4EE;
+    flex-grow: 1;
+    flex-basis: 0;
+}
+.pc-box-select {
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: solid 3px #42A17C;
+}
+.pc-box-select > a {
+    padding: 10px;
+    text-decoration: none;
+    color: #F3F4EE;
+    background: #4F7FC1;
+}
+.pc-box-select > span {
+    color: #25654E;
+}
+.pc-other {
+    flex-grow: 1;
+    flex-basis: 0
+}
+
+.pc-search {
+    background: #42A17C;
+    height: 40px;
+    padding: 10px;
+    border-bottom: solid 3px #42A17C;
+    display: flex;
+    align-items: center;
+}
+.pc-search > input {
+    flex-grow: 1;
+    margin-left: 10px;
+}
+
+.pc-search > span {
+    color: #F3F4EE;
+}
