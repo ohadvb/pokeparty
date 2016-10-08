@@ -23,6 +23,7 @@ static const u16 BOXES_END = 0xbe2e;
 
 u8 current_sram_bank = 0;
 
+unsigned long ticks_since_last_write = 0;
 
 void message_js(char * msg)
 {
@@ -60,6 +61,7 @@ void do_dex(char * message)
         u8 b = 0;
         sscanf(message, "%2hhx", &b);
         message += 2;
+        //TODO: binary or instead of writes
         realWriteMemory(POKEDEX_START + i, b);
     }
 
@@ -104,13 +106,56 @@ void run_memory_hooks(u16 address, u8 value)
     box_and_party_hook(address);
 }
 
+static const u16 BOX_SIZE = 1104;
 extern u8 * gbRam;
 // bank x is in gbRam[x << 13]
+void send_boxes()
+{
+    u8 box_number = gbReadMemory(CURRENT_BOX_NUMBER);
+    FILE * out_file = fopen("/store/boxes.bin", "wb");
+    if (out_file == NULL)
+    {
+        fprintf(stderr, "failed to open boxes file\n");
+    }
+    for (int i = PARTY_START; i <=PARTY_END; i++)
+    {
+        u8 output = gbReadMemory(i);
+        fwrite(&output, 1, 1, out_file);
+    }
+    for (int box = 0; box < 14; box++)
+    {
+        if (box == box_number)
+        {
+            int base_index = 1 << 13;
+            fwrite(&gbRam[base_index + CURRENT_BOX_START - 0xa000], BOX_SIZE, 1, out_file);
+        }
+        else
+        {
+            int base_index = 2 << 13;
+            fwrite(&gbRam[base_index + BOXES_START + BOX_SIZE*box -0xa000], BOX_SIZE, 1, out_file);
+        }
+    }
+    printf("POKEMSG boxes %s\n", "boxes.bin");
+}
+
+void handle_ticks()
+{
+    ticks_since_last_write++;
+    if (ticks_since_last_write == 200)
+    {
+        send_boxes();
+    }
+}
 //ox4000 selects bank, 0xa to 0 enables, 0 to 0 disables
 void sram_hook(u16 address, u8 value)
 {
     if (address == 0x4000)
     {
+        if ((current_sram_bank == 1 || current_sram_bank == 2) && value != 1 && value != 2)
+        {
+            // fprintf(stderr, "done with boxes\n");
+            // send_boxes();
+        }
         current_sram_bank = value;
     }
 }
@@ -118,29 +163,13 @@ void sram_hook(u16 address, u8 value)
 void box_and_party_hook(u16 address)
 {
     //TODO: current implementation results in 40 prints, find a good way to cache it.
-    static bool last_write_was_pokemon = false;
-    bool writing_pokemon = false;
-    if (address >= PARTY_START && address <= PARTY_END)
+    if ((address >= PARTY_START && address <= 0xda29) ||
+         (address == CURRENT_BOX_NUMBER)||
+         (current_sram_bank == 1 && address >= CURRENT_BOX_START && address <= CURRENT_BOX_END)||
+         (current_sram_bank == 2 && address >= BOXES_START && address <= BOXES_END))
     {
-        writing_pokemon  = true;
+        ticks_since_last_write = 0;
     }
-    if (address == CURRENT_BOX_NUMBER)
-    {
-        writing_pokemon  = true;
-    }
-    if (current_sram_bank == 1 && address >= CURRENT_BOX_START && address <= CURRENT_BOX_END)
-    {
-        writing_pokemon  = true;
-    }
-    if (current_sram_bank == 2 && address >= BOXES_START && address <= BOXES_END)
-    {
-        writing_pokemon  = true;
-    }
-    if (!writing_pokemon && last_write_was_pokemon)
-    {
-        fprintf(stderr, "writing pokemon data\n");
-    }
-    last_write_was_pokemon = writing_pokemon;
 }
 
 void pokedex_hook(u16 address)

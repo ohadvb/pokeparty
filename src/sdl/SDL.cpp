@@ -2411,6 +2411,7 @@ int real_main(int argc, char **argv)
 
   while(emulating) {
       handle_incoming_js_messages();
+      handle_ticks();
     if(!paused && active) {
       if(debugger && emulator.emuHasDebugger)
         dbgMain();

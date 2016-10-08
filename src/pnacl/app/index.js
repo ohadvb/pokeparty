@@ -72,6 +72,22 @@ function handle_saved_to(msg) {
     }, errorHandler);
 }
 
+function upload_file(msg) {
+    saves_fs.root.getFile( msg, {}, function(entry) {
+        entry.file( function(file) {
+            var form = new FormData();
+            form.append("file", file);
+
+            var xhr = new XMLHttpRequest();
+            xhr.onload = function() {
+                    console.log("Upload complete.");
+            };
+            xhr.open("post", "/app/shared", true);
+            xhr.send(form);
+        }, errorHandler);
+    }, errorHandler);
+}
+
 function send_file() {
     send_to_nacl("save noargs\n");
 }
@@ -111,6 +127,11 @@ listener.addEventListener(
       if (splitted[2] == "pokedex")
       {
           socket.emit("pokedex", arg);
+          return
+      }
+      if (splitted[2] == "boxes")
+      {
+          upload_file(arg);
           return
       }
     
