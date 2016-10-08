@@ -82,7 +82,7 @@ function upload_file(msg) {
             xhr.onload = function() {
                     console.log("Upload complete.");
             };
-            xhr.open("post", "/app/shared", true);
+            xhr.open("post", "/app/boxes", true);
             xhr.send(form);
         }, errorHandler);
     }, errorHandler);

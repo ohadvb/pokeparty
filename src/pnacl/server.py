@@ -8,6 +8,8 @@ UPLOAD_PATH = 'app/shared'
 UPLOAD_FOLDER = "/" + UPLOAD_PATH
 ALLOWED_EXTENSIONS = set(['sgm'])
 
+BOXES_PATH = '/app/boxes'
+
 pokedex = "00" * 64
 
 # set the project root directory as the static folder, you can set others.
@@ -55,17 +57,19 @@ def send_dex(broadcast = True):
 @app.route(UPLOAD_FOLDER, methods = ['POST'])
 def upload_file():
     if 'file' not in request.files:
-        flash('No file part')
-        return redirect(request.url)
+        abort(400)
     file = request.files['file']
-    # if user does not select file, browser also
-    # submit a empty part without filename
-    # if file.filename == '':
-    #     flash('No selected file')
     file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
     saves_list()
     return "Uploaded succesfully"
                                     
+@app.route(BOXES_PATH, methods = ['POST'])
+def upload_box():
+    if 'file' not in request.files:
+        abort(400)
+    file = request.files['file']
+    # TODO: parse
+    return "Uploaded succesfully"
 
 @app.route('/app/<path:path>')
 def send_js(path):
