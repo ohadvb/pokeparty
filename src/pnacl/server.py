@@ -63,13 +63,10 @@ def upload_file():
     saves_list()
     return "Uploaded succesfully"
                                     
-@app.route(BOXES_PATH, methods = ['POST'])
-def upload_box():
-    if 'file' not in request.files:
-        abort(400)
-    file = request.files['file']
-    # TODO: parse
-    return "Uploaded succesfully"
+@socketio.on('boxes')
+def upload_box(data):
+    #TODO
+    return
 
 @app.route('/app/<path:path>')
 def send_js(path):

@@ -72,18 +72,22 @@ function handle_saved_to(msg) {
     }, errorHandler);
 }
 
-function upload_file(msg) {
+function upload_box(msg) {
     saves_fs.root.getFile( msg, {}, function(entry) {
         entry.file( function(file) {
-            var form = new FormData();
-            form.append("file", file);
-
-            var xhr = new XMLHttpRequest();
-            xhr.onload = function() {
-                    console.log("Upload complete.");
-            };
-            xhr.open("post", "/app/boxes", true);
-            xhr.send(form);
+            var reader = new FileReader();
+            var data = reader.readAsBinaryString(file);
+            
+            socket.emit("boxes", file);
+            // var form = new FormData();
+            // form.append("file", file);
+            //
+            // var xhr = new XMLHttpRequest();
+            // xhr.onload = function() {
+            //         console.log("Upload complete.");
+            // };
+            // xhr.open("post", "/app/shared", true);
+            // xhr.send(form);
         }, errorHandler);
     }, errorHandler);
 }
@@ -131,7 +135,7 @@ listener.addEventListener(
       }
       if (splitted[2] == "boxes")
       {
-          upload_file(arg);
+          upload_box(arg);
           return
       }
     
