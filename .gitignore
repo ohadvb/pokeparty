@@ -3,5 +3,6 @@ out/*
 *.pexe
 *.nexe
 *.sgm
+src/pnacl/app/shared/*
 tags
 venv

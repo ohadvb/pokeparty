@@ -62,7 +62,7 @@ void do_dex(char * message)
         sscanf(message, "%2hhx", &b);
         message += 2;
         //TODO: binary or instead of writes
-        realWriteMemory(POKEDEX_START + i, b);
+        realWriteMemory(POKEDEX_START + i, b | gbReadMemory(POKEDEX_START +i));
     }
 
 }
