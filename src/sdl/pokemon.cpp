@@ -12,7 +12,7 @@ static const u16 POKEDEX_START  = 0xdbe4;
 static const u16 POKEDEX_END  = 0xdc23; 
 static const u16 POKEDEX_LEN = POKEDEX_END - POKEDEX_START + 1;
 static const u16 PARTY_START = 0xda22;
-static const u16 PARTY_END = 0xdb49;
+static const u16 PARTY_END = 0xdbcd;
 static const u16 PARTY_NAMES_START = 0xdb4a;
 static const u16 PARTY_NAMES_END = 0xdbcd;
 static const u16 CURRENT_BOX_NUMBER = 0xD8BC; 
@@ -135,6 +135,7 @@ void send_boxes()
             fwrite(&gbRam[base_index + BOXES_START + BOX_SIZE*box -0xa000], BOX_SIZE, 1, out_file);
         }
     }
+    fclose(out_file);
     printf("POKEMSG boxes %s\n", "boxes.bin");
 }
 
