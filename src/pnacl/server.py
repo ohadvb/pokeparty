@@ -12,6 +12,7 @@ ALLOWED_EXTENSIONS = set(['sgm'])
 BOXES_PATH = '/app/boxes'
 
 pokedex = "00" * 64
+boxes = {}
 
 # set the project root directory as the static folder, you can set others.
 app = Flask(__name__, static_url_path='')
@@ -66,7 +67,7 @@ def upload_file():
                                     
 @socketio.on('boxes')
 def upload_box(data):
-    print box_parser.parse_data(data)
+    boxes[request.sid] = box_parser.parse_data(data)
     return
 
 @app.route('/app/<path:path>')

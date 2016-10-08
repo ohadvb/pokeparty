@@ -3,7 +3,7 @@
 from construct import this, Struct, Array, Byte,\
     Int16ub, Padding, String, Aligned, Terminated, Adapter
 import pokemon_encoding
-import pdb
+import pokemon_names
 
 import itertools
 import sys
@@ -39,6 +39,7 @@ def parse_box(poke_list):
         d["index"] = pokemon[0]
         d["level"] = pokemon[31]
         d["name"] = poke_list.names[i]
+        d["species"] = pokemon_names.names[d["index"]]
         box.append(d)
         print d
     return box
