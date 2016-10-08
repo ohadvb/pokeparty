@@ -3,6 +3,7 @@
 from construct import this, Struct, Array, Byte,\
     Int16ub, Padding, String, Aligned, Terminated, Adapter
 import pokemon_encoding
+import pdb
 
 import itertools
 import sys
@@ -25,6 +26,34 @@ def PokemonList (capacity, pokemon_size, padding):
     )
 
 PokemonDump = PokemonList (6, 48, 0) >> PokemonList(20, 32, 2)[14]
+
+def parse_box(poke_list):
+    box = []
+    list_count = poke_list.count
+    if list_count in  (0, 0xff):
+        return box
+    for i in range(poke_list.count):
+        d = {}
+        pokemon = poke_list.pokemon[i][:32]
+        d["binary"] = "".join(chr(i) for i in pokemon)
+        d["index"] = pokemon[0]
+        d["level"] = pokemon[31]
+        d["name"] = poke_list.names[i]
+        box.append(d)
+        print d
+    return box
+
+
+def parse_data(data):
+    dump = PokemonDump.parse(data)
+    boxes = []
+    boxes.append(parse_box(dump[0]))
+    for poke_list in dump[1]:
+        boxes.append(parse_box(poke_list))
+    return boxes
+        
+
+
 
 def main (argv):
     with open (argv[1], 'rb') as f:

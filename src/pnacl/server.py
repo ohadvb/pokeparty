@@ -1,6 +1,7 @@
 from flask import Flask, request, send_from_directory
 from flask_socketio import SocketIO,send,emit
 from werkzeug.utils import secure_filename
+import box_parser
 import os.path, os
 import fnmatch
 
@@ -65,7 +66,7 @@ def upload_file():
                                     
 @socketio.on('boxes')
 def upload_box(data):
-    #TODO
+    print box_parser.parse_data(data)
     return
 
 @app.route('/app/<path:path>')
