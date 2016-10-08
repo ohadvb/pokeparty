@@ -3,3 +3,5 @@ out/*
 *.pexe
 *.nexe
 *.sgm
+tags
+venv
