@@ -70,6 +70,10 @@ def upload_box(data):
     boxes[request.sid] = box_parser.parse_data(data)
     return
 
+@app.route('/app/boxes')
+def send_boxes(path):
+    return boxes[request.sid]
+
 @app.route('/app/<path:path>')
 def send_js(path):
     return send_from_directory('app', path)

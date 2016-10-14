@@ -80,6 +80,10 @@ ul.tab li a:focus, .active {background-color: #ccc;}
     border-top: none;
 }
 
+.hide {
+    display: none;
+}
+
 .hidden{
     position: absolute !important;
     top: -9999px !important;
