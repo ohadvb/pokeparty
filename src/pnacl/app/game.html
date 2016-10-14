@@ -2,9 +2,18 @@
 <html>
   <head>
     <link rel="stylesheet" href="style.css">
+    <script src="build/react.js"></script>
+    <script src="build/react-dom.js"></script>
+    <script src="https://unpkg.com/babel-core@5.8.38/browser.min.js"></script>
+    <script src="tabs.js"></script>
   </head>
   <body>
+      <ul class="tab">
+        <li><a href="#" class="tablinks" onclick="openTab(event, 'Game')">Game</a></li>
+        <li><a href="#" class="tablinks" onclick="openTab(event, 'PC')">Bill's PC</a></li>
+      </ul>
     <p>
+    <div id="Game" class="tabcontent">
       <div id="listener">
         <embed name="nacl_module"
                id="naclModule"
@@ -20,7 +29,7 @@
         <div id="loadingBar">
           <div id="progress"></div>
         </div>
-      </div>
+        </div>
     </p>
     <br>
     <p>
@@ -32,6 +41,10 @@
       <select id="saves_select"></select>
       <button onclick="load_save()">Load State</button>
     </p>
+    </div>
+    <div id="PC" class="tabcontent hidden">
+        <h1> PC </h1>
+    </div>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
     <script src="index.js"></script>
     <script src="sock.js"></script>

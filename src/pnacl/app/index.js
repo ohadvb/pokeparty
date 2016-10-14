@@ -79,15 +79,6 @@ function upload_box(msg) {
             var data = reader.readAsBinaryString(file);
             
             socket.emit("boxes", file);
-            // var form = new FormData();
-            // form.append("file", file);
-            //
-            // var xhr = new XMLHttpRequest();
-            // xhr.onload = function() {
-            //         console.log("Upload complete.");
-            // };
-            // xhr.open("post", "/app/shared", true);
-            // xhr.send(form);
         }, errorHandler);
     }, errorHandler);
 }
