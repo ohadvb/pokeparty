@@ -1,0 +1,84 @@
+/*
+blue 4F7FC1
+brown 877A73
+light green 42A17C
+dark green 25654E
+white F3F4EE
+*/
+html {
+    font-family: sans-serif;
+}
+.pc {
+    width: 800px;
+    display: flex;
+    background: #F3F4EE;
+}
+.pc-my {
+    flex-grow: 1;
+    flex-basis: 0;
+}
+.pc-my > header {
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: solid 3px #42A17C;
+}
+.pc-btn {
+    padding: 10px;
+    text-decoration: none;
+    color: #F3F4EE;
+    background: #4F7FC1;
+}
+.pc-my > header > span {
+    color: #25654E;
+}
+.pc-other {
+    flex-grow: 1;
+    flex-basis: 0
+}
+
+.pc-other > header {
+    background: #42A17C;
+    height: 40px;
+    padding: 10px;
+    border-bottom: solid 3px #42A17C;
+    display: flex;
+    align-items: center;
+}
+.pc-other > header > input {
+    flex-grow: 1;
+    margin-left: 10px;
+}
+
+.pc-other > header > span {
+    color: #F3F4EE;
+}
+
+.pc-entry {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    border-bottom: solid 1px #42A17C;
+}
+
+.pc-entry:hover {
+    background: #E3E4DE;
+}
+
+.pc-entry > img {
+    height: 40px;
+    border: solid 2px #877A73;
+}
+.pc-entry > h1 {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-left: 0.5em;
+    color: #25654E;
+}
+.pc-entry > h2 {
+    margin-left: 1em;
+    color: #877A73;
+}
