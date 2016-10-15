@@ -4,6 +4,7 @@ from construct import this, Struct, Array, Byte,\
     Int16ub, Padding, String, Aligned, Terminated, Adapter
 import pokemon_encoding
 import pokemon_names
+import pdb
 
 import itertools
 import sys
@@ -12,6 +13,11 @@ class PokemonStringAdapter (Adapter):
     def _decode (self, obj, ctx):
         terminated = itertools.takewhile (lambda c: c not in (0x50,0xff), obj)
         return pokemon_encoding.decode (terminated)
+    
+    def _encode (self, obj, ctx):
+        encoded = pokemon_encoding.encode(obj)
+        pad_to_len(encoded, 0x50, 11)
+        return encoded
 
 PokemonString = PokemonStringAdapter (Byte[11])
 
@@ -39,12 +45,32 @@ def parse_box(poke_list):
         d["index"] = pokemon[0]
         d["level"] = pokemon[31]
         d["name"] = poke_list.names[i]
+        d["ot"] = poke_list.ot[i]
         d["species"] = pokemon_names.names[d["index"]]
         box.append(d)
     return box
 
-def build_boxes(data):
-    pass
+def pad_to_len(l, padding, size):
+    l += [padding] * (size - len(l))
+
+def build_boxes(boxes, party):
+    out = PokemonList(20, 32, 2)[14]
+    ot = party[0]["ot"]
+    l = []
+    for box in boxes:
+        d = {}
+        d["count"] = len(box)
+        d["species"] = [p["index"] for p in box]
+        pad_to_len(d["species"], 0xff, 20)
+        d["pokemon"] = [[ord(c) for c in list(p["binary"].decode("hex"))] for p in box]
+        pad_to_len(d["pokemon"], [0] * 32, 20)
+        d["ot"] = [ot] * len(box)
+        pad_to_len(d["ot"], "\x00" * 11 , 20)
+        d["names"] = [p["name"] for p in box]
+        pad_to_len(d["names"], "\x00" * 11, 20)
+        l.append(d)
+        s = PokemonList(20, 32, 2)
+    return out.build(l)
     
 
 def parse_data(data):

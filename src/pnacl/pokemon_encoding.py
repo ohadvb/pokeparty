@@ -58,5 +58,5 @@ def decode(data):
 	return "".join(str(char_set[b]) for b in data)
 
 def encode(s):
-	return bytes(char_set.index(c) for c in s)
+	return list(char_set.index(c) for c in s)
 

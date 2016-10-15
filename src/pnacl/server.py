@@ -1,6 +1,7 @@
 from flask import Flask, request, send_from_directory, jsonify
 from flask_socketio import SocketIO,send,emit
 from werkzeug.utils import secure_filename
+import pdb
 import box_parser
 import os.path, os
 import fnmatch
@@ -72,12 +73,11 @@ def upload_box(data):
 
 @socketio.on('update boxes')
 def update_boxes(new_boxes):
-    print new_boxes
-    data = box_parser.build_boxes(boxes)
+    data = box_parser.build_boxes(new_boxes, boxes[request.sid]["party"])
 
 def flat_list(sid):
     l = []
-    for key in [k for k in boxes.keys() if k != sid]:
+    for key in boxes.keys():
         l = l + boxes[key]["party"]
         for b in boxes[key]["pc"]:
             l = l + b
