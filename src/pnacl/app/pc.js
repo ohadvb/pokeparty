@@ -47,9 +47,9 @@ class MyBoxes extends React.Component {
     render() {
         return (<div className="pc-my">
                 <header>
-                    <a className="pc-btn" href="#">&#x25c0;</a>
+                    <a className="pc-btn" onClick={() => this.props.changeBox(-1)}>&#x25c0;</a>
                     <span>BOX {this.props.box + 1}</span>
-                    <a className="pc-btn" href="#">&#x25b6;</a>
+                    <a className="pc-btn" onClick={() => this.props.changeBox(1)}>&#x25b6;</a>
                 </header>
                 <PokemonList list={this.props.boxes[this.props.box]} />
                 </div> );
@@ -116,8 +116,15 @@ class PC extends React.Component {
 
         this._set_data = this._set_data.bind(this);
         this.addMon = this.addMon.bind(this);
+        this.changeBox = this.changeBox.bind(this);
         this.render = this.render.bind(this);
 }
+
+    changeBox(d) {
+        var newVal = (this.state.box + d) % 14;
+        console.log(newVal);
+        this.setState( {box : newVal} );
+    }
 
     addMon(mon) {
         console.log("addMon");
@@ -145,7 +152,7 @@ class PC extends React.Component {
         }
         return (
             <div>
-                <MyBoxes box={0} boxes={this.state.boxes} />
+                <MyBoxes box={this.state.box} boxes={this.state.boxes} changeBox = {this.changeBox}/>
                 <OtherBox list = {this.state.list} addMon = {this.addMon} />
             </div>
         );
