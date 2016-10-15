@@ -139,10 +139,10 @@ class PC extends React.Component {
     }
 
     flush() {
-        console.log("flush");
         if (this.dirty) {
             socket.emit("update boxes", this.state.boxes);
         }
+        this.dirty = false;
     }
 
     _set_data(boxes) {
