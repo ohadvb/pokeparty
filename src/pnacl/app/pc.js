@@ -18,19 +18,18 @@ class PokemonList extends React.Component {
     constructor(props) {
         super(props);
         console.log(props);
-        this.state = {list : props.list };
     }
 
-    componentWillReceiveProps( newProps ) {
-        this.setState( newProps );
-    }
+    // componentWillReceiveProps( newProps ) {
+    //     this.setState( newProps );
+    // }
 
     render() {
-        if (this.state.list.length == 0) {
+        if (this.props.list.length == 0) {
             return <div> </div>;
         }
         return ( <div>
-            { this.state.list.map(mon => ( <Pokemon {...mon} /> ))  }
+            { this.props.list.map(mon => ( <Pokemon {...mon} /> ))  }
             </div>
         );
     }
@@ -39,17 +38,16 @@ class PokemonList extends React.Component {
 class MyBoxes extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { box : props.box, boxes : props.boxes };
     }
 
     render() {
         return (<div className="pc-my">
                 <header>
                     <a className="pc-btn" href="#">&#x25c0;</a>
-                    <span>BOX {this.state.box + 1}</span>
+                    <span>BOX {this.props.box + 1}</span>
                     <a className="pc-btn" href="#">&#x25b6;</a>
                 </header>
-                <PokemonList list={this.state.boxes[this.state.box]} />
+                <PokemonList list={this.props.boxes[this.props.box]} />
                 </div> );
     }
 }
@@ -75,10 +73,15 @@ class OtherBox extends React.Component {
         this.state = {searchText : "" };
 
         this.handleChange = this.handleChange.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     }
 
     handleChange(newText) {
         this.setState({searchText : newText});
+    }
+
+    handleClick(mon) {
+        this.props.addMon(mon);
     }
 
     render() {
@@ -95,7 +98,7 @@ class OtherBox extends React.Component {
                         <span>Search:</span>
                         <SearchBox text={this.state.searchText} onChange={this.handleChange}/>
                     </header>
-                    <PokemonList list={rows} />
+                    <PokemonList list={rows} handleClick={this.handleClick} />
                 </div>
                 );
     }
@@ -108,8 +111,19 @@ class PC extends React.Component {
         this.state = {box : 0, boxes : [[]], list : [] };
 
         this._set_data = this._set_data.bind(this);
+        this.addMon = this.addMon.bind(this);
         this.render = this.render.bind(this);
 }
+
+    addMon(mon) {
+        i = this.state.box;
+        if (this.state.boxes[i].length >= 20)
+        {
+            return;
+        }
+        this.state.boxes[i].push(mon);
+        this.setState({boxes : this.state.boxes});
+    }
 
     _set_data(boxes) {
         this.initialized = true;
@@ -127,7 +141,7 @@ class PC extends React.Component {
         return (
             <div>
                 <MyBoxes box={0} boxes={this.state.boxes} />
-                <OtherBox list = {this.state.list} />
+                <OtherBox list = {this.state.list} addMon = {this.addMon} />
             </div>
         );
     }
