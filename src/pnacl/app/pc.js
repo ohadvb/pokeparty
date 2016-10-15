@@ -45,7 +45,7 @@ class MyBoxes extends React.Component {
     render() {
         return (<div className="pc-my">
                 <header>
-                    <a className="pc-btn" href="#"cla>&#x25c0;</a>
+                    <a className="pc-btn" href="#">&#x25c0;</a>
                     <span>BOX {this.state.box + 1}</span>
                     <a className="pc-btn" href="#">&#x25b6;</a>
                 </header>
@@ -54,20 +54,48 @@ class MyBoxes extends React.Component {
     }
 }
 
+class SearchBox extends React.Component {
+    constructor(props) {
+        super(props); 
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange() {
+        this.props.onChange(this.refs.filterTextInput.value);
+    }
+
+    render () {
+        return <input type="text" value={this.props.text} ref="filterTextInput" onChange={this.handleChange}/>;
+    }
+}
+
 class OtherBox extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {list : props.list};
+        this.state = {searchText : "" };
+
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(newText) {
+        this.setState({searchText : newText});
     }
 
     render() {
+            var rows = [];
+            this.props.list.forEach( function(mon) {
+                if (this.state.searchText != "" && mon.name.indexOf(this.state.searchText) === -1) {
+                    return;
+                }
+                rows.push(mon);
+            }.bind(this).bind(rows));
             return (
                 <div className="pc-other">
                     <header>
                         <span>Search:</span>
-                        <input/>
+                        <SearchBox text={this.state.searchText} onChange={this.handleChange}/>
                     </header>
-                    <PokemonList list={this.state.list} />
+                    <PokemonList list={rows} />
                 </div>
                 );
     }
