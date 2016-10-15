@@ -1,3 +1,14 @@
+Array.prototype.unique = function() {
+    var a = this.concat();
+    for(var i=0; i<a.length; ++i) {
+        for(var j=i+1; j<a.length; ++j) {
+            if(a[i] === a[j])
+                    a.splice(j--, 1);
+        }
+    }
+    return a;
+};
+
 class Pokemon extends React.Component {
     constructor(props) {
         super(props);
@@ -91,11 +102,14 @@ class OtherBox extends React.Component {
     render() {
             var rows = [];
             this.props.list.forEach( function(mon) {
-                if (this.state.searchText != "" && mon.name.indexOf(this.state.searchText) === -1) {
+                if (this.state.searchText != "" && 
+                    mon.name.toLowerCase().indexOf(this.state.searchText.toLowerCase()) === -1 &&
+                    mon.species.toLowerCase().indexOf(this.state.searchText.toLowerCase())) {
                     return;
                 }
                 rows.push(mon);
             }.bind(this).bind(rows));
+            rows = rows.unique();
             return (
                 <div className="pc-other">
                     <header>
