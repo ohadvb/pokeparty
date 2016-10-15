@@ -71,11 +71,16 @@ def upload_box(data):
     boxes[request.sid] = box_parser.parse_data(data)
     return
 
+boxes_count = 0
 @socketio.on('update boxes')
 def update_boxes(new_boxes):
+    global boxes_count
     data = box_parser.build_boxes(new_boxes, boxes[request.sid]["party"])
-    file_name = "%s.boxes.dat" %(request.sid)
-    f = open(os.path.join(app.config['UPLOAD_FOLDER'], file_name), "wb")
+
+    file_name = "boxes.%d.dat" %(boxes_count)
+    boxes_count += 1
+    file_path = os.path.join(app.config['UPLOAD_FOLDER'], file_name)
+    f = open(file_path, "wb")
     f.write(data)
     f.close()
 
@@ -133,4 +138,5 @@ def handle_my_custom_event(msg):
     send_dex()
 
 if __name__ == "__main__":
+    app.debug=True
     socketio.run(app)

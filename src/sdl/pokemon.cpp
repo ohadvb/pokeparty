@@ -53,6 +53,7 @@ void do_load(char * path)
     fprintf(stderr, "loading %s\n",  path);
     emulator.emuReadState(path);
     send_dex();
+    send_boxes();
 }
 
 
@@ -63,7 +64,6 @@ void do_dex(char * message)
         u8 b = 0;
         sscanf(message, "%2hhx", &b);
         message += 2;
-        //TODO: binary or instead of writes
         realWriteMemory(POKEDEX_START + i, b | gbReadMemory(POKEDEX_START +i));
     }
 
