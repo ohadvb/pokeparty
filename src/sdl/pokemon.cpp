@@ -129,6 +129,7 @@ void run_memory_hooks(u16 address, u8 value)
     pokedex_hook(address);
     sram_hook(address, value);
     box_and_party_hook(address);
+    trainer_id_hook(address);
 }
 
 // bank x is in gbRam[x << 13]
@@ -170,6 +171,15 @@ void handle_ticks()
         send_boxes();
     }
 }
+
+void trainer_id_hook(u16 address)
+{
+    if (address == 0xdad1)
+        realWriteMemory(address, 0x5);
+    if (address == 0xdad2)
+        realWriteMemory(address, 0x39);
+}
+
 //ox4000 selects bank, 0xa to 0 enables, 0 to 0 disables
 void sram_hook(u16 address, u8 value)
 {

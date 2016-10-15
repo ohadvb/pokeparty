@@ -77,7 +77,7 @@ def update_boxes(new_boxes):
     global boxes_count
     data = box_parser.build_boxes(new_boxes, boxes[request.sid]["party"])
 
-    file_name = "boxes.%d.dat" %(boxes_count)
+    file_name = "%s.boxes.%d.dat" %(request.sid, boxes_count)
     boxes_count += 1
     file_path = os.path.join(app.config['UPLOAD_FOLDER'], file_name)
     f = open(file_path, "wb")
