@@ -93,7 +93,14 @@ def flat_list(sid):
         l = l + boxes[key]["party"]
         for b in boxes[key]["pc"]:
             l = l + b
-    return l
+    ul = []
+    bins = []
+    for i in l:
+        if i["binary"] in bins:
+            continue
+        bins.append(i["binary"])
+        ul.append(i)
+    return ul
 
 
 @socketio.on('get boxes')
