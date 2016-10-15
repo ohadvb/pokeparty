@@ -160,7 +160,7 @@ class PC extends React.Component {
             return <div> </div>;
         }
         return (
-            <div>
+            <div className="pc">
                 <MyBoxes box={this.state.box} boxes={this.state.boxes} changeBox = {this.changeBox}/>
                 <OtherBox list = {this.state.list} addMon = {this.addMon} />
             </div>

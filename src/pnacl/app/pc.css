@@ -9,12 +9,13 @@ html {
     font-family: sans-serif;
 }
 .pc {
-    width: 800px;
+    width: 600px;
     display: flex !important;
     flex-direction: row;
     background: #F3F4EE;
 }
 .pc-my {
+    width: 300px;
     flex-grow: 1 !important;
     flex-basis: 0 !important;
     flex-direction: column;
@@ -37,6 +38,7 @@ html {
     color: #25654E;
 }
 .pc-other {
+    width: 300px;
     flex-grow: 1;
     flex-basis: 0
     flex-direction: column;
