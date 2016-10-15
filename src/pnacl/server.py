@@ -1,4 +1,4 @@
-from flask import Flask, request, send_from_directory
+from flask import Flask, request, send_from_directory, jsonify
 from flask_socketio import SocketIO,send,emit
 from werkzeug.utils import secure_filename
 import box_parser
@@ -70,9 +70,21 @@ def upload_box(data):
     boxes[request.sid] = box_parser.parse_data(data)
     return
 
-@app.route('/app/boxes')
-def send_boxes(path):
-    return boxes[request.sid]
+def flat_list(sid):
+    l = []
+    for key in [k for k in boxes.keys() if k != sid]:
+        l = l + boxes[key]["party"]
+        for b in boxes[key]["pc"]:
+            l = l + b
+    return l
+
+
+@socketio.on('get boxes')
+def send_boxes():
+    if len(boxes.keys()) == 0:
+        emit("boxes", [])
+    boxes[request.sid]["list"] = flat_list(request.sid)
+    emit("boxes", boxes[request.sid]) 
 
 @app.route('/app/<path:path>')
 def send_js(path):

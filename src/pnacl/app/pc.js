@@ -17,29 +17,50 @@ class Pokemon extends React.Component {
 class PokemonList extends React.Component {
     constructor(props) {
         super(props);
+        console.log(props);
+        this.state = {list : props.list };
+    }
+
+    componentWillReceiveProps( newProps ) {
+        this.setState( newProps );
     }
 
     render() {
-        this.props.list.map(mon => ( <Pokemon {...mon} /> ));
+        console.log(this.props.list);
+        console.log(this.state.list);
+        if (this.state.list.length == 0) {
+            return <div> </div>;
+        }
+        console.log("rendering");
+        console.log(this.state.list);
+        return ( <div>
+            { this.state.list.map(mon => ( <Pokemon {...mon} /> ))  }
+            </div>
+        );
     }
 }
 
 class PC extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {box : 0, boxes : [[]], list : [] };
+
+        this._set_data = this._set_data.bind(this);
+}
+
+    _set_data(boxes) {
+        this.setState({boxes: boxes.pc, list : boxes.list});
     }
 
-    getInitialState(){ return {boxes: [], list :[]}; } 
-
     componentDidMount() {
-        $.get("/app/boxes", function(result) {
-            this.setState( {...result} );
-            console.log(result);
-        }).bind(this);
+        socket.on('boxes', this._set_data);
     }
 
     render() {
+        console.log("PC.render");
         console.log({...this.state});
+        return (<PokemonList list={this.state.boxes[0]} />);
     }
 }
 
+ReactDOM.render(<PC />, document.getElementById("PC_APP"));

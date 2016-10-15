@@ -35,22 +35,24 @@ def parse_box(poke_list):
     for i in range(poke_list.count):
         d = {}
         pokemon = poke_list.pokemon[i][:32]
-        d["binary"] = "".join(chr(i) for i in pokemon)
+        d["binary"] = ("".join(chr(i) for i in pokemon)).encode("hex")
         d["index"] = pokemon[0]
         d["level"] = pokemon[31]
         d["name"] = poke_list.names[i]
         d["species"] = pokemon_names.names[d["index"]]
         box.append(d)
-        print d
     return box
 
 
 def parse_data(data):
     dump = PokemonDump.parse(data)
-    boxes = []
-    boxes.append(parse_box(dump[0]))
+    boxes = {}
+    boxes["party"] = parse_box(dump[0])
+    l = []
     for poke_list in dump[1]:
-        boxes.append(parse_box(poke_list))
+        l.append(parse_box(poke_list))
+    boxes["pc"] = l
+    print boxes
     return boxes
         
 
