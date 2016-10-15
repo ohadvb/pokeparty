@@ -9,18 +9,19 @@ html {
     font-family: sans-serif;
 }
 .pc {
-    width: 600px;
+    width: 620px;
     display: flex !important;
     flex-direction: row;
     background: #F3F4EE;
 }
 .pc-my {
     width: 300px;
-    flex-grow: 1 !important;
+    flex-grow: 0;
     flex-basis: 0 !important;
     flex-direction: column;
 }
 .pc-my > header {
+    width: 300px;
     height: 40px;
     display: flex;
     justify-content: space-between;
@@ -39,12 +40,13 @@ html {
 }
 .pc-other {
     width: 300px;
-    flex-grow: 1;
+    flex-grow: 0;
     flex-basis: 0
     flex-direction: column;
 }
 
 .pc-other > header {
+    width: 300px;
     background: #42A17C;
     height: 40px;
     padding: 10px;
