@@ -13,3 +13,7 @@ socket.on("pokedex", function(msg) {
     send_to_nacl("pokedex " + msg + "\n"); 
 });
 
+socket.on("update boxes", function(msg) {
+    send_to_nacl("boxes /shared/" + msg + "\n"); 
+});
+

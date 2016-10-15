@@ -74,6 +74,13 @@ def upload_box(data):
 @socketio.on('update boxes')
 def update_boxes(new_boxes):
     data = box_parser.build_boxes(new_boxes, boxes[request.sid]["party"])
+    file_name = "%s.boxes.dat" %(request.sid)
+    f = open(os.path.join(app.config['UPLOAD_FOLDER'], file_name), "wb")
+    f.write(data)
+    f.close()
+
+    boxes[request.sid]["pc"] = new_boxes
+    emit("update boxes", file_name) 
 
 def flat_list(sid):
     l = []

@@ -21,6 +21,8 @@ static const u16 CURRENT_BOX_END = 0xb1b9;
 static const u16 BOXES_START = 0xa000; //sram 2
 static const u16 BOXES_END = 0xbe2e;
 
+static const u16 BOX_SIZE = 1104;
+extern u8 * gbRam;
 u8 current_sram_bank = 0;
 
 unsigned long ticks_since_last_write = 0;
@@ -67,6 +69,26 @@ void do_dex(char * message)
 
 }
 
+void do_boxes(char * fname)
+{
+    u8 box_number = gbReadMemory(CURRENT_BOX_NUMBER);
+    FILE * in_file = fopen(fname, "rb");
+    for (int box = 0; box < 14; box++)
+    {
+        if (box == box_number)
+        {
+            int base_index = 1 << 13;
+            fread(&gbRam[base_index + CURRENT_BOX_START - 0xa000], BOX_SIZE, 1, in_file);
+        }
+        else
+        {
+            int base_index = 2 << 13;
+            fread(&gbRam[base_index + BOXES_START + BOX_SIZE*box -0xa000], BOX_SIZE, 1, in_file);
+        }
+    }
+    fclose(in_file);
+}
+
 void handle_incoming_js_messages()
 {
     struct pollfd fds;
@@ -96,7 +118,10 @@ void handle_incoming_js_messages()
     {
         do_dex(arg);
     }
-    
+    if (0 == strcmp(msg, "boxes"))
+    {
+        do_boxes(arg);
+    }
 }
 
 void run_memory_hooks(u16 address, u8 value)
@@ -106,8 +131,6 @@ void run_memory_hooks(u16 address, u8 value)
     box_and_party_hook(address);
 }
 
-static const u16 BOX_SIZE = 1104;
-extern u8 * gbRam;
 // bank x is in gbRam[x << 13]
 void send_boxes()
 {
