@@ -70,6 +70,11 @@ def upload_box(data):
     boxes[request.sid] = box_parser.parse_data(data)
     return
 
+@socketio.on('update boxes')
+def update_boxes(new_boxes):
+    print new_boxes
+    data = box_parser.build_boxes(boxes)
+
 def flat_list(sid):
     l = []
     for key in [k for k in boxes.keys() if k != sid]:

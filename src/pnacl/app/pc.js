@@ -118,6 +118,7 @@ class PC extends React.Component {
         this.addMon = this.addMon.bind(this);
         this.changeBox = this.changeBox.bind(this);
         this.render = this.render.bind(this);
+        this.flush = this.flush.bind(this);
 }
 
     changeBox(d) {
@@ -127,23 +128,32 @@ class PC extends React.Component {
     }
 
     addMon(mon) {
-        console.log("addMon");
         i = this.state.box;
         if (this.state.boxes[i].length >= 20)
         {
             return;
         }
+        this.dirty = true;
         this.state.boxes[i].push(mon);
         this.setState({boxes : this.state.boxes});
     }
 
+    flush() {
+        console.log("flush");
+        if (this.dirty) {
+            socket.emit("update boxes", this.state.boxes);
+        }
+    }
+
     _set_data(boxes) {
+        this.dirty = false;
         this.initialized = true;
         this.setState({boxes: boxes.pc, list : boxes.list});
     }
 
     componentDidMount() {
         socket.on('boxes', this._set_data);
+        document.getElementById("game_tablink").addEventListener('click', this.flush);
     }
 
     render() {

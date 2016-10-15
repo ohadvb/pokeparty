@@ -43,6 +43,9 @@ def parse_box(poke_list):
         box.append(d)
     return box
 
+def build_boxes(data):
+    pass
+    
 
 def parse_data(data):
     dump = PokemonDump.parse(data)
