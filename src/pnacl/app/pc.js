@@ -26,13 +26,9 @@ class PokemonList extends React.Component {
     }
 
     render() {
-        console.log(this.props.list);
-        console.log(this.state.list);
         if (this.state.list.length == 0) {
             return <div> </div>;
         }
-        console.log("rendering");
-        console.log(this.state.list);
         return ( <div>
             { this.state.list.map(mon => ( <Pokemon {...mon} /> ))  }
             </div>
@@ -59,7 +55,25 @@ class PC extends React.Component {
     render() {
         console.log("PC.render");
         console.log({...this.state});
-        return (<PokemonList list={this.state.boxes[0]} />);
+        return (
+            <div>
+            <div className="pc-my">
+                <header>
+                    <a className="pc-btn" href="#">&#x25c0;</a>
+                    <span>BOX {this.state.box + 1}</span>
+                    <a className="pc-btn" href="#">&#x25b6;</a>
+                </header>
+                <PokemonList list={this.state.boxes[this.state.box]} />
+            </div>
+            <div className="pc-other">
+                <header>
+                    <span>Search:</span>
+                <input/>
+                <PokemonList list={this.state.list} />
+                </header>
+            </div>
+            </div>
+        );
     }
 }
 

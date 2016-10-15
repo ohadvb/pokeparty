@@ -10,12 +10,12 @@ html {
 }
 .pc {
     width: 800px;
-    display: flex;
+    display: flex !important;
     background: #F3F4EE;
 }
 .pc-my {
-    flex-grow: 1;
-    flex-basis: 0;
+    flex-grow: 1 !important;
+    flex-basis: 0 !important;
 }
 .pc-my > header {
     height: 40px;
