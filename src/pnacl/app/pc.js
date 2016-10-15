@@ -4,36 +4,40 @@ class Pokemon extends React.Component {
     }
 
     render() {
-        return ( <div className="pc-entry">
+        return ( <div className="pc-entry" onClick={this.props.onClick}>
           <img src={"/app/sprites/" + this.props.index + ".png"}/>
           <h1>{this.props.name} / {this.props.species}</h1>
           <h2>Lv {this.props.level}</h2>
         </div> );
  
     }
-
 }
 
 class PokemonList extends React.Component {
     constructor(props) {
         super(props);
-        console.log(props);
+        this.onClick = this.onClick.bind(this);    
     }
 
-    // componentWillReceiveProps( newProps ) {
-    //     this.setState( newProps );
-    // }
+    onClick(mon) {
+        if (this.props.onClick != null) {
+            this.props.onClick(mon);
+        }
+    }
 
     render() {
+        var that = this;
         if (this.props.list.length == 0) {
             return <div> </div>;
         }
         return ( <div>
-            { this.props.list.map(mon => ( <Pokemon {...mon} /> ))  }
+            { this.props.list.map(mon => ( <Pokemon {...mon} onClick={that.onClick.bind(that, mon)} /> ))  }
             </div>
         );
     }
 }
+
+PokemonList.defaultProps = { onClick : null };
 
 class MyBoxes extends React.Component {
     constructor(props) {
@@ -98,7 +102,7 @@ class OtherBox extends React.Component {
                         <span>Search:</span>
                         <SearchBox text={this.state.searchText} onChange={this.handleChange}/>
                     </header>
-                    <PokemonList list={rows} handleClick={this.handleClick} />
+                    <PokemonList list={rows} onClick={this.handleClick} />
                 </div>
                 );
     }
@@ -116,6 +120,7 @@ class PC extends React.Component {
 }
 
     addMon(mon) {
+        console.log("addMon");
         i = this.state.box;
         if (this.state.boxes[i].length >= 20)
         {
