@@ -8,26 +8,48 @@
 extern struct EmulatedSystem emulator;
 
 static const char * MESSAGE_FORMAT = "POKEMSG %s\n";
-static const u16 POKEDEX_START  = 0xdbe4; 
-static const u16 POKEDEX_END  = 0xdc23; 
-static const u16 POKEDEX_LEN = POKEDEX_END - POKEDEX_START + 1;
-static const u16 PARTY_START = 0xda22;
-static const u16 PARTY_END = 0xdbcd;
-static const u16 PARTY_NAMES_START = 0xdb4a;
-static const u16 PARTY_NAMES_END = 0xdbcd;
-static const u16 CURRENT_BOX_NUMBER = 0xD8BC; 
-static const u16 CURRENT_BOX_START = 0xad6c; // sram 1
-static const u16 CURRENT_BOX_END = 0xb1b9;
-static const u16 BOXES_START = 0xa000; //sram 2
-static const u16 BOXES_END = 0xbe2e;
 
-static const u16 BOX_SIZE = 1104;
+
+u16 POKEDEX_START  = 0xdbe4; 
+u16 POKEDEX_END  = 0xdc23; 
+u16 POKEDEX_LEN = POKEDEX_END - POKEDEX_START + 1;
+u16 PARTY_START = 0xda22;
+u16 PARTY_LIST_END = 0xda29;
+u16 PARTY_END = 0xdbcd;
+u16 CURRENT_BOX_NUMBER = 0xD8BC; 
+u16 CURRENT_BOX_START = 0xad6c; // sram 1
+u16 CURRENT_BOX_END = 0xb1b9;
+u8 BOXES_SRAM_MIN = 2;
+u8 BOXES_SRAM_MAX = 2;
+u16 BOXES_START = 0xa000; //sram 2
+u16 BOXES_END = 0xbe2e;
+u16 BOX_SIZE = 1104;
+
 extern u8 * gbRam;
 extern u8 * gbRom;
 u8 current_sram_bank = 0;
 
 unsigned int gen = 0;
 unsigned long ticks_since_last_write = 0;
+
+void set_to_gen1()
+{
+    POKEDEX_START  = 0xd2f7; 
+    POKEDEX_END  = 0xd31c; 
+    POKEDEX_LEN = POKEDEX_END - POKEDEX_START + 1;
+    PARTY_START = 0xd163;
+    PARTY_LIST_END = 0xd16a;
+    PARTY_END = 0xd2f6;
+    CURRENT_BOX_NUMBER = 0xD5a0; 
+    CURRENT_BOX_START = 0xb0c0; // sram 1
+    CURRENT_BOX_END = 0xb521;
+    u8 BOXES_SRAM_MIN = 2;
+    u8 BOXES_SRAM_MAX = 3;
+    BOXES_START = 0xa000; //sram 2 & 3
+    BOXES_END = 0xba4b;
+    BOX_SIZE = 1122;
+}
+
 
 void message_js(char * msg)
 {
@@ -227,10 +249,10 @@ void sram_hook(u16 address, u8 value)
 void box_and_party_hook(u16 address)
 {
     //TODO: current implementation results in 40 prints, find a good way to cache it.
-    if ((address >= PARTY_START && address <= 0xda29) ||
+    if ((address >= PARTY_START && address <= PARTY_LIST_END) ||
          (address == CURRENT_BOX_NUMBER)||
          (current_sram_bank == 1 && address >= CURRENT_BOX_START && address <= CURRENT_BOX_END)||
-         (current_sram_bank == 2 && address >= BOXES_START && address <= BOXES_END))
+         (current_sram_bank >= BOXES_SRAM_MIN && current_sram_bank <= BOXES_SRAM_MAX && address >= BOXES_START && address <= BOXES_END))
     {
         ticks_since_last_write = 0;
     }
