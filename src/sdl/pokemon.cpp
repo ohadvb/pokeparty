@@ -23,8 +23,10 @@ static const u16 BOXES_END = 0xbe2e;
 
 static const u16 BOX_SIZE = 1104;
 extern u8 * gbRam;
+extern u8 * gbRom;
 u8 current_sram_bank = 0;
 
+unsigned int gen = 0;
 unsigned long ticks_since_last_write = 0;
 
 void message_js(char * msg)
@@ -124,8 +126,36 @@ void handle_incoming_js_messages()
     }
 }
 
+void init_gen()
+{
+    char * game_text = (char*)&gbRom[0x134];
+    static const char GOLD[] = "POKEMON_GLD";
+    static const char SILVER[] = "POKEMON_SLV";
+    static const char BLUE[] = "POKEMON BLUE";
+    static const char RED[] = "POKEMON RED";
+    static const char YELLOW[] = "POKEMON YELLOW";
+
+    if (strncmp(game_text, GOLD, strlen(GOLD)) == 0 ||
+        strncmp(game_text, SILVER, strlen(SILVER)) == 0)
+        {
+        fprintf(stderr, "gen 2 game\n");
+        gen = 2;
+        }
+    if (strncmp(game_text, BLUE, strlen(BLUE)) == 0 ||
+        strncmp(game_text, BLUE, strlen(BLUE)) == 0 ||
+        strncmp(game_text, RED, strlen(RED)) == 0)
+        {
+            fprintf(stderr, "gen 1 game\n");
+            gen = 1;
+        }
+}
+
 void run_memory_hooks(u16 address, u8 value)
 {
+    if (!gen)
+    {
+        init_gen();
+    }
     pokedex_hook(address);
     sram_hook(address, value);
     box_and_party_hook(address);

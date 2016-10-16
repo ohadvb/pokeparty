@@ -145,5 +145,5 @@ def handle_my_custom_event(msg):
     send_dex()
 
 if __name__ == "__main__":
-    app.debug=True
+    # app.debug=True
     socketio.run(app)
