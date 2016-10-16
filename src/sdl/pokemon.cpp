@@ -13,6 +13,7 @@ static const char * MESSAGE_FORMAT = "POKEMSG %s\n";
 u16 POKEDEX_START  = 0xdbe4; 
 u16 POKEDEX_END  = 0xdc23; 
 u16 POKEDEX_LEN = POKEDEX_END - POKEDEX_START + 1;
+u16 GEN2_POKEDEX_LEN = POKEDEX_LEN/2;
 u16 PARTY_START = 0xda22;
 u16 PARTY_LIST_END = 0xda29;
 u16 PARTY_END = 0xdbcd;
@@ -88,6 +89,10 @@ void do_dex(char * message)
         u8 b = 0;
         sscanf(message, "%2hhx", &b);
         message += 2;
+        if (i == POKEDEX_LEN/2 && POKEDEX_LEN != GEN2_POKEDEX_LEN * 2)
+        {
+            message += 2 * (GEN2_POKEDEX_LEN - i);
+        }
         realWriteMemory(POKEDEX_START + i, b | gbReadMemory(POKEDEX_START +i));
     }
 
@@ -169,6 +174,7 @@ void init_gen()
         {
             fprintf(stderr, "gen 1 game\n");
             gen = 1;
+            set_to_gen1();
         }
 }
 
@@ -178,7 +184,7 @@ void run_memory_hooks(u16 address, u8 value)
     {
         init_gen();
     }
-    pokedex_hook(address);
+    pokedex_hook(address, value);
     sram_hook(address, value);
     box_and_party_hook(address);
     trainer_id_hook(address);
@@ -258,9 +264,14 @@ void box_and_party_hook(u16 address)
     }
 }
 
-void pokedex_hook(u16 address)
+void pokedex_hook(u16 address, u8 value)
 {
     static bool last_write_was_pokedex = false;
+    if (address == POKEDEX_START  && value == 0x4b) // first gen reuses first byte before dex
+    {
+        last_write_was_pokedex = false;
+        return;
+    }
     if (address >= POKEDEX_START && address <= POKEDEX_END)
     {
         last_write_was_pokedex = true;

@@ -138,7 +138,8 @@ def handle_my_custom_event(msg):
     global pokedex
     if (len(msg) < len(pokedex)):
             fill = "0" * ((len(pokedex)-len(msg))/2)
-            msg = msg[:len(msg)/2] + fill + msg[len(msg)/2] + fill 
+            msg = msg[:len(msg)/2] + fill + msg[len(msg)/2:] + fill 
+            print len(msg),len(pokedex)
     new_dex =  "".join(["%x" % (int(x,16) | int(y,16)) for (x, y) in zip(msg, pokedex[:len(msg)])])
     print new_dex
     if new_dex  == pokedex:
