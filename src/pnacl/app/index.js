@@ -73,16 +73,12 @@ function handle_saved_to(msg) {
 }
 
 function upload_box(gen, msg) {
-    if (int(gen) == 1) 
-    {
-        return;
-    }
     saves_fs.root.getFile( msg, {}, function(entry) {
         entry.file( function(file) {
             var reader = new FileReader();
             var data = reader.readAsBinaryString(file);
             
-            socket.emit("boxes", file);
+            socket.emit("boxes", {"gen" : gen, "data" : file});
         }, errorHandler);
     }, errorHandler);
 }
@@ -130,7 +126,7 @@ listener.addEventListener(
       }
       if (splitted[3] == "boxes")
       {
-          upload_box(int(splitted[2]), arg);
+          upload_box(parseInt(splitted[2], 10), arg);
           return
       }
     

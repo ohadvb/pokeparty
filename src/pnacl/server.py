@@ -68,7 +68,10 @@ def upload_file():
                                     
 @socketio.on('boxes')
 def upload_box(data):
-    boxes[request.sid] = box_parser.parse_data(data)
+    if (data["gen"] == 1):
+        print "gen1"
+        return
+    boxes[request.sid] = box_parser.parse_data(data["data"])
     return
 
 boxes_count = 0

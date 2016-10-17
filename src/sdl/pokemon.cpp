@@ -218,7 +218,7 @@ void send_boxes()
         }
     }
     fclose(out_file);
-    printf("POKEMSG boxes %d %s\n", gen, "boxes.bin");
+    printf("POKEMSG %d boxes %s\n", gen, "boxes.bin");
 }
 
 void handle_ticks()
