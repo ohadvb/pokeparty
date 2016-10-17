@@ -14,6 +14,7 @@ BOXES_PATH = '/app/boxes'
 
 pokedex = "00" * 64
 boxes = {}
+gen1_boxes = {}
 
 # set the project root directory as the static folder, you can set others.
 app = Flask(__name__, static_url_path='')
@@ -69,9 +70,13 @@ def upload_file():
 @socketio.on('boxes')
 def upload_box(data):
     if (data["gen"] == 1):
-        print "gen1"
-        return
-    boxes[request.sid] = box_parser.parse_data(data["data"])
+        gen1_data, gen2_data = box_parser.parse_gen1_data(data["data"])
+        gen1_boxes[request.sid] = gen1_data
+        boxes[request.sid] = gen2_data
+        print gen1_data
+    else:
+        boxes[request.sid] = box_parser.parse_data(data["data"])
+    print boxes[request.sid]
     return
 
 boxes_count = 0
