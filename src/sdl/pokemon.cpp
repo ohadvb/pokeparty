@@ -7,7 +7,7 @@
 
 extern struct EmulatedSystem emulator;
 
-static const char * MESSAGE_FORMAT = "POKEMSG %d %s\n";
+static const char * MESSAGE_FORMAT = "POKEMSG  %s\n";
 
 
 u16 POKEDEX_START  = 0xdbe4; 
@@ -54,7 +54,7 @@ void set_to_gen1()
 
 void message_js(char * msg)
 {
-    printf(MESSAGE_FORMAT, gen, msg);
+    printf(MESSAGE_FORMAT, msg);
 }
 
 void do_save()
@@ -65,7 +65,7 @@ void do_save()
 
 void send_dex()
 {
-    printf("POKEMSG %d pokedex ", gen);
+    printf("POKEMSG pokedex ");
     for( int i = POKEDEX_START; i <= POKEDEX_END; i++ )
     {
         printf("%02x", gbReadMemory(i));
@@ -176,6 +176,7 @@ void init_gen()
             gen = 1;
             set_to_gen1();
         }
+    printf("POKEMSG gen %d\n", gen);
 }
 
 void run_memory_hooks(u16 address, u8 value)
@@ -218,7 +219,7 @@ void send_boxes()
         }
     }
     fclose(out_file);
-    printf("POKEMSG %d boxes %s\n", gen, "boxes.bin");
+    printf("POKEMSG boxes %s\n",  "boxes.bin");
 }
 
 void handle_ticks()

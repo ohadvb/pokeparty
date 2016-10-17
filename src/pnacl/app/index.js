@@ -3,6 +3,7 @@ var resizeTimer;
 var firstLoad = false;
 var saves_fs = null;
 var game = null;
+var gen = 0;
 
 var postFileCallback = function() {};
 
@@ -30,6 +31,7 @@ function scaleNacl() {
 
 function makeNewPlugin() {
   var newNode = plugin.cloneNode(true);
+  gen = 0;
   plugin.parentNode.appendChild(newNode);
   plugin.parentNode.removeChild(plugin);
   plugin = document.getElementById('naclModule');
@@ -72,7 +74,7 @@ function handle_saved_to(msg) {
     }, errorHandler);
 }
 
-function upload_box(gen, msg) {
+function upload_box( msg) {
     saves_fs.root.getFile( msg, {}, function(entry) {
         entry.file( function(file) {
             var reader = new FileReader();
@@ -113,22 +115,27 @@ listener.addEventListener(
       {
           return;
       }
-      arg = splitted[4].replace(/^\s+|\s+$/g, '')
-      if (splitted[3] == "saved")
+      arg = splitted[3].replace(/^\s+|\s+$/g, '')
+      if (splitted[2] == "saved")
       {
           handle_saved_to(arg);
           return;
       }
-      if (splitted[3] == "pokedex")
+      if (splitted[2] == "pokedex")
       {
           socket.emit("pokedex", arg);
-          return
+          return;
       }
-      if (splitted[3] == "boxes")
+      if (splitted[2] == "boxes")
       {
-          upload_box(parseInt(splitted[2], 10), arg);
-          return
+          upload_box(arg);
+          return;
       }
+      if (splitted[2] == "gen")
+        {
+            gen = parseInt(splitted[3],10);
+            console.log("gen = " + gen);
+        }
     
     console.log(e.data);
   }, true);
