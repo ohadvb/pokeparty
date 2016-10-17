@@ -165,8 +165,8 @@ void init_gen()
     if (strncmp(game_text, GOLD, strlen(GOLD)) == 0 ||
         strncmp(game_text, SILVER, strlen(SILVER)) == 0)
         {
-        fprintf(stderr, "gen 2 game\n");
-        gen = 2;
+            fprintf(stderr, "gen 2 game\n");
+            gen = 2;
         }
     if (strncmp(game_text, BLUE, strlen(BLUE)) == 0 ||
         strncmp(game_text, BLUE, strlen(BLUE)) == 0 ||
@@ -267,7 +267,7 @@ void box_and_party_hook(u16 address)
 void pokedex_hook(u16 address, u8 value)
 {
     static bool last_write_was_pokedex = false;
-    if (address == POKEDEX_START  && value == 0x4b) // first gen reuses first byte before dex
+    if (gen == 1 && address == POKEDEX_START  && value == 0x4b && gbReadMemory(0xd60d) == 0) // first gen reuses first byte before dex
     {
         last_write_was_pokedex = false;
         return;
