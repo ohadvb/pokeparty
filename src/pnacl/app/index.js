@@ -72,7 +72,11 @@ function handle_saved_to(msg) {
     }, errorHandler);
 }
 
-function upload_box(msg) {
+function upload_box(gen, msg) {
+    if (int(gen) == 1) 
+    {
+        return;
+    }
     saves_fs.root.getFile( msg, {}, function(entry) {
         entry.file( function(file) {
             var reader = new FileReader();
@@ -113,20 +117,20 @@ listener.addEventListener(
       {
           return;
       }
-      arg = splitted[3].replace(/^\s+|\s+$/g, '')
-      if (splitted[2] == "saved")
+      arg = splitted[4].replace(/^\s+|\s+$/g, '')
+      if (splitted[3] == "saved")
       {
           handle_saved_to(arg);
           return;
       }
-      if (splitted[2] == "pokedex")
+      if (splitted[3] == "pokedex")
       {
           socket.emit("pokedex", arg);
           return
       }
-      if (splitted[2] == "boxes")
+      if (splitted[3] == "boxes")
       {
-          upload_box(arg);
+          upload_box(int(splitted[2]), arg);
           return
       }
     
