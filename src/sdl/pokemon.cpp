@@ -240,7 +240,7 @@ void send_boxes()
 void handle_ticks()
 {
     ticks_since_last_write++;
-    if (ticks_since_last_write == 200)
+    if (ticks_since_last_write == 400)
     {
         send_boxes();
     }
