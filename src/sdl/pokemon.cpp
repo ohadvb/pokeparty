@@ -21,10 +21,11 @@ u16 CURRENT_BOX_NUMBER = 0xD8BC;
 u16 CURRENT_BOX_START = 0xad6c; // sram 1
 u16 CURRENT_BOX_END = 0xb1b9;
 u8 BOXES_SRAM_MIN = 2;
-u8 BOXES_SRAM_MAX = 2;
+u8 BOXES_SRAM_MAX = 3;
 u16 BOXES_START = 0xa000; //sram 2
-u16 BOXES_END = 0xbe2e;
+u16 BOXES_END = 0xbe30;
 u16 BOX_SIZE = 1104;
+u16 NUM_BOXES = 14;
 
 extern u8 * gbRam;
 extern u8 * gbRom;
@@ -49,6 +50,7 @@ void set_to_gen1()
     BOXES_START = 0xa000; //sram 2 & 3
     BOXES_END = 0xba4b;
     BOX_SIZE = 1122;
+    NUM_BOXES = 12;
 }
 
 
@@ -112,7 +114,14 @@ void do_boxes(char * fname)
         else
         {
             int base_index = 2 << 13;
-            fread(&gbRam[base_index + BOXES_START + BOX_SIZE*box -0xa000], BOX_SIZE, 1, in_file);
+            int index = box;
+            if (box >= NUM_BOXES/2)
+            {
+                base_index = 3 << 13;
+                index = box - (NUM_BOXES/2);
+            }
+
+            fread(&gbRam[base_index + BOXES_START + BOX_SIZE*index -0xa000], BOX_SIZE, 1, in_file);
         }
     }
     fclose(in_file);
@@ -205,7 +214,7 @@ void send_boxes()
         u8 output = gbReadMemory(i);
         fwrite(&output, 1, 1, out_file);
     }
-    for (int box = 0; box < 14; box++)
+    for (int box = 0; box < NUM_BOXES; box++)
     {
         if (box == box_number)
         {
@@ -215,7 +224,13 @@ void send_boxes()
         else
         {
             int base_index = 2 << 13;
-            fwrite(&gbRam[base_index + BOXES_START + BOX_SIZE*box -0xa000], BOX_SIZE, 1, out_file);
+            int index = box;
+            if (box >= NUM_BOXES/2)
+            {
+                base_index = 3 << 13;
+                index = box - (NUM_BOXES/2);
+            }
+            fwrite(&gbRam[base_index + BOXES_START + BOX_SIZE*index -0xa000], BOX_SIZE, 1, out_file);
         }
     }
     fclose(out_file);
