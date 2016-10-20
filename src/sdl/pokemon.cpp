@@ -44,7 +44,7 @@ void set_to_gen1()
     PARTY_END = 0xd2f6;
     CURRENT_BOX_NUMBER = 0xD5a0; 
     CURRENT_BOX_START = 0xb0c0; // sram 1
-    CURRENT_BOX_END = 0xb521;
+    CURRENT_BOX_END = 0xb522;
     u8 BOXES_SRAM_MIN = 2;
     u8 BOXES_SRAM_MAX = 3;
     BOXES_START = 0xa000; //sram 2 & 3

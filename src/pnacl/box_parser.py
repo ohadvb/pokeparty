@@ -93,7 +93,6 @@ def parse_box(poke_list, PokemonStruct, gen):
         pokemon = "".join(chr(c) for c in poke_list.pokemon[i][:34])
         d["binary"] = pokemon.encode("hex")
         parsed_mon = PokemonStruct.parse(pokemon)
-        print poke_list.species
         d["index"] = poke_list.species[i]
         if gen == 1:
             d["index"] = pokemon_index.gen1_to_gen2[d["index"]]
