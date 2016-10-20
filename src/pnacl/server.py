@@ -76,7 +76,7 @@ def upload_box(data):
         print gen1_data
     else:
         boxes[request.sid] = box_parser.parse_data(data["data"])
-    print boxes[request.sid]
+        print boxes[request.sid]
     return
 
 boxes_count = 0

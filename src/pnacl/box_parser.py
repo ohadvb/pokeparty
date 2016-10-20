@@ -3,9 +3,11 @@
 from construct import this, Struct, Array, Byte,\
     Int16ub, Padding, String, Aligned, Terminated, Adapter
 import pokemon_encoding
+import pokemon_index
 import pokemon_names
 import pdb
 
+import copy
 import itertools
 import sys
 
@@ -81,7 +83,7 @@ PokemonDump = PokemonList (6, 48, 0) >> PokemonList(20, 32, 2)[14]
 Gen1PokemonDump = PokemonList (6, 44, 0) >> PokemonList(20, 33, 0)[12]
 
 
-def parse_box(poke_list, PokemonStruct):
+def parse_box(poke_list, PokemonStruct, gen):
     box = []
     list_count = poke_list.count
     if list_count in  (0, 0xff):
@@ -93,6 +95,8 @@ def parse_box(poke_list, PokemonStruct):
         parsed_mon = PokemonStruct.parse(pokemon)
         print poke_list.species
         d["index"] = poke_list.species[i]
+        if gen == 1:
+            d["index"] = pokemon_index.gen1_to_gen2[d["index"]]
         d["level"] = parsed_mon["level"]
         d["name"] = poke_list.names[i]
         d["ot"] = poke_list.ot[i]
@@ -123,36 +127,38 @@ def build_boxes(boxes, party):
     return out.build(l)
     
 
-def parse_data_impl(data, dump_struct, party_mon_struct, mon_struct):
+def parse_data_impl(data, dump_struct, party_mon_struct, mon_struct, gen):
     dump = dump_struct.parse(data)
     boxes = {}
-    boxes["party"] = parse_box(dump[0], party_mon_struct)
+    boxes["party"] = parse_box(dump[0], party_mon_struct, gen)
     l = []
     for poke_list in dump[1]:
-        l.append(parse_box(poke_list, mon_struct))
+        l.append(parse_box(poke_list, mon_struct, gen))
     boxes["pc"] = l
     return boxes
         
 def parse_data(data):
-    return parse_data_impl(data, PokemonDump, Pokemon, Pokemon)
+    return parse_data_impl(data, PokemonDump, Pokemon, Pokemon, 2)
 
-def gen1_box_to_gen2(box):
+def gen1_box_to_gen2(box, mon_struct):
     for mon in box:
         b = mon["binary"].decode("hex")
-        parsed = Gen1Pokemon.parse(b)
+        parsed = mon_struct.parse(b)
+        parsed["index"] = pokemon_index.gen1_to_gen2[parsed["index"]]
         parsed["Friendship"] = 0xff
         parsed["Pokerus"] = 0
         parsed["Caught Data"] = 0
         mon["binary"] = "".join(Pokemon.build(parsed)).encode("hex")
 
 def gen1_to_gen2(boxes):
-    for box in [boxes["party"]] + boxes["pc"]:
-        gen1_box_to_gen2(box)
+    gen1_box_to_gen2(boxes["party"], Gen1PartyPokemon)
+    for box in boxes["pc"]:
+        gen1_box_to_gen2(box, Gen1BoxPokemon)
 
 def parse_gen1_data(data):
-    boxes =  parse_data_impl(data, Gen1PokemonDump, Gen1PartyPokemon, Gen1BoxPokemon)
-    gen2_boxes = boxes
-    # gen1_to_gen2(gen2_boxes)
+    boxes =  parse_data_impl(data, Gen1PokemonDump, Gen1PartyPokemon, Gen1BoxPokemon, 1)
+    gen2_boxes = copy.deepcopy(boxes)
+    gen1_to_gen2(gen2_boxes)
     return boxes, gen2_boxes
 
 def main (argv):
