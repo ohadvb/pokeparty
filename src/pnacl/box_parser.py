@@ -108,7 +108,10 @@ def pad_to_len(l, padding, size):
     l += [padding] * (size - len(l))
 
 def build_boxes(boxes, party):
-    out = PokemonList(20, 32, 2)[14]
+    if len(boxes) == 14:
+        out = PokemonList(20, 32, 2)[14]
+    else:
+        out = PokemonList(20,33,0)[12]
     ot = party[0]["ot"]
     l = []
     for box in boxes:

@@ -83,7 +83,11 @@ boxes_count = 0
 @socketio.on('update boxes')
 def update_boxes(new_boxes):
     global boxes_count
-    data = box_parser.build_boxes(new_boxes, boxes[request.sid]["party"])
+    if len(new_boxes) == 12:
+        party = gen1_boxes[request.sid]["party"]
+    else:
+        party = boxes[request.sid]["party"]
+    data = box_parser.build_boxes(new_boxes, party) 
 
     file_name = "%s.boxes.%d.dat" %(request.sid, boxes_count)
     boxes_count += 1
@@ -95,11 +99,11 @@ def update_boxes(new_boxes):
     boxes[request.sid]["pc"] = new_boxes
     emit("update boxes", file_name) 
 
-def flat_list(sid):
+def flat_list(to_send):
     l = []
-    for key in boxes.keys():
-        l = l + boxes[key]["party"]
-        for b in boxes[key]["pc"]:
+    for key in to_send.keys():
+        l = l + to_send[key]["party"]
+        for b in to_send[key]["pc"]:
             l = l + b
     ul = []
     bins = []
@@ -112,11 +116,16 @@ def flat_list(sid):
 
 
 @socketio.on('get boxes')
-def send_boxes():
-    if len(boxes.keys()) == 0:
+def send_boxes(msg):
+    gen = msg
+    if gen == 1:
+        to_send = gen1_boxes
+    else:
+        to_send = boxes
+    if not request.sid in to_send:
         emit("boxes", [])
-    boxes[request.sid]["list"] = flat_list(request.sid)
-    emit("boxes", boxes[request.sid]) 
+    to_send[request.sid]["list"] = flat_list(to_send)
+    emit("boxes", to_send[request.sid]) 
 
 @app.route('/app/<path:path>')
 def send_js(path):

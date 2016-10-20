@@ -31,5 +31,5 @@ function openPC(evt) {
     if (pc_tab.className.includes(" hide")) {
         pc_tab.className = pc_tab.className.replace(" hide", "");
     }
-    socket.emit("get boxes");
+    socket.emit("get boxes", gen);
 }
