@@ -35,8 +35,8 @@ Gen1BoxPokemon = Struct (
         'Exp' / Byte[3],
         'EV stats' / Int16ub[5],
         'iv' / Int16ub,
-        'PPs' / Byte[4],
-        'ulevel' / Byte )
+        'PPs' / Byte[4])
+        # 'ulevel' / Byte )
 
 Gen1PartyPokemon = Struct (
         'index' / Byte,

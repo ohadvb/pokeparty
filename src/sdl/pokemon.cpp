@@ -7,7 +7,7 @@
 
 extern struct EmulatedSystem emulator;
 
-static const char * MESSAGE_FORMAT = "POKEMSG  %s\n";
+static const char * MESSAGE_FORMAT = "POKEMSG %s\n";
 
 
 u16 POKEDEX_START  = 0xdbe4; 
