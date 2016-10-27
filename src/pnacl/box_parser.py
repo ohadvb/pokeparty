@@ -109,23 +109,28 @@ def pad_to_len(l, padding, size):
 def build_boxes(boxes, party):
     if len(boxes) == 14:
         out = PokemonList(20, 32, 2)[14]
+        pokemon_size = 32
+        gen = 2
     else:
         out = PokemonList(20,33,0)[12]
+        pokemon_size = 33
+        gen = 1
     ot = party[0]["ot"]
     l = []
     for box in boxes:
         d = {}
         d["count"] = len(box)
         d["species"] = [p["index"] for p in box]
+        if gen == 1:
+            d["species"] = [pokemon_index.gen2_to_gen1[x] for x in d["species"]]
         pad_to_len(d["species"], 0xff, 20)
-        d["pokemon"] = [[ord(c) for c in list(p["binary"].decode("hex"))] for p in box]
-        pad_to_len(d["pokemon"], [0] * 32, 20)
+        d["pokemon"] = [[ord(c) for c in p["binary"].decode("hex")] for p in box]
+        pad_to_len(d["pokemon"], [0] * pokemon_size, 20)
         d["ot"] = [ot] * len(box)
         pad_to_len(d["ot"], "\x00" * 11 , 20)
         d["names"] = [p["name"] for p in box]
         pad_to_len(d["names"], "\x00" * 11, 20)
         l.append(d)
-        s = PokemonList(20, 32, 2)
     return out.build(l)
     
 

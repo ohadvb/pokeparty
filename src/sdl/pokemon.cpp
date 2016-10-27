@@ -102,7 +102,9 @@ void do_dex(char * message)
 
 void do_boxes(char * fname)
 {
-    u8 box_number = gbReadMemory(CURRENT_BOX_NUMBER);
+    u8 box_number = gbReadMemory(CURRENT_BOX_NUMBER) &0x7f;
+    realWriteMemory(CURRENT_BOX_NUMBER, box_number | 0x80); 
+
     FILE * in_file = fopen(fname, "rb");
     for (int box = 0; box < 14; box++)
     {
@@ -203,7 +205,7 @@ void run_memory_hooks(u16 address, u8 value)
 // bank x is in gbRam[x << 13]
 void send_boxes()
 {
-    u8 box_number = gbReadMemory(CURRENT_BOX_NUMBER);
+    u8 box_number = gbReadMemory(CURRENT_BOX_NUMBER) &0x7f;
     FILE * out_file = fopen("/store/boxes.bin", "wb"); //TODO: randomize name
     if (out_file == NULL)
     {
