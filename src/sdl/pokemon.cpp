@@ -20,6 +20,7 @@ u16 PARTY_END = 0xdbcd;
 u16 CURRENT_BOX_NUMBER = 0xD8BC; 
 u16 CURRENT_BOX_START = 0xad6c; // sram 1
 u16 CURRENT_BOX_END = 0xb1b9;
+u16 TRAINER_ID = 0xdad1;
 u8 BOXES_SRAM_MIN = 2;
 u8 BOXES_SRAM_MAX = 3;
 u16 BOXES_START = 0xa000; //sram 2
@@ -45,8 +46,9 @@ void set_to_gen1()
     CURRENT_BOX_NUMBER = 0xD5a0; 
     CURRENT_BOX_START = 0xb0c0; // sram 1
     CURRENT_BOX_END = 0xb522;
-    u8 BOXES_SRAM_MIN = 2;
-    u8 BOXES_SRAM_MAX = 3;
+    TRAINER_ID = 0xd177;
+    BOXES_SRAM_MIN = 2;
+    BOXES_SRAM_MAX = 3;
     BOXES_START = 0xa000; //sram 2 & 3
     BOXES_END = 0xba4b;
     BOX_SIZE = 1122;
@@ -242,7 +244,7 @@ void send_boxes()
 void handle_ticks()
 {
     ticks_since_last_write++;
-    if (ticks_since_last_write == 400)
+    if (ticks_since_last_write == 200)
     {
         send_boxes();
     }
@@ -250,9 +252,9 @@ void handle_ticks()
 
 void trainer_id_hook(u16 address)
 {
-    if (address == 0xdad1)
+    if (address == TRAINER_ID)
         realWriteMemory(address, 0x5);
-    if (address == 0xdad2)
+    if (address == TRAINER_ID + 1)
         realWriteMemory(address, 0x39);
 }
 
@@ -272,7 +274,6 @@ void sram_hook(u16 address, u8 value)
 
 void box_and_party_hook(u16 address)
 {
-    //TODO: current implementation results in 40 prints, find a good way to cache it.
     if ((address >= PARTY_START && address <= PARTY_LIST_END) ||
          (address == CURRENT_BOX_NUMBER)||
          (current_sram_bank == 1 && address >= CURRENT_BOX_START && address <= CURRENT_BOX_END)||
