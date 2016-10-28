@@ -136,7 +136,7 @@ class PC extends React.Component {
 }
 
     changeBox(d) {
-        var newVal = ((this.state.box + d) + 14) % 14;
+        var newVal = ((this.state.box + d) + this.state.boxes.length) % this.state.boxes.length;
         this.setState( {box : newVal} );
     }
 

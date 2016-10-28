@@ -91,8 +91,8 @@ def parse_box(poke_list, PokemonStruct, gen):
     for i in range(poke_list.count):
         d = {}
         pokemon = "".join(chr(c) for c in poke_list.pokemon[i][:34])
-        d["binary"] = pokemon.encode("hex")
         parsed_mon = PokemonStruct.parse(pokemon)
+        d["binary"] = Gen1BoxPokemon.build(parsed_mon).encode("hex")
         d["index"] = poke_list.species[i]
         if gen == 1:
             d["index"] = pokemon_index.gen1_to_gen2[d["index"]]
@@ -148,9 +148,10 @@ def parse_data(data):
     return parse_data_impl(data, PokemonDump, Pokemon, Pokemon, 2)
 
 def gen1_box_to_gen2(box, mon_struct):
+    #TODO: remove extra argument
     for mon in box:
         b = mon["binary"].decode("hex")
-        parsed = mon_struct.parse(b)
+        parsed = Gen1BoxPokemon.parse(b)
         parsed["index"] = pokemon_index.gen1_to_gen2[parsed["index"]]
         parsed["Friendship"] = 0xff
         parsed["Pokerus"] = 0
