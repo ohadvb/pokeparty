@@ -20,6 +20,7 @@ u16 PARTY_END = 0xdbcd;
 u16 CURRENT_BOX_NUMBER = 0xD8BC; 
 u16 CURRENT_BOX_START = 0xad6c; // sram 1
 u16 CURRENT_BOX_END = 0xb1b9;
+u8 CURRENT_BOX_SRAM = 1;
 u16 TRAINER_ID = 0xdad1;
 u8 BOXES_SRAM_MIN = 2;
 u8 BOXES_SRAM_MAX = 3;
@@ -29,6 +30,7 @@ u16 BOX_SIZE = 1104;
 u16 NUM_BOXES = 14;
 
 extern u8 * gbRam;
+extern u8 * gbMemoryMap[];
 extern u8 * gbRom;
 u8 current_sram_bank = 0;
 
@@ -47,6 +49,9 @@ void set_to_gen1()
     CURRENT_BOX_NUMBER = 0xD5a0; 
     CURRENT_BOX_START = 0xb0c0; // sram 1
     CURRENT_BOX_END = 0xb522;
+    CURRENT_BOX_START = 0xda80; // main ram
+    CURRENT_BOX_END = 0xdee1;
+    CURRENT_BOX_SRAM = 0;
     TRAINER_ID = 0xd177;
     BOXES_SRAM_MIN = 2;
     BOXES_SRAM_MAX = 3;
@@ -113,8 +118,13 @@ void do_boxes(char * fname)
     {
         if (box == box_number)
         {
-            int base_index = 1 << 13;
-            fread(&gbRam[base_index + CURRENT_BOX_START - 0xa000], BOX_SIZE, 1, in_file);
+            if (gen == 2)
+            {
+                int base_index = 1 << 13;
+                fread(&gbRam[base_index + CURRENT_BOX_START - 0xa000], BOX_SIZE, 1, in_file);
+            }
+            if (gen == 1)
+                fread(&gbMemoryMap[CURRENT_BOX_START>>12][CURRENT_BOX_START & 0x0fff], BOX_SIZE, 1, in_file);
         }
         else
         {
@@ -225,7 +235,10 @@ void send_boxes()
         if (box == box_number)
         {
             int base_index = 1 << 13;
-            fwrite(&gbRam[base_index + CURRENT_BOX_START - 0xa000], BOX_SIZE, 1, out_file);
+            if (gen == 2)
+                fwrite(&gbRam[base_index + CURRENT_BOX_START - 0xa000], BOX_SIZE, 1, out_file);
+            if (gen == 1)
+                fwrite(&gbMemoryMap[CURRENT_BOX_START>>12][CURRENT_BOX_START & 0x0fff], BOX_SIZE, 1, out_file);
         }
         else
         {
@@ -265,11 +278,6 @@ void sram_hook(u16 address, u8 value)
 {
     if (address == 0x4000)
     {
-        if ((current_sram_bank == 1 || current_sram_bank == 2) && value != 1 && value != 2)
-        {
-            // fprintf(stderr, "done with boxes\n");
-            // send_boxes();
-        }
         current_sram_bank = value;
     }
 }
@@ -278,7 +286,7 @@ void box_and_party_hook(u16 address)
 {
     if ((address >= PARTY_START && (address <= PARTY_LIST_END || (address <= PARTY_END && ticks_since_last_write < TICKS_TO_WAIT ))) ||
          (address == CURRENT_BOX_NUMBER)||
-         (current_sram_bank == 1 && address >= CURRENT_BOX_START && address <= CURRENT_BOX_END)||
+         ((!CURRENT_BOX_SRAM || current_sram_bank == CURRENT_BOX_SRAM) && address >= CURRENT_BOX_START && address <= CURRENT_BOX_END)||
          (current_sram_bank >= BOXES_SRAM_MIN && current_sram_bank <= BOXES_SRAM_MAX && address >= BOXES_START && address <= BOXES_END))
     {
         ticks_since_last_write = 0;
