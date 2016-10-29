@@ -16,6 +16,9 @@ pokedex = "00" * 64
 boxes = {}
 gen1_boxes = {}
 
+gen1_list = {}
+gen2_list = {}
+
 # set the project root directory as the static folder, you can set others.
 app = Flask(__name__, static_url_path='')
 app.config['UPLOAD_FOLDER'] = UPLOAD_PATH
@@ -57,6 +60,12 @@ def send_dex(broadcast = True):
     else:
         emit("pokedex", pokedex)
 
+def update_list(l, new_mons):
+    for mon in new_mons["party"]:
+        l[mon["binary"]] = mon
+    for box in new_mons["pc"]:
+        for mon in box:
+            l[mon["binary"]] = mon
 
 @app.route(UPLOAD_FOLDER, methods = ['POST'])
 def upload_file():
@@ -72,10 +81,13 @@ def upload_box(data):
     if (data["gen"] == 1):
         gen1_data, gen2_data = box_parser.parse_gen1_data(data["data"])
         gen1_boxes[request.sid] = gen1_data
+        update_list(gen1_list, gen1_data)
         boxes[request.sid] = gen2_data
+        update_list(gen2_list, gen2_data)
         print gen1_data
     else:
         boxes[request.sid] = box_parser.parse_data(data["data"])
+        update_list(gen2_list, boxes[request.sid])
         print boxes[request.sid]
     return
 
@@ -100,32 +112,22 @@ def update_boxes(new_boxes):
     emit("update boxes", file_name) 
 
 def flat_list(to_send):
-    l = []
-    for key in to_send.keys():
-        l = l + to_send[key]["party"]
-        for b in to_send[key]["pc"]:
-            l = l + b
-    ul = []
-    bins = []
-    for i in l:
-        if i["binary"] in bins:
-            continue
-        bins.append(i["binary"])
-        ul.append(i)
-    return ul
-
+    return sorted(to_send.values(), key=lambda x:x["level"], reverse=True)
 
 @socketio.on('get boxes')
 def send_boxes(msg):
     gen = msg
     if gen == 1:
-        to_send = gen1_boxes
+        out_boxes = gen1_boxes
+        out_list = flat_list(gen1_list)
     else:
-        to_send = boxes
-    if not request.sid in to_send:
+        out_boxes = boxes
+        out_list = flat_list(gen2_list)
+    if not request.sid in out_boxes:
         emit("boxes", [])
-    to_send[request.sid]["list"] = flat_list(to_send)
-    emit("boxes", to_send[request.sid]) 
+    to_send = out_boxes[request.sid]
+    to_send["list"] = out_list
+    emit("boxes", to_send) 
 
 @app.route('/app/<path:path>')
 def send_js(path):
