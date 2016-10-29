@@ -33,6 +33,7 @@ extern u8 * gbRom;
 u8 current_sram_bank = 0;
 
 unsigned int gen = 0;
+static const int TICKS_TO_WAIT = 200;
 unsigned long ticks_since_last_write = 0;
 
 void set_to_gen1()
@@ -212,6 +213,7 @@ void send_boxes()
     if (out_file == NULL)
     {
         fprintf(stderr, "failed to open boxes file\n");
+        return;
     }
     for (int i = PARTY_START; i <=PARTY_END; i++)
     {
@@ -244,7 +246,7 @@ void send_boxes()
 void handle_ticks()
 {
     ticks_since_last_write++;
-    if (ticks_since_last_write == 200)
+    if (ticks_since_last_write == TICKS_TO_WAIT)
     {
         send_boxes();
     }
@@ -274,7 +276,7 @@ void sram_hook(u16 address, u8 value)
 
 void box_and_party_hook(u16 address)
 {
-    if ((address >= PARTY_START && address <= PARTY_LIST_END) ||
+    if ((address >= PARTY_START && (address <= PARTY_LIST_END || (address <= PARTY_END && ticks_since_last_write < TICKS_TO_WAIT ))) ||
          (address == CURRENT_BOX_NUMBER)||
          (current_sram_bank == 1 && address >= CURRENT_BOX_START && address <= CURRENT_BOX_END)||
          (current_sram_bank >= BOXES_SRAM_MIN && current_sram_bank <= BOXES_SRAM_MAX && address >= BOXES_START && address <= BOXES_END))
