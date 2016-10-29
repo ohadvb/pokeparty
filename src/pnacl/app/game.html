@@ -34,13 +34,17 @@
     </p>
     <br>
     <p>
-      <select id="games_select"></select>
+      <select id="games_select" onchange="set_href()"></select>
       <button onclick="makeNewPlugin()">Restart Gameboy</button>
       <br>
       <button onclick="send_file()">Upload State</button>
       <br>
       <select id="saves_select"></select>
       <button onclick="load_save()">Load State</button>
+      <br>
+      <form action="#" id="export_save_button">
+        <input type="submit" value="Export Save File" />
+      </form>
     </p>
     </div>
     <div id="PC" class="tabcontent hide">

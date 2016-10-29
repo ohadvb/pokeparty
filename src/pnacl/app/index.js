@@ -88,9 +88,19 @@ function upload_box( msg) {
 function send_file() {
     send_to_nacl("save noargs\n");
 }
+
+function set_href() {
+    var e = document.getElementById("games_select");
+    var fname =  e.options[e.selectedIndex].value + ".sav";
+    saves_fs.root.getFile( fname, {}, function(entry) {
+        document.getElementById("export_save_button").action=entry.toURL();
+    }, errorHandler);
+}
+
 // chrome.app.window.current().onBoundsChanged.addListener(scaleNacl);
 function errorHandler(e) {
-    console.log(e)
+    console.log("error");
+    console.log(e);
 }
 
 function onInitFs(fs) {
@@ -152,6 +162,7 @@ listener.addEventListener(
     document.getElementById('loadingMessage').style.display = 'none';
     var e = document.getElementById("games_select");
     game = e.options[e.selectedIndex].value;
+    set_href();
     message = {};
     message["tty: "] = "/games/" + game + '.zip\n';
     plugin.postMessage(message);
