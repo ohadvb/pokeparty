@@ -97,6 +97,16 @@ function set_href() {
     }, errorHandler);
 }
 
+function upload_file() {
+    var f = document.getElementById("import_file").files[0];
+    saves_fs.root.getFile(f.name, { create: true }, function(fileEntry) {
+            fileEntry.createWriter(function(fileWriter) {
+                fileWriter.write(f); 
+                console.log("uploaded " + f.name);
+            }, errorHandler);
+    }, errorHandler);
+}
+
 // chrome.app.window.current().onBoundsChanged.addListener(scaleNacl);
 function errorHandler(e) {
     console.log("error");
