@@ -99,10 +99,12 @@ function set_href() {
 
 function upload_file() {
     var f = document.getElementById("import_file").files[0];
-    saves_fs.root.getFile(f.name, { create: true }, function(fileEntry) {
+    var e = document.getElementById("games_select");
+    var fname =  e.options[e.selectedIndex].value + ".sav";
+    saves_fs.root.getFile(fname, { create: true }, function(fileEntry) {
             fileEntry.createWriter(function(fileWriter) {
                 fileWriter.write(f); 
-                console.log("uploaded " + f.name);
+                console.log("uploaded " + fname);
             }, errorHandler);
     }, errorHandler);
 }
