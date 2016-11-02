@@ -9,13 +9,13 @@ html {
     font-family: sans-serif;
 }
 .pc {
-    width: 620px;
+    overflow: scroll;
     display: flex !important;
     flex-direction: row;
     background: #F3F4EE;
 }
 .pc-my {
-    width: 300px;
+    width: 320px;
     flex-grow: 0;
     flex-basis: 0 !important;
     flex-direction: column;
@@ -34,12 +34,13 @@ html {
     text-decoration: none;
     color: #F3F4EE;
     background: #4F7FC1;
+    cursor: pointer;
 }
 .pc-my > header > span {
     color: #25654E;
 }
 .pc-other {
-    width: 300px;
+    width: 320px;
     flex-grow: 0;
     flex-basis: 0
     flex-direction: column;
@@ -61,6 +62,11 @@ html {
 
 .pc-other > header > span {
     color: #F3F4EE;
+}
+
+.pc-entry-container {
+    height: 500px;
+    overflow: scroll;
 }
 
 .pc-entry {
