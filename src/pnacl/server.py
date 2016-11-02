@@ -62,10 +62,11 @@ def send_dex(broadcast = True):
 
 def update_list(l, new_mons):
     for mon in new_mons["party"]:
-        l[mon["binary"]] = mon
+        #TODO: keep strongest
+        l[mon["index"]] = mon
     for box in new_mons["pc"]:
         for mon in box:
-            l[mon["binary"]] = mon
+            l[mon["index"]] = mon
 
 @app.route(UPLOAD_FOLDER, methods = ['POST'])
 def upload_file():
