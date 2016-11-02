@@ -27,10 +27,10 @@ socketio = SocketIO(app)
 saves_path = {}
 
 def my_send(msg, l, broadcast):
-   if broadcast:
-         socketio.emit(msg, l, broadcast = True)
-   else:
-       emit(msg, l)
+    if broadcast:
+        socketio.emit(msg, l, broadcast = True)
+    else:
+        emit(msg, l)
 
 def saves_list(broadcast = True):
     suffix = ".sgm"
@@ -50,7 +50,7 @@ def get_list(path, match, trim_str):
     l = []
     for f in os.listdir(path):
        if fnmatch.fnmatch(f, match):
-            l.append(f.replace(trim_str, ""))
+          l.append(f.replace(trim_str, ""))
     return l
 
 def send_dex(broadcast = True):
@@ -78,7 +78,12 @@ def upload_file():
     if 'file' not in request.files:
         abort(400)
     file = request.files['file']
-    file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
+    file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
+    if os.path.exists (file_path):
+        print 'Upload rejected, file exists'
+        return 'Upload rejected, file exists'
+
+    file.save(file_path)
     saves_list()
     return "Uploaded succesfully"
                                     
