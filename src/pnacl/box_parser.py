@@ -185,7 +185,7 @@ def gen1_box_to_gen2(box):
         
 def parse_gen1_data(data):
     boxes =  parse_data_impl(data, 1)
-    return boxes, boxes
+    return boxes
 
 def main (argv):
     with open (argv[1], 'rb') as f:

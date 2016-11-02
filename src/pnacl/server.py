@@ -63,10 +63,15 @@ def send_dex(broadcast = True):
 def update_list(l, new_mons):
     for mon in new_mons["party"]:
         #TODO: keep strongest
-        l[mon["index"]] = mon
+        i = mon["index"]
+        if i in l and mon["level"] <= l[i]["level"]:
+            continue
+        l[i] = mon
     for box in new_mons["pc"]:
         for mon in box:
-            l[mon["index"]] = mon
+            if i in l and mon["level"] <= l[i]["level"]:
+                continue
+            l[i] = mon
 
 @app.route(UPLOAD_FOLDER, methods = ['POST'])
 def upload_file():
@@ -80,11 +85,10 @@ def upload_file():
 @socketio.on('boxes')
 def upload_box(data):
     if (data["gen"] == 1):
-        gen1_data, gen2_data = box_parser.parse_gen1_data(data["data"])
+        gen1_data= box_parser.parse_gen1_data(data["data"])
         gen1_boxes[request.sid] = gen1_data
         update_list(gen1_list, gen1_data)
-        boxes[request.sid] = gen2_data
-        update_list(gen2_list, gen2_data)
+        update_list(gen2_list, gen1_data)
         print gen1_data
     else:
         boxes[request.sid] = box_parser.parse_data(data["data"])
