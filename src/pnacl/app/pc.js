@@ -38,10 +38,7 @@ class PokemonList extends React.Component {
 
     render() {
         var that = this;
-        if (this.props.list.length == 0) {
-            return <div> </div>;
-        }
-        return ( <div>
+        return ( <div className="pc-entry-container">
             { this.props.list.map(mon => ( <Pokemon {...mon} onClick={that.onClick.bind(that, mon)} /> ))  }
             </div>
         );
@@ -147,7 +144,7 @@ class PC extends React.Component {
             return;
         }
         this.dirty = true;
-        this.state.boxes[i].push(mon);
+        this.state.boxes[i].unshift(mon);
         this.setState({boxes : this.state.boxes});
     }
 
