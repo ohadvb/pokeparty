@@ -69,6 +69,7 @@ def update_list(l, new_mons):
         l[i] = mon
     for box in new_mons["pc"]:
         for mon in box:
+            i = mon["index"]
             if i in l and mon["level"] <= l[i]["level"]:
                 continue
             l[i] = mon
