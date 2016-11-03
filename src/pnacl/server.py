@@ -92,6 +92,7 @@ def upload_box(data):
     if (data["gen"] == 1):
         gen1_data= box_parser.parse_gen1_data(data["data"])
         gen1_boxes[request.sid] = gen1_data
+        boxes[request.sid] = gen1_data
         update_list(gen1_list, gen1_data)
         update_list(gen2_list, gen1_data)
         print gen1_data

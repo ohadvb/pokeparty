@@ -25,7 +25,7 @@ PokemonString = PokemonStringAdapter (Byte[11])
 
 class Gen1PokemonIndexAdapter (Adapter):
     def _decode(self,obj,ctx):
-        if obj == 0xff or obj == 0:
+        if obj not in pokemon_index.gen1_to_gen2.keys():
             return 0xff
         return pokemon_index.gen1_to_gen2[obj]
 
@@ -143,6 +143,7 @@ def build_boxes(boxes, party):
         pokemon_struct = Gen1BoxPokemon
         gen = 1
     ot = party[0]["ot"]
+    ot_id = party[0]["pokemon"]["ot id"]
     l = []
     for box in boxes:
         d = {}
@@ -150,6 +151,8 @@ def build_boxes(boxes, party):
         d["species"] = [p["index"] for p in box]
         pad_to_len(d["species"], 0xff, 20)
         d["pokemon"] = [p["pokemon"] for p in box]
+        for p in d["pokemon"]:
+            p["ot id"] = ot_id
         pad_to_len(d["pokemon"], pokemon_struct.parse("\x00" * pokemon_struct.sizeof()), 20)
         d["ot"] = [ot] * len(box)
         pad_to_len(d["ot"], "\x00" * 11 , 20)
