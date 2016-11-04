@@ -95,14 +95,16 @@ Gen2PartyPokemon = Struct (
         'level' / Byte,
         'unused' / Byte[16])
 
-
+TrainerData = Struct (
+        'ot id' / Int16ub,
+        'ot' / PokemonString )
 
 def PokemonList (capacity, pokemon_struct, index_struct, padding):
     return Struct (
         'count' / Byte,
         'species' / index_struct[capacity], Padding (1, b'\xff'),
         'pokemon' /  pokemon_struct[capacity],
-        'ot' / Byte[11][capacity],
+        'ot' / PokemonString[capacity],
         'names' / PokemonString[capacity],
         Padding (padding)
     )
@@ -133,7 +135,7 @@ def parse_box(poke_list, PokemonStruct, gen):
 def pad_to_len(l, padding, size):
     l += [padding] * (size - len(l))
 
-def build_boxes(boxes, party):
+def build_boxes(boxes, trainer):
     if len(boxes) == 14:
         out = Gen2Boxes
         pokemon_struct = Gen2BoxPokemon
@@ -142,8 +144,8 @@ def build_boxes(boxes, party):
         out = Gen1Boxes
         pokemon_struct = Gen1BoxPokemon
         gen = 1
-    ot = party[0]["ot"]
-    ot_id = party[0]["pokemon"]["ot id"]
+    ot = trainer["ot"]
+    ot_id = trainer["ot id"]
     l = []
     for box in boxes:
         d = {}
@@ -155,7 +157,7 @@ def build_boxes(boxes, party):
             p["ot id"] = ot_id
         pad_to_len(d["pokemon"], pokemon_struct.parse("\x00" * pokemon_struct.sizeof()), 20)
         d["ot"] = [ot] * len(box)
-        pad_to_len(d["ot"], [0] * 11 , 20)
+        pad_to_len(d["ot"], "\x00" * 11 , 20)
         d["names"] = [p["name"] for p in box]
         pad_to_len(d["names"], "\x00" * 11, 20)
         l.append(d)
@@ -167,9 +169,10 @@ def parse_data_impl(data, gen):
         dump_struct,  mon_struct, party_mon_struct = PokemonDump, Gen2BoxPokemon, Gen2PartyPokemon
     else:
         dump_struct, mon_struct, party_mon_struct = Gen1PokemonDump, Gen1BoxPokemon, Gen1PartyPokemon
-
-    dump = dump_struct.parse(data)
     boxes = {}
+    boxes["trainer"] = TrainerData.parse(data)
+    dump = dump_struct.parse(data[TrainerData.sizeof():])
+    print boxes["trainer"]
     boxes["party"] = parse_box(dump[0], party_mon_struct, gen)
     l = []
     for poke_list in dump[1]:

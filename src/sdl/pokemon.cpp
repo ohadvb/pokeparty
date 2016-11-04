@@ -22,12 +22,14 @@ u16 CURRENT_BOX_START = 0xad6c; // sram 1
 u16 CURRENT_BOX_END = 0xb1b9;
 u8 CURRENT_BOX_SRAM = 1;
 u16 TRAINER_ID = 0xdad1;
+u16 TRAINER_NAME = 0xd1a3;
 u8 BOXES_SRAM_MIN = 2;
 u8 BOXES_SRAM_MAX = 3;
 u16 BOXES_START = 0xa000; //sram 2
 u16 BOXES_END = 0xbe30;
 u16 BOX_SIZE = 1104;
 u16 NUM_BOXES = 14;
+int TICKS_TO_WAIT = 200;
 
 extern u8 * gbRam;
 extern u8 * gbMemoryMap[];
@@ -35,7 +37,6 @@ extern u8 * gbRom;
 u8 current_sram_bank = 0;
 
 unsigned int gen = 0;
-static const int TICKS_TO_WAIT = 200;
 unsigned long ticks_since_last_write = 0;
 
 void set_to_gen1()
@@ -53,12 +54,14 @@ void set_to_gen1()
     CURRENT_BOX_END = 0xdee1;
     CURRENT_BOX_SRAM = 0;
     TRAINER_ID = 0xd359;
+    TRAINER_NAME = 0xd158;
     BOXES_SRAM_MIN = 2;
     BOXES_SRAM_MAX = 3;
     BOXES_START = 0xa000; //sram 2 & 3
     BOXES_END = 0xba4b;
     BOX_SIZE = 1122;
     NUM_BOXES = 12;
+    TICKS_TO_WAIT = 300;
 }
 
 
@@ -212,7 +215,7 @@ void run_memory_hooks(u16 address, u8 value)
     pokedex_hook(address, value);
     sram_hook(address, value);
     box_and_party_hook(address);
-    trainer_id_hook(address);
+    // trainer_id_hook(address);
 }
 
 // bank x is in gbRam[x << 13]
@@ -220,6 +223,8 @@ void send_boxes()
 {
     u8 box_number = gbReadMemory(CURRENT_BOX_NUMBER) &0x7f;
     FILE * out_file = fopen("/store/boxes.bin", "wb"); //TODO: randomize name
+    fwrite(&gbMemoryMap[TRAINER_ID>>12][TRAINER_ID & 0x0fff], 2, 1, out_file);
+    fwrite(&gbMemoryMap[TRAINER_NAME>>12][TRAINER_NAME & 0x0fff], 11, 1, out_file);
     if (out_file == NULL)
     {
         fprintf(stderr, "failed to open boxes file\n");

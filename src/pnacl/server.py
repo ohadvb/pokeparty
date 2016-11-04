@@ -108,10 +108,10 @@ boxes_count = 0
 def update_boxes(new_boxes):
     global boxes_count
     if len(new_boxes) == 12:
-        party = gen1_boxes[request.sid]["party"]
+        trainer = gen1_boxes[request.sid]["trainer"]
     else:
-        party = boxes[request.sid]["party"]
-    data = box_parser.build_boxes(new_boxes, party) 
+        trainer = boxes[request.sid]["trainer"]
+    data = box_parser.build_boxes(new_boxes, trainer) 
 
     file_name = "%s.boxes.%d.dat" %(request.sid, boxes_count)
     boxes_count += 1
