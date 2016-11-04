@@ -248,4 +248,5 @@ names = {1: "Bulbasaur",
 248: "Tyranitar",
 249: "Lugia",
 250: "Ho-Oh",
-251: "Celebi" }
+251: "Celebi",
+253: "Egg"}
