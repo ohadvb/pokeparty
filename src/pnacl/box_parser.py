@@ -1,6 +1,6 @@
 #! /usr/bin/env python2
 
-from construct import this, Struct, Array, Byte,\
+from construct import this, Struct, Array, Byte, Bytes, \
     Int16ub, Padding, String, Aligned, Terminated, Adapter, Padded, Default
 import pokemon_encoding
 import pokemon_index
@@ -102,7 +102,7 @@ def PokemonList (capacity, pokemon_struct, index_struct, padding):
         'count' / Byte,
         'species' / index_struct[capacity], Padding (1, b'\xff'),
         'pokemon' /  pokemon_struct[capacity],
-        'ot' / PokemonString[capacity],
+        'ot' / Byte[11][capacity],
         'names' / PokemonString[capacity],
         Padding (padding)
     )
@@ -155,7 +155,7 @@ def build_boxes(boxes, party):
             p["ot id"] = ot_id
         pad_to_len(d["pokemon"], pokemon_struct.parse("\x00" * pokemon_struct.sizeof()), 20)
         d["ot"] = [ot] * len(box)
-        pad_to_len(d["ot"], "\x00" * 11 , 20)
+        pad_to_len(d["ot"], [0] * 11 , 20)
         d["names"] = [p["name"] for p in box]
         pad_to_len(d["names"], "\x00" * 11, 20)
         l.append(d)

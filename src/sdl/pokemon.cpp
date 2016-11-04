@@ -52,7 +52,7 @@ void set_to_gen1()
     CURRENT_BOX_START = 0xda80; // main ram
     CURRENT_BOX_END = 0xdee1;
     CURRENT_BOX_SRAM = 0;
-    TRAINER_ID = 0xd177;
+    TRAINER_ID = 0xd359;
     BOXES_SRAM_MIN = 2;
     BOXES_SRAM_MAX = 3;
     BOXES_START = 0xa000; //sram 2 & 3
