@@ -1168,6 +1168,7 @@ void sdlInitVideo() {
   }
 
   surface = SDL_SetVideoMode(screenWidth, screenHeight, 0, flags);
+  fprintf(stderr, "width: %d, height: %d\n", screenWidth, screenHeight);
 
   if(surface == NULL) {
     systemMessage(0, "Failed to set video mode");
@@ -1935,7 +1936,6 @@ int real_main(int argc, char **argv)
 {
   fprintf(stdout, "VBA-M version %s [SDL]\n", VERSION);
   fprintf(stderr, "VBA-M version %s [SDL]\n", VERSION);
-  message_js("hello");
 
   arg0 = argv[0];
 

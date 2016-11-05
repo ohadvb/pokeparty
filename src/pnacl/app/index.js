@@ -21,9 +21,9 @@ Array.prototype.unique = function() {
 function scaleNacl() {
   clearTimeout(resizeTimer);
   resizeTimer = setTimeout(function() {
-    var bounds = chrome.app.window.current().getBounds();
-    var scaleX = bounds.width / plugin.width;
-    var scaleY = bounds.height / plugin.height;
+    // var bounds = chrome.app.window.current().getBounds();
+    var scaleX = 320 / plugin.width;
+    var scaleY = 320 / plugin.height;
     var scale = Math.min(scaleX, scaleY);
     plugin.style.webkitTransform = 'scale(' + scale + ')';
   }, 100);
@@ -180,7 +180,6 @@ listener.addEventListener(
     plugin.postMessage(message);
     socket.emit('startgame event', game);
     firstLoad = true; //allow sending messages
-    scaleNacl();
   }, true);
 
 listener.addEventListener(
