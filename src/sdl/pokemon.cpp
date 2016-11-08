@@ -29,7 +29,12 @@ u16 BOXES_START = 0xa000; //sram 2
 u16 BOXES_END = 0xbe30;
 u16 BOX_SIZE = 1104;
 u16 NUM_BOXES = 14;
-int TICKS_TO_WAIT = 200;
+u16 BOX_MON_SIZE = 32;
+u16 BOX_MON_LVL_OFFSET = 0x1f;
+u16 PARTY_MON_SIZE = 48;
+u16 PARTY_MON_LVL_OFFSET = 0x1f;
+u16 MON_MOVES_OFFSET = 0x2;
+const int TICKS_TO_WAIT = 200;
 
 extern u8 * gbRam;
 extern u8 * gbMemoryMap[];
@@ -61,7 +66,11 @@ void set_to_gen1()
     BOXES_END = 0xba4b;
     BOX_SIZE = 1122;
     NUM_BOXES = 12;
-    TICKS_TO_WAIT = 300;
+    BOX_MON_SIZE = 33;
+    BOX_MON_LVL_OFFSET = 0x3;
+    PARTY_MON_SIZE = 44;
+    PARTY_MON_LVL_OFFSET = 0x21;
+    MON_MOVES_OFFSET = 0x8;
 }
 
 
@@ -90,8 +99,6 @@ void do_load(char * path)
 {
     fprintf(stderr, "loading %s\n",  path);
     emulator.emuReadState(path);
-    send_dex();
-    send_boxes();
 }
 
 
@@ -206,6 +213,12 @@ void init_gen()
     printf("POKEMSG gen %d\n", gen);
 }
 
+void run_load_hooks()
+{
+    send_dex();
+    send_boxes();
+}
+
 void run_memory_hooks(u16 address, u8 value)
 {
     if (!gen)
@@ -287,11 +300,39 @@ void sram_hook(u16 address, u8 value)
     }
 }
 
+bool is_box_lvl_or_move_offset(u16 address)
+{
+    if(!((!CURRENT_BOX_SRAM || current_sram_bank == CURRENT_BOX_SRAM) && address >= CURRENT_BOX_START && address <= CURRENT_BOX_END))
+    {
+        return false;
+    }
+    u16 offset = (address - CURRENT_BOX_START) % BOX_MON_SIZE; 
+    if (offset == BOX_MON_LVL_OFFSET || (offset >= MON_MOVES_OFFSET && offset <= MON_MOVES_OFFSET + 3) )
+    {
+        return true;
+    }
+    return false;
+}
+
+bool is_party_lvl_or_move_offset(u16 address)
+{
+    if (!(address >= PARTY_START && address <= PARTY_END))
+    {
+        return false;
+    }
+    u16 offset = (address - PARTY_START) % PARTY_MON_SIZE; 
+    if (offset == PARTY_MON_LVL_OFFSET || (offset >= MON_MOVES_OFFSET && offset <= MON_MOVES_OFFSET + 3) )
+    {
+        return true;
+    }
+    return false;
+}
+
 void box_and_party_hook(u16 address)
 {
-    if ((address >= PARTY_START && (address <= PARTY_LIST_END || (address <= PARTY_END && ticks_since_last_write < TICKS_TO_WAIT ))) ||
+    if ( is_party_lvl_or_move_offset(address)||
          (address == CURRENT_BOX_NUMBER)||
-         ((!CURRENT_BOX_SRAM || current_sram_bank == CURRENT_BOX_SRAM) && address >= CURRENT_BOX_START && address <= CURRENT_BOX_END)||
+         is_box_lvl_or_move_offset(address)||
          (current_sram_bank >= BOXES_SRAM_MIN && current_sram_bank <= BOXES_SRAM_MAX && address >= BOXES_START && address <= BOXES_END))
     {
         ticks_since_last_write = 0;

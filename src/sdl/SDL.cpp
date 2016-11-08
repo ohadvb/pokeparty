@@ -1168,7 +1168,7 @@ void sdlInitVideo() {
   }
 
   surface = SDL_SetVideoMode(screenWidth, screenHeight, 0, flags);
-  fprintf(stderr, "width: %d, height: %d\n", screenWidth, screenHeight);
+  fprintf(stderr, "openGl: %d, width: %d, height: %d\n", openGL, desktopWidth, desktopHeight);
 
   if(surface == NULL) {
     systemMessage(0, "Failed to set video mode");

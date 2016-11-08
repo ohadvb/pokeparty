@@ -10,6 +10,7 @@ void pokedex_hook(u16 address, u8 value);
 void box_and_party_hook(u16 address);
 void trainer_id_hook(u16 address);
 void run_memory_hooks(u16 address, u8 value);
+void run_load_hooks();
 void sram_hook(u16 address, u8 value);
 
 

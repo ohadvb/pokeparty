@@ -3628,7 +3628,14 @@ bool gbWriteSaveState(const char *name)
   return res;
 }
 
+static bool real_gbReadSaveState(gzFile gzFile);
 static bool gbReadSaveState(gzFile gzFile)
+{
+    bool ret = real_gbReadSaveState(gzFile);
+    run_load_hooks();
+    return ret;
+}
+static bool real_gbReadSaveState(gzFile gzFile)
 {
   int version = utilReadInt(gzFile);
 
