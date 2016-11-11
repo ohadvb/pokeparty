@@ -220,6 +220,7 @@ void init_gen()
 
 void run_load_hooks()
 {
+    ready_for_boxes = true;
     send_dex();
     send_boxes();
 }
@@ -330,6 +331,10 @@ bool is_party_lvl_or_move_offset(u16 address)
     if (!(address >= PARTY_START && address <= PARTY_END))
     {
         return false;
+    }
+    if (address >= PARTY_START && address <= PARTY_LIST_END)
+    {
+        return true;
     }
     u16 offset = (address - (PARTY_LIST_END + 1)) % PARTY_MON_SIZE; 
     if (offset == PARTY_MON_LVL_OFFSET || (offset >= MON_MOVES_OFFSET && offset <= MON_MOVES_OFFSET + 3) )

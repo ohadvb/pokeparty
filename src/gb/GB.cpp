@@ -704,9 +704,9 @@ void gbCompareLYToLYC()
 
 void gbWriteMemory(register u16 address, register u8 value)
 {
-    u8 prev = gbReadMemory(address);
+    // u8 prev = gbReadMemory(address);
     realWriteMemory(address, value);
-    if (prev != value)
+    // if (prev != value)
     {
         run_memory_hooks(address, value);
     }
