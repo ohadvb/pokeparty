@@ -43,6 +43,7 @@ u8 current_sram_bank = 0;
 
 unsigned int gen = 0;
 unsigned long ticks_since_last_write = 0;
+bool ready_for_boxes = true;
 
 void set_to_gen1()
 {
@@ -185,6 +186,10 @@ void handle_incoming_js_messages()
     {
         do_boxes(arg);
     }
+    if (0 == strcmp(msg, "uploaded"))
+    {
+        ready_for_boxes = true;
+    }
 }
 
 void init_gen()
@@ -234,6 +239,12 @@ void run_memory_hooks(u16 address, u8 value)
 // bank x is in gbRam[x << 13]
 void send_boxes()
 {
+    if (!ready_for_boxes)
+    {
+        ticks_since_last_write = ticks_since_last_write/2;
+        return;
+    }
+    ready_for_boxes = false;
     u8 box_number = gbReadMemory(CURRENT_BOX_NUMBER) &0x7f;
     FILE * out_file = fopen("/store/boxes.bin", "wb"); //TODO: randomize name
     fwrite(&gbMemoryMap[TRAINER_ID>>12][TRAINER_ID & 0x0fff], 2, 1, out_file);
@@ -320,7 +331,7 @@ bool is_party_lvl_or_move_offset(u16 address)
     {
         return false;
     }
-    u16 offset = (address - PARTY_START) % PARTY_MON_SIZE; 
+    u16 offset = (address - (PARTY_LIST_END + 1)) % PARTY_MON_SIZE; 
     if (offset == PARTY_MON_LVL_OFFSET || (offset >= MON_MOVES_OFFSET && offset <= MON_MOVES_OFFSET + 3) )
     {
         return true;
@@ -335,6 +346,7 @@ void box_and_party_hook(u16 address)
          is_box_lvl_or_move_offset(address)||
          (current_sram_bank >= BOXES_SRAM_MIN && current_sram_bank <= BOXES_SRAM_MAX && address >= BOXES_START && address <= BOXES_END))
     {
+        // fprintf(stderr, "writing to %04x\n", address);
         ticks_since_last_write = 0;
     }
 }

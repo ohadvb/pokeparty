@@ -101,6 +101,7 @@ def upload_box(data):
         boxes[request.sid] = box_parser.parse_data(data["data"])
         update_list(gen2_list, boxes[request.sid])
         print boxes[request.sid]
+    emit("uploaded", "")
     return
 
 boxes_count = 0

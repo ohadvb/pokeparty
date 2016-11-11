@@ -17,3 +17,6 @@ socket.on("update boxes", function(msg) {
     send_to_nacl("boxes /shared/" + msg + "\n"); 
 });
 
+socket.on("uploaded", function(msg) {
+    send_to_nacl("uploaded boxes\n"); 
+});

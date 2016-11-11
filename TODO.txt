@@ -1,0 +1,4 @@
+- easier URL and port
+- scale
+- avoid races when uploading boxes
+- update on name changes and evoloutions
