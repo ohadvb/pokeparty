@@ -1,4 +1,4 @@
-from flask import Flask, request, send_from_directory, jsonify
+from flask import Flask, request, send_from_directory, jsonify, redirect
 from flask_socketio import SocketIO,send,emit
 from werkzeug.utils import secure_filename
 import pdb
@@ -144,6 +144,10 @@ def send_boxes(msg):
     to_send = out_boxes[request.sid]
     to_send["list"] = out_list
     emit("boxes", to_send) 
+
+@app.route('/')
+def redirect_to_game():
+    return redirect("/app/game.html")
 
 @app.route('/app/<path:path>')
 def send_js(path):
