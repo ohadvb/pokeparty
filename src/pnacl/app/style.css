@@ -40,15 +40,13 @@ body {
 #naclModule {
     height: 288px;
     width : 320px;
-    -webkit-transform-origin: 50% 50%;
-    image-rendering: pixelated;
-    /* image-rendering: crisp-edges; */
+    transform-origin: 0% 0%;
+    image-rendering: -webkit-optimize-contrast;
 }
 
 #wrap {
-    height: 480px;
+    height: 440px;
     width : 480px;
-    -webkit-transform-origin: 50% 50%;
 }
   /* -webkit-transorm: scale(1.5); */
 

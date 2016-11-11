@@ -27,7 +27,7 @@ function scaleNacl() {
     var scaleY = wrap.offsetHeight / plugin.height;
     var scale = Math.min(scaleX, scaleY);
     console.log(scale);
-    wrap.style.webkitTransform = 'scale(' + scale + ')';
+    plugin.style.webkitTransform = 'scale(' + scale + ')';
   }, 100);
 }
 
