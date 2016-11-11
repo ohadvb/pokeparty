@@ -15,21 +15,23 @@
       </ul>
     <p>
     <div id="Game" class="tabcontent">
-      <div id="listener">
-        <embed name="nacl_module"
-               id="naclModule"
-               width="320" height="288"
-               ps_stdout="dev/tty"
-               ps_stdin="dev/tty"
-               ps_tty_prefix="tty: "
-               src="game.nmf"
-               type="application/x-pnacl" />
-      </div>
-      <div id="loadingMessage" class="centered">
-        <div>Translating PNaCl to Native Architecture</div>
-        <div id="loadingBar">
-          <div id="progress"></div>
-        </div>
+        <div id="wrap">
+            <div id="listener">
+                <embed name="nacl_module"
+                    id="naclModule"
+                    width="320" height="288"
+                    ps_stdout="dev/tty"
+                    ps_stdin="dev/tty"
+                    ps_tty_prefix="tty: "
+                    src="game.nmf"
+                    type="application/x-pnacl" />
+            </div>
+            <div id="loadingMessage" class="centered">
+                <div>Translating PNaCl to Native Architecture</div>
+                <div id="loadingBar">
+                <div id="progress"></div>
+                </div>
+            </div>
         </div>
     </p>
     <br>

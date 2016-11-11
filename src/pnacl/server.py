@@ -62,13 +62,16 @@ def send_dex(broadcast = True):
 
 def update_list(l, new_mons):
     for mon in new_mons["party"]:
-        #TODO: keep strongest
+        if mon["level"] == 0:
+            continue #this is possible since pokemon structs are written in 2 parts when catching
         i = mon["index"]
         if i in l and mon["level"] <= l[i]["level"]:
             continue
         l[i] = mon
     for box in new_mons["pc"]:
         for mon in box:
+            if mon["level"] == 0:
+                continue #this is possible since pokemon structs are written in 2 parts when catching
             i = mon["index"]
             if i in l and mon["level"] <= l[i]["level"]:
                 continue

@@ -22,10 +22,12 @@ function scaleNacl() {
   clearTimeout(resizeTimer);
   resizeTimer = setTimeout(function() {
     // var bounds = chrome.app.window.current().getBounds();
-    var scaleX = 320 / plugin.width;
-    var scaleY = 320 / plugin.height;
+    var wrap = document.getElementById('wrap');
+    var scaleX = wrap.offsetWidth / plugin.width;
+    var scaleY = wrap.offsetHeight / plugin.height;
     var scale = Math.min(scaleX, scaleY);
-    plugin.style.webkitTransform = 'scale(' + scale + ')';
+    console.log(scale);
+    wrap.style.webkitTransform = 'scale(' + scale + ')';
   }, 100);
 }
 
@@ -173,6 +175,7 @@ listener.addEventListener(
   function(e) {
     document.getElementById('loadingMessage').style.display = 'none';
     var e = document.getElementById("games_select");
+    scaleNacl();
     game = e.options[e.selectedIndex].value;
     set_href();
     message = {};

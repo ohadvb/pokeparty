@@ -38,8 +38,19 @@ body {
 }
 
 #naclModule {
-  -webkit-transform-origin: 50% 50%;
+    height: 288px;
+    width : 320px;
+    -webkit-transform-origin: 50% 50%;
+    image-rendering: pixelated;
+    /* image-rendering: crisp-edges; */
 }
+
+#wrap {
+    height: 480px;
+    width : 480px;
+    -webkit-transform-origin: 50% 50%;
+}
+  /* -webkit-transorm: scale(1.5); */
 
 /* Style the list */
 ul.tab {
