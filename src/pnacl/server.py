@@ -60,22 +60,36 @@ def send_dex(broadcast = True):
     else:
         emit("pokedex", pokedex)
 
+def should_add_mon(l, mon):
+    mon = mon["pokemon"]
+    if mon["level"] == 0:
+        return False
+    if mon["index"] not in l:
+        return True
+    cur_mon = l[mon["index"]]["pokemon"]
+    if cur_mon["level"] < mon["level"]:
+        return True
+    if cur_mon["level"] > mon["level"]:
+        return False
+    if "Friendship" in cur_mon and "Friendship" in mon:
+        if cur_mon["Friendship"] < mon["Friendship"]:
+            return True
+        if cur_mon["Friendship"] > mon["Friendship"]:
+            return False
+    if cur_mon["Exp"] < mon["Exp"]:
+        return True
+    return False
+
 def update_list(l, new_mons):
     for mon in new_mons["party"]:
-        if mon["level"] == 0:
-            continue #this is possible since pokemon structs are written in 2 parts when catching
-        i = mon["index"]
-        if i in l and mon["level"] <= l[i]["level"]:
+        if not should_add_mon(l, mon):
             continue
-        l[i] = mon
+        l[mon["index"]] = mon
     for box in new_mons["pc"]:
         for mon in box:
-            if mon["level"] == 0:
-                continue #this is possible since pokemon structs are written in 2 parts when catching
-            i = mon["index"]
-            if i in l and mon["level"] <= l[i]["level"]:
+            if not should_add_mon(l, mon):
                 continue
-            l[i] = mon
+            l[mon["index"]] = mon
 
 @app.route(UPLOAD_FOLDER, methods = ['POST'])
 def upload_file():
