@@ -171,6 +171,7 @@ def send_js(path):
 def handle_my_custom_event(msg):
         print "connected"
         games_list(False)
+        send_dex(False);
 
 def create_save_path(game):
     path = os.path.join(UPLOAD_PATH, game)

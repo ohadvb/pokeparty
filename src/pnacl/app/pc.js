@@ -130,7 +130,7 @@ class PC extends React.Component {
         this.changeBox = this.changeBox.bind(this);
         this.render = this.render.bind(this);
         this.flush = this.flush.bind(this);
-}
+    }
 
     changeBox(d) {
         var newVal = ((this.state.box + d) + this.state.boxes.length) % this.state.boxes.length;
