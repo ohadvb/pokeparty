@@ -13,7 +13,7 @@ static const char * MESSAGE_FORMAT = "POKEMSG %s\n";
 u16 POKEDEX_START  = 0xdbe4; 
 u16 POKEDEX_END  = 0xdc23; 
 u16 POKEDEX_LEN = POKEDEX_END - POKEDEX_START + 1;
-u16 GEN2_POKEDEX_LEN = POKEDEX_LEN/2;
+u16 GEN2_POKEDEX_LEN = POKEDEX_LEN;
 u16 PARTY_START = 0xda22;
 u16 PARTY_LIST_END = 0xda29;
 u16 PARTY_END = 0xdbcd;
@@ -107,13 +107,12 @@ void do_dex(char * message)
 {
     for (int i = 0; i < POKEDEX_LEN; i++)
     {
-        u8 b = 0;
-        sscanf(message, "%2hhx", &b);
-        message += 2;
-        if (i == POKEDEX_LEN/2 && POKEDEX_LEN != GEN2_POKEDEX_LEN * 2)
+        if (i == POKEDEX_LEN/2 && gen == 1)
         {
-            message += 2 * (GEN2_POKEDEX_LEN - i);
+            message += GEN2_POKEDEX_LEN - POKEDEX_LEN;
         }
+        u8 b = 0;
+        sscanf(&message[i*2], "%2hhx", &b);
         realWriteMemory(POKEDEX_START + i, b | gbReadMemory(POKEDEX_START +i));
     }
 
