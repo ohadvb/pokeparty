@@ -42,8 +42,11 @@ def saves_list(broadcast = True):
 
     # send_list(UPLOAD_PATH, "*" + suffix, suffix, "update list", broadcast)
 
+def get_games_list():
+    return get_list("app/games", "*.zip", ".zip")
+
 def games_list(broadcast = False):
-    my_send("games list", get_list("app/games", "*.zip", ".zip"), broadcast) 
+    my_send("games list", get_games_list(), broadcast) 
     
 
 def get_list(path, match, trim_str):
@@ -173,11 +176,15 @@ def handle_my_custom_event(msg):
         games_list(False)
         send_dex(False);
 
-def create_save_path(game):
-    path = os.path.join(UPLOAD_PATH, game)
+def create_dir(path):
     if not os.path.exists(path):
         print "created %s" %(path)
         os.mkdir(path)
+
+
+def create_save_path(game):
+    path = os.path.join(UPLOAD_PATH, game)
+    create_dir(path)
     saves_path[game] = path
 
 
@@ -202,6 +209,14 @@ def handle_my_custom_event(msg):
     pokedex = new_dex
     send_dex()
 
+def prepare_environment():
+    create_dir(UPLOAD_PATH)
+    for game in get_games_list():
+        create_save_path(game)
+
+    
+
 if __name__ == "__main__":
     # app.debug=True
+    prepare_environment()
     socketio.run(app, host="0.0.0.0")
