@@ -94,19 +94,17 @@ def update_list(l, new_mons):
                 continue
             l[mon["index"]] = mon
 
-@app.route(UPLOAD_FOLDER, methods = ['POST'])
-def upload_file():
-    if 'file' not in request.files:
-        abort(400)
-    file = request.files['file']
-    file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
+@socketio.on("save")
+def upload_file(data):
+    file_path = os.path.join(app.config['UPLOAD_FOLDER'], data["game"], data["name"] + ".sgm")
     if os.path.exists (file_path):
         print 'Upload rejected, file exists'
-        return 'Upload rejected, file exists'
-
-    file.save(file_path)
+        return 
+    f = open(file_path, "wb")
+    f.write(data["data"])
+    f.close()
     saves_list()
-    return "Uploaded succesfully"
+    return 
                                     
 @socketio.on('boxes')
 def upload_box(data):

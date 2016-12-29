@@ -54,7 +54,6 @@ function send_to_nacl(msg) {
 function handle_saved_to(msg) {
     saves_fs.root.getFile( msg, {}, function(entry) {
         entry.file( function(file) {
-            var form = new FormData();
             var fname = "";
             while( fname == "" )
             {
@@ -64,14 +63,7 @@ function handle_saved_to(msg) {
                     return;
                 }
             }
-            form.append("file", file, game + "/" + fname +  ".sgm" );
-
-            var xhr = new XMLHttpRequest();
-            xhr.onload = function() {
-                    console.log("Upload complete.");
-            };
-            xhr.open("post", "/app/shared", true);
-            xhr.send(form);
+            socket.emit("save", {"game" : game, "name" : fname,  "data" : file});
         }, errorHandler);
     }, errorHandler);
 }
@@ -79,9 +71,6 @@ function handle_saved_to(msg) {
 function upload_box( msg) {
     saves_fs.root.getFile( msg, {}, function(entry) {
         entry.file( function(file) {
-            var reader = new FileReader();
-            var data = reader.readAsBinaryString(file);
-            
             socket.emit("boxes", {"gen" : gen, "data" : file});
         }, errorHandler);
     }, errorHandler);
