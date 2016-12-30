@@ -21,7 +21,6 @@ Array.prototype.unique = function() {
 function scaleNacl() {
   clearTimeout(resizeTimer);
   resizeTimer = setTimeout(function() {
-    // var bounds = chrome.app.window.current().getBounds();
     var wrap = document.getElementById('wrap');
     var scaleX = wrap.offsetWidth / plugin.width;
     var scaleY = wrap.offsetHeight / plugin.height;
@@ -100,7 +99,6 @@ function upload_file() {
     }, errorHandler);
 }
 
-// chrome.app.window.current().onBoundsChanged.addListener(scaleNacl);
 function errorHandler(e) {
     console.log("error");
     console.log(e);
@@ -145,10 +143,10 @@ listener.addEventListener(
           return;
       }
       if (splitted[2] == "gen")
-        {
-            gen = parseInt(splitted[3],10);
-            console.log("gen = " + gen);
-        }
+      {
+        gen = parseInt(splitted[3],10);
+        console.log("gen = " + gen);
+      }
     
     console.log(e.data);
   }, true);
@@ -181,17 +179,6 @@ listener.addEventListener(
     document.getElementById('progress').style.width = (percent * 100) + '%';
   }, true);
 
-document.addEventListener('keydown', function(e) {
-  // Ctrl + o
-  if (firstLoad && e.ctrlKey && e.keyCode == 79) {
-    showOpenFileDialog();
-  }
-  // ESC
-  if (e.keyCode == 27) {
-    makePlugin();
-    e.preventDefault();
-  }
-}, true);
 
 function update_ddl(list, new_list, ddl)
 {

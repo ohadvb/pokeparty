@@ -99,6 +99,7 @@ def upload_file(data):
     file_path = os.path.join(app.config['UPLOAD_FOLDER'], data["game"], data["name"] + ".sgm")
     if os.path.exists (file_path):
         print 'Upload rejected, file exists'
+        my_send("save_exists", [data["name"]], False)
         return 
     f = open(file_path, "wb")
     f.write(data["data"])

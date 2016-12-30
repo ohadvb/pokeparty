@@ -20,3 +20,7 @@ socket.on("update boxes", function(msg) {
 socket.on("uploaded", function(msg) {
     send_to_nacl("uploaded boxes\n"); 
 });
+
+socket.on("save_exists", function(msg) {
+    alert(msg +  " already exists!");
+});
