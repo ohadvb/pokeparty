@@ -40,7 +40,6 @@ def saves_list(broadcast = True):
     print d
     my_send("update list", d, broadcast)
 
-    # send_list(UPLOAD_PATH, "*" + suffix, suffix, "update list", broadcast)
 
 def get_games_list():
     return get_list("app/games", "*.zip", ".zip")
@@ -87,7 +86,7 @@ def update_list(l, new_mons):
     for mon in new_mons["party"]:
         if not should_add_mon(l, mon):
             continue
-        l[mon["index"]] = mon
+        l[mon["pokemon"]["index"]] = mon
     for box in new_mons["pc"]:
         for mon in box:
             if not should_add_mon(l, mon):
