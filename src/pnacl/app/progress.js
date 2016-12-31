@@ -57,9 +57,9 @@ class Progress extends React.Component {
             if (i <= 151) 
                 count1+=has;
 
-            rows.push(<Mon src={"/app/sprites/" + i + ".png"} has={has}/>);
+            rows.push(<Mon src={"/app/sprites/" + i + ".png"} has={has} key={i}/>);
             if (i % MONS_PER_LINE == 0 ) {
-                rows.push(<br/>);
+                rows.push(<br key={"br" + i}/>);
             }
         }
         return ( 
