@@ -96,7 +96,7 @@ def update_list(l, new_mons):
 
 @socketio.on("save")
 def upload_file(data):
-    file_path = os.path.join(app.config['UPLOAD_FOLDER'], data["game"], data["name"] + ".sgm")
+    file_path = os.path.join(app.config['UPLOAD_FOLDER'], data["game"], data["name"].replace(" ", "_") + ".sgm")
     if os.path.exists (file_path):
         print 'Upload rejected, file exists'
         my_send("save_exists", [data["name"]], False)
