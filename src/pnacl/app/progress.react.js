@@ -10,7 +10,7 @@ class Mon extends React.Component {
     render() {
         var d;
         if (this.props.has) d = "none";else d = "opacity(20%)";
-        return React.createElement("img", { src: this.props.src, style: { filter: d }, height: IMG_SIZE, width: IMG_SIZE });
+        return React.createElement("img", { src: this.props.src, title: this.props.text, style: { filter: d }, height: IMG_SIZE, width: IMG_SIZE });
     }
 }
 
@@ -43,6 +43,12 @@ class Bar extends React.Component {
 class Progress extends React.Component {
     constructor(props) {
         super(props);
+        this.state = { names: Array(252) };
+        fetch('/app/pokemon_names').then(function (result) {
+            return result.json();
+        }).then(function (result) {
+            this.setState({ names: result });
+        }.bind(this));
     }
 
     render() {
@@ -59,7 +65,7 @@ class Progress extends React.Component {
             count2 += has;
             if (i <= 151) count1 += has;
 
-            rows.push(React.createElement(Mon, { src: "/app/sprites/" + i + ".png", has: has, key: i }));
+            rows.push(React.createElement(Mon, { src: "/app/sprites/" + i + ".png", has: has, key: i, text: "#" + i + " " + this.state.names[i] }));
             if (i % MONS_PER_LINE == 0) {
                 rows.push(React.createElement("br", { key: "br" + i }));
             }

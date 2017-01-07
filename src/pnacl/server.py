@@ -2,7 +2,7 @@ from flask import Flask, request, send_from_directory, jsonify, redirect
 from flask_socketio import SocketIO,send,emit
 from werkzeug.utils import secure_filename
 import pdb
-import box_parser
+import box_parser, pokemon_names
 import os.path, os
 import fnmatch
 
@@ -167,6 +167,15 @@ def redirect_to_game():
 @app.route('/app/<path:path>')
 def send_js(path):
     return send_from_directory('app', path)
+
+@app.route('/app/pokemon_names')
+def send_names():
+    return jsonify(pokemon_names.names)
+
+@app.route('/app/pokemon_names/<int:mon>')
+def send_name(mon):
+    return pokemon_names.names[mon]
+
 
 @socketio.on('connect event')
 def handle_my_custom_event(msg):
