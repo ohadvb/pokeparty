@@ -8,3 +8,6 @@ src/pnacl/app/shared/*
 *.DS_STORE
 tags
 venv
+node_modules
+.babelrc
+package.json
