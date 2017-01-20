@@ -132,6 +132,8 @@ def parse_box(poke_list, PokemonStruct, gen):
         if d["species"] == "Egg":
             d["species"] += " (" + pokemon_names.names[d["pokemon"]["index"]] + ")"
             d["pokemon"]["Friendship"] = 1
+        else:
+            d["pokemon"]["Friendship"] = 255
         box.append(d)
     return box
 
